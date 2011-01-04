@@ -1,4 +1,5 @@
 ## Il manque les liaisons Event -> Auth, Auth vers group, Group vers Auth
+## Subscription : On ne delete pas en cascade a la supression d'un User. Je pense qu'il faut garder TOUT l'historique des subscriptions, du coup, ptet y rajouter un ou deux champs qui permettraient de garder le Nom Prénom Sté de la personne ayant souscrit. Et passer uid à NULL
 
 sfGuardUser:
   relations:
@@ -6,13 +7,14 @@ sfGuardUser:
     Auth:               { type: one, local: auth_id, foreign: id }
       
 Subscription:
+  actAs:
+    Timestampable: ~
   columns:          
     user_id:            { type: integer }
     event_id:           { type: integer }
-    plan:               { type: string(255) } #??? plan id
-    signup:             { type: string(255) } #??? Pas compris
+    selected_offer:     { type: integer(2) } # id de la table qui gardera les configs défaut de l'event/Wall en fonction des offres/options
   relations:
-    User:               { type: one, class: sfGuardUser, local: user_id, foreign: id, onDelete: CASCADE }
+    User:               { type: one, class: sfGuardUser, local: user_id, foreign: id, onDelete: CASCADE } 
     Event:              { type: one, local: event_id, foreign: id, onDelete: SET NULL }
 
 Auth:
@@ -22,8 +24,8 @@ Auth:
     group_id:           { type: integer }
   relations:
     User:               { type: one, class: sfGuardUser, local: user_id, foreign: id, onDelete: CASCADE }
-    Event:              { type: one, local: event_id, foreign: id, onDelete: SET NULL }
-    Group:              { type: one, local: group_id, foreign: id, onDelete: SET NULL }
+    Event:              { type: one, local: event_id, foreign: id, onDelete: SET NULL } # On delete le tuple non si plus d'Event à gêrer
+    Group:              { type: one, local: group_id, foreign: id, onDelete: SET NULL } # Idem, si plus de groupe correspondant, on del Event.
       
 Group:
   columns:
@@ -33,11 +35,11 @@ Event:
   actAs:
     Timestampable: ~
   columns:
-    name:               { type: string(255), notnull: true }
+    name:               { type: string(150), notnull: true }
     short:              { type: string(20), notnull: true }
     short_description:  { type: string(255) }
     landing_html:       { type: string(255) }
-    logo:               { type: string(255), notnull: true }
+    logo:               { type: string(255), notnull: true } # ça devait pas être un unique id?
     password:           { type: string(255) }
     redirect:           { type: boolean, default: 0 }
     has_custom_css:     { type: boolean, default: 0 }
@@ -80,16 +82,16 @@ Quote:
     has_answer:         { type: boolean, default: 0 }
     is_validated:       { type: boolean, default: 0 }
     is_poll:            { type: boolean, default: 0 }
-    token:              { type: string(255) }
-    tweet_id:           { type: string(255) }
+    token:              { type: string(32) } # taille d'un md5
+    tweet_id:           { type: string(50) } # fixé à 50 dans Wall
     is_favori:          { type: boolean, default: 0 }
   relations:
     Wall:               { type: one, foreign: id, local: wall_id, onDelete: SET NULL }
     User:               { type: one, class: sfGuardUser, local: user_id, foreign: id, onDelete: SET NULL }
     Source:             { type: one, foreign: id, local: source_id, onDelete: SET NULL }
-    Anwsers:            { type: many, class: Answer, local: id, foreign: anwser_id }
-    PollChoices:        { type: many, class: PollChoice, local: id, foreign: poll_choice_id }
-    PollAnswers:        { type: many, class: PollAnswer, local: id, foreign: poll_anwser_id }
+    Anwsers:            { type: many, class: Answer, local: id, foreign: anwser_id } #pas trop compris le foreign et local
+    PollChoices:        { type: many, class: PollChoice, local: id, foreign: poll_choice_id } #pas trop compris le foreign et local
+    PollAnswers:        { type: many, class: PollAnswer, local: id, foreign: poll_anwser_id } #pas trop compris le foreign et local
 
 Answer:
   actAs:
