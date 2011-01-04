@@ -143,7 +143,6 @@ Vote:
     User:               { type: one, class: sfGuardUser, local: user_id, foreign: id, onDelete: CASCADE }
     
 #stats
-
 StatUser:
   columns:
     user_id:            { type: integer, notnull: true }
