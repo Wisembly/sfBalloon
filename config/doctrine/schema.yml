@@ -1,0 +1,168 @@
+## Il manque les liaisons Event -> Auth, Auth vers group, Group vers Auth
+
+sfGuardUser:
+  relations:
+    Subscription:       { type: one, local: subscription_id, foreign: id }
+    Auth:               { type: one, local: auth_id, foreign: id }
+      
+Subscription:
+  columns:          
+    user_id:            { type: integer }
+    event_id:           { type: integer }
+    plan:               { type: string(255) } #??? plan id
+    signup:             { type: string(255) } #??? Pas compris
+  relations:
+    User:               { type: one, class: sfGuardUser, local: user_id, foreign: id, onDelete: CASCADE }
+    Event:              { type: one, local: event_id, foreign: id, onDelete: SET NULL }
+
+Auth:
+  columns:
+    user_id:            { type: integer }
+    event_id:           { type: integer }
+    group_id:           { type: integer }
+  relations:
+    User:               { type: one, class: sfGuardUser, local: user_id, foreign: id, onDelete: CASCADE }
+    Event:              { type: one, local: event_id, foreign: id, onDelete: SET NULL }
+    Group:              { type: one, local: group_id, foreign: id, onDelete: SET NULL }
+      
+Group:
+  columns:
+    name:               { type: string(255) }
+
+Event:
+  actAs:
+    Timestampable: ~
+  columns:
+    name:               { type: string(255), notnull: true }
+    short:              { type: string(20), notnull: true }
+    short_description:  { type: string(255) }
+    landing_html:       { type: string(255) }
+    logo:               { type: string(255), notnull: true }
+    password:           { type: string(255) }
+    redirect:           { type: boolean, default: 0 }
+    has_custom_css:     { type: boolean, default: 0 }
+  relations:
+    Walls:              { type: many, class: Wall, local: id, foreign: event_id }
+    
+Wall:
+  actAs:
+    Timestampable: ~
+  columns:
+    event_id:           { type: integer }
+    name:               { type: string(150), notnull: true }
+    tw_hashtag:         { type: string(100) }
+    sms_hashtag:        { type: string(20) }
+    last_tweet_id:      { type: string(50) }
+    lang:               { type: string(5) }
+    short_description:  { type: text }
+    start:              { type: timestamp, notnull: true }
+    stop:               { type: timestamp, notnull: true }
+    real_start_date:    { type: timestamp, notnull: true }
+    is_moderated:       { type: boolean, default: 0 }
+    alaune_quote_id:    { type: integer }
+    survey:             { type: integer }
+    feedback:           { type: string(255) }
+    has_custom_css:     { type: boolean, default: 0 }
+  relations:
+    Event:              { type: one, foreign: id, local: event_id, onDelete: CASCADE }
+    Quotes:             { type: many, class: Quote, local: id, foreign: wall_id }
+    
+Quote:
+  actAs:
+    Timestampable: ~
+  columns:
+    wall_id:            { type: integer }
+    user_id:            { type: integer }
+    source_id:          { type: integer }
+    tw_username:        { type: string(30) }
+    quote:              { type: string(255), notnull: true }
+    votes_count:        { type: integer, default: 0 }
+    has_answer:         { type: boolean, default: 0 }
+    is_validated:       { type: boolean, default: 0 }
+    is_poll:            { type: boolean, default: 0 }
+    token:              { type: string(255) }
+    tweet_id:           { type: string(255) }
+    is_favori:          { type: boolean, default: 0 }
+  relations:
+    Wall:               { type: one, foreign: id, local: wall_id, onDelete: SET NULL }
+    User:               { type: one, class: sfGuardUser, local: user_id, foreign: id, onDelete: SET NULL }
+    Source:             { type: one, foreign: id, local: source_id, onDelete: SET NULL }
+    Anwsers:            { type: many, class: Answer, local: id, foreign: anwser_id }
+    PollChoices:        { type: many, class: PollChoice, local: id, foreign: poll_choice_id }
+    PollAnswers:        { type: many, class: PollAnswer, local: id, foreign: poll_anwser_id }
+
+Answer:
+  actAs:
+    Timestampable: ~
+  columns:
+    quote_id:           { type: integer }
+    user_id:            { type: integer }
+    answer:             { type: text, notnull: true }
+  relations:
+    Quote:              { type: one, foreign: id, local: quote_id, onDelete: SET NULL }
+    User:               { type: one, class: sfGuardUser, local: user_id, foreign: id, onDelete: SET NULL }
+    
+Source:
+  actAs:
+    Sluggable:
+      name: small_title
+      unique: true
+      fields: [title]
+      canUpdate: true
+  columns:
+    title:              { type: string(25), notnull: true }
+    
+PollChoice:
+  columns:
+    quote_id:           { type: integer, notnull: true }
+    choice_value:       { type: string(150), notnull: true }
+    votes_count:        { type: integer, default: 0 }
+  relations:
+    Quote:              { type: one, foreign: id, local: quote_id, onDelete: CASCADE }
+    
+PollAnswer:
+  columns:
+    quote_id:           { type: integer, notnull: true }
+    source_id:          { type: integer }
+    user_id:            { type: integer, notnull: true }
+    token:              { type: string(32), notnull: true }
+  relations:
+    Quote:              { type: one, foreign: id, local: quote_id, onDelete: CASCADE }
+    Source:             { type: one, foreign: id, local: source_id, onDelete: SET NULL }
+    User:               { type: one, class: sfGuardUser, local: user_id, foreign: id, onDelete: CASCADE }
+
+Vote:
+  actAs:
+    Timestampable: ~
+  columns:
+    quote_id:           { type: integer, notnull: true }
+    user_id:            { type: integer, notnull: true }
+    token:              { type: string(32), notnull: true }
+  relations:
+    Quote:              { type: one, foreign: id, local: quote_id, onDelete: CASCADE }
+    User:               { type: one, class: sfGuardUser, local: user_id, foreign: id, onDelete: CASCADE }
+    
+#stats
+
+StatUser:
+  columns:
+    user_id:            { type: integer, notnull: true }
+    total_quotes:       { type: integer, notnull: true, default: 0 }
+    validated_quotes:   { type: integer, notnull: true, default: 0 }
+    total_votes:        { type: integer, notnull: true, default: 0 }
+    votes_for_quotes:   { type: integer, notnull: true, default: 0 }
+    answered_questions: { type: integer, notnull: true, default: 0 }
+    events_used:        { type: integer, notnull: true, default: 0 }
+    walls_used:         { type: integer, notnull: true, default: 0 }
+  relations:
+    User:               { type: one, class: sfGuardUser, local: user_id, foreign: id, onDelete: CASCADE }
+    
+StatWall:
+  columns:
+    wall_id:            { type: integer, notnull: true }
+    total_questions:    { type: integer, notnull: true, default: 0 }
+    validated_questions: { type: integer, notnull: true, default: 0 }
+    total_votes:        { type: integer, notnull: true, default: 0 }
+    max_connceted_users: { type: integer, notnull: true, default: 0 }
+  relations:
+    Wall:               { type: one, foreign: id, local: wall_id, onDelete: CASCADE }
