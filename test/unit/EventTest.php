@@ -26,23 +26,28 @@ for ($j=0; $j<2; $j++) {
 	));
 	
 	for ($i=0; $i<4; $i++) {
-		$quote = create_quote(array('quote' => 'Question '.$i));
+		$quote = create_quote(array('quote' => 'Question '.$j.'.'.$i));
 		$wall->Quotes[] = $quote;
 	}
 	
 	$event->Walls[] = $wall;
 }
+$t = new lime_test(12);
 
 $event->save();
+
 $event->delete();
 
-$t = new lime_test(4);
 $t->comment('Softdelete test');
 $t->isnt($event, null, 'Event is not deleted of the database');
 $t->isnt($event->getDeletedAt(), null, 'Event is softdeleted');
-$t->isnt($event->Walls[0]->getDeletedAt(), null, 'Wall1 is soft deleted');
-$t->isnt($event->Walls[1]->getDeletedAt(), null, 'Wall2 is soft deleted');
 
+for ($j=0; $j<2; $j++) {
+	$t->isnt($event->Walls[$j]->getDeletedAt(), null, 'Wall'.$j.' is soft deleted');
+	for ($i=0; $i<4; $i++) {
+		$t->isnt($event->Walls[$j]->Quotes[$i]->getDeletedAt(), null, 'Quote'.$j.'.'.$i.' is soft deleted');
+	}
+}
 
 function create_quote($defaults = array())
 {
