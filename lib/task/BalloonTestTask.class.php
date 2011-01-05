@@ -22,6 +22,11 @@ class BalloonTestTask extends sfBaseTask
 {
 	protected function configure()
   {
+		
+		$this->addOptions(array(
+      new sfCommandOption('nobuild', null, sfCommandOption::PARAMETER_OPTIONAL, 'build dev database?', false),
+    ));
+
     $this->namespace = 'balloon';
     $this->name = 'test';
     $this->briefDescription = 'build dev database, drop test database, reinject database in test and launch unittesting';
@@ -29,18 +34,25 @@ class BalloonTestTask extends sfBaseTask
 
 	protected function execute($arguments = array(), $options = array())
   {
-		$task = new sfDoctrineBuildTask($this->dispatcher, $this->formatter);
-    $task->run(array(), array('env' => 'dev', 'all' => true, 'no-confirmation' => true));
+		if ($options['nobuild']) {
+			$this->logSection('Build', 'Building dev database ...');
+			$task = new sfDoctrineBuildTask($this->dispatcher, $this->formatter);
+	    $task->run(array(), array('env' => 'dev', 'all' => true, 'no-confirmation' => true));
+		}
 
+		$this->logSection('Drop', 'Droping test database ...');
 		$task = new sfDoctrineDropDbTask($this->dispatcher, $this->formatter);
     $task->run(array(), array('env' => 'test', 'no-confirmation' => true));
 
+		$this->logSection('Create', 'Creating test database ...');
 		$task = new sfDoctrineBuildDbTask($this->dispatcher, $this->formatter);
     $task->run(array(), array('env' => 'test'));
 
+		$this->logSection('Build', 'Building test database ...');
 		$task = new sfDoctrineInsertSqlTask($this->dispatcher, $this->formatter);
     $task->run(array(), array('env' => 'test'));
 
+		$this->logSection('Test', 'Testing ...');
 		$task = new sfTestUnitTask($this->dispatcher, $this->formatter);
     $task->run(array(), array());
   }
