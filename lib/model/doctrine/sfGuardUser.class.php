@@ -12,4 +12,8 @@
  */
 class sfGuardUser extends BasesfGuardUser
 {
+	public function getRole()
+	{
+		return $this->getAuth()->getGroup()->getName();
+	}
 }

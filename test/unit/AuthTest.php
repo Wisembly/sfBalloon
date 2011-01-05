@@ -38,10 +38,11 @@ $auth2->save();
 
 $t = new lime_test(3);
 $t->comment('User Auth and Group');
-$t->is($user->getAuth()->getGroup()->getName(), 'Admin', 'User is an admin');
-$t->is($user2->getAuth()->getGroup()->getName(), 'Modo', 'User2 is an modo');
-$t->isnt($user2->getAuth()->getGroup()->getName(), 'Admin', 'User2 isnt an admin');
+$t->is($user->getRole(), 'Admin', 'User is an admin');
+$t->is($user2->getRole(), 'Modo', 'User2 is an modo');
+$t->isnt($user2->getRole(), 'Admin', 'User2 isnt an admin');
 
+// Waiting other test (CC Guillaume)
 
 function create_user($defaults = array())
 {
