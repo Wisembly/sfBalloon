@@ -16,24 +16,22 @@ $date2 = new Datetime();
 $date1->sub(date_interval_create_from_date_string('15 days'));
 $date2->add(date_interval_create_from_date_string('15 days'));
 
-$wall1 = create_wall(array(
-	'event_id' 				=> $event->getId(),
-	'name'						=> 'SIP Salle 1',
-	'start'						=> $date1->getTimestamp(),
-	'stop'						=> $date2->getTimestamp(),
-	'real_start_date'	=> $date->getTimestamp()
-));
-
-$wall2 = create_wall(array(
-	'event_id' 				=> $event->getId(),
-	'name'						=> 'SIP Salle 2',
-	'start'						=> $date1->getTimestamp(),
-	'stop'						=> $date2->getTimestamp(),
-	'real_start_date'	=> $date->getTimestamp()
-));
-
-$event->Walls[] = $wall1;
-$event->Walls[] = $wall2;
+for ($j=0; $j<2; $j++) {
+	$wall = create_wall(array(
+		'event_id' 				=> $event->getId(),
+		'name'						=> 'SIP Salle '.$j,
+		'start'						=> $date1->getTimestamp(),
+		'stop'						=> $date2->getTimestamp(),
+		'real_start_date'	=> $date->getTimestamp()
+	));
+	
+	for ($i=0; $i<4; $i++) {
+		$quote = create_quote(array('quote' => 'Question '.$i));
+		$wall->Quotes[] = $quote;
+	}
+	
+	$event->Walls[] = $wall;
+}
 
 $event->save();
 $event->delete();
@@ -44,6 +42,17 @@ $t->isnt($event, null, 'Event is not deleted of the database');
 $t->isnt($event->getDeletedAt(), null, 'Event is softdeleted');
 $t->isnt($event->Walls[0]->getDeletedAt(), null, 'Wall1 is soft deleted');
 $t->isnt($event->Walls[1]->getDeletedAt(), null, 'Wall2 is soft deleted');
+
+
+function create_quote($defaults = array())
+{
+	$quote = new Quote();
+	$quote->fromArray(array_merge(array(
+		'quote'						=> 'Question'
+	), $defaults));
+	
+	return $quote;
+}
 
 function create_event($defaults = array())
 {
