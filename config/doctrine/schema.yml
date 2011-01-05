@@ -6,8 +6,8 @@ sfGuardUser:
   actAs:
     SoftDelete: ~
   relations:
-    Subscription:       { type: one, local: subscription_id, foreign: id }
-    Auth:               { type: one, local: auth_id, foreign: id }
+    Subscription:       { local: id, foreign: user_id }
+    Auth:               { local: id, foreign: user_id }
       
 Subscription:
   actAs:
@@ -17,7 +17,7 @@ Subscription:
     event_id:           { type: integer }
     selected_offer:     { type: integer(2) } # id de la table qui gardera les configs défaut de l'event/Wall en fonction des offres/options
   relations:
-    User:               { type: one, class: sfGuardUser, local: user_id, foreign: id, cascade: [delete] } 
+    User:               { foreignType: one, class: sfGuardUser, local: user_id, foreign: id, cascade: [delete] } 
     Event:              { type: one, local: event_id, foreign: id, cascade: [delete] }
 
 Auth:
@@ -26,11 +26,11 @@ Auth:
     event_id:           { type: integer }
     group_id:           { type: integer }
   relations:
-    User:               { type: one, class: sfGuardUser, local: user_id, foreign: id, onDelete: CASCADE }
+    User:               { foreignType: one, class: sfGuardUser, local: user_id, foreign: id, onDelete: CASCADE }
     Event:              { type: one, local: event_id, foreign: id, onDelete: CASCADE } # On delete le tuple non si plus d'Event à gêrer
-    Group:              { type: one, local: group_id, foreign: id, onDelete: CASCADE } # Idem, si plus de groupe correspondant, on del Event.
+    Group:              { type: one, class: AuthGroup, local: group_id, foreign: id, onDelete: CASCADE } # Idem, si plus de groupe correspondant, on del Event.
       
-Group:
+AuthGroup:
   columns:
     name:               { type: string(255) }
 
