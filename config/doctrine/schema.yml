@@ -1,6 +1,7 @@
 ## Il manque les liaisons Event -> Auth, Auth vers group, Group vers Auth
 ## Subscription : On ne delete pas en cascade a la supression d'un User. Je pense qu'il faut garder TOUT l'historique des subscriptions, du coup, ptet y rajouter un ou deux champs qui permettraient de garder le Nom Prénom Sté de la personne ayant souscrit. Et passer uid à NULL
 
+
 sfGuardUser:
   relations:
     Subscription:       { type: one, local: subscription_id, foreign: id }
