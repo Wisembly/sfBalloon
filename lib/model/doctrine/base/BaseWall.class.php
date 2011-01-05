@@ -135,14 +135,14 @@ abstract class BaseWall extends sfDoctrineRecord
         parent::setUp();
         $this->hasOne('Event', array(
              'local' => 'event_id',
-             'foreign' => 'id',
-             'cascade' => array(
-             0 => 'delete',
-             )));
+             'foreign' => 'id'));
 
         $this->hasMany('Quote as Quotes', array(
              'local' => 'id',
-             'foreign' => 'wall_id'));
+             'foreign' => 'wall_id',
+             'cascade' => array(
+             0 => 'delete',
+             )));
 
         $this->hasMany('StatWall', array(
              'local' => 'id',

@@ -14,7 +14,7 @@
  * @property boolean $redirect
  * @property boolean $has_custom_css
  * @property Doctrine_Collection $Walls
- * @property Doctrine_Collection $Subscription
+ * @property Subscription $Subscription
  * @property Doctrine_Collection $Auth
  * 
  * @method string              getName()              Returns the current record's "name" value
@@ -26,7 +26,7 @@
  * @method boolean             getRedirect()          Returns the current record's "redirect" value
  * @method boolean             getHasCustomCss()      Returns the current record's "has_custom_css" value
  * @method Doctrine_Collection getWalls()             Returns the current record's "Walls" collection
- * @method Doctrine_Collection getSubscription()      Returns the current record's "Subscription" collection
+ * @method Subscription        getSubscription()      Returns the current record's "Subscription" value
  * @method Doctrine_Collection getAuth()              Returns the current record's "Auth" collection
  * @method Event               setName()              Sets the current record's "name" value
  * @method Event               setShort()             Sets the current record's "short" value
@@ -37,7 +37,7 @@
  * @method Event               setRedirect()          Sets the current record's "redirect" value
  * @method Event               setHasCustomCss()      Sets the current record's "has_custom_css" value
  * @method Event               setWalls()             Sets the current record's "Walls" collection
- * @method Event               setSubscription()      Sets the current record's "Subscription" collection
+ * @method Event               setSubscription()      Sets the current record's "Subscription" value
  * @method Event               setAuth()              Sets the current record's "Auth" collection
  * 
  * @package    balloon
@@ -92,9 +92,12 @@ abstract class BaseEvent extends sfDoctrineRecord
         parent::setUp();
         $this->hasMany('Wall as Walls', array(
              'local' => 'id',
-             'foreign' => 'event_id'));
+             'foreign' => 'event_id',
+             'cascade' => array(
+             0 => 'delete',
+             )));
 
-        $this->hasMany('Subscription', array(
+        $this->hasOne('Subscription', array(
              'local' => 'id',
              'foreign' => 'event_id'));
 

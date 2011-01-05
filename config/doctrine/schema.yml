@@ -1,7 +1,6 @@
 ## Il manque les liaisons Event -> Auth, Auth vers group, Group vers Auth
 ## Subscription : On ne delete pas en cascade a la supression d'un User. Je pense qu'il faut garder TOUT l'historique des subscriptions, du coup, ptet y rajouter un ou deux champs qui permettraient de garder le Nom Prénom Sté de la personne ayant souscrit. Et passer uid à NULL
 
-
 sfGuardUser:
   actAs:
     SoftDelete: ~
@@ -17,8 +16,8 @@ Subscription:
     event_id:           { type: integer }
     selected_offer:     { type: integer(2) } # id de la table qui gardera les configs défaut de l'event/Wall en fonction des offres/options
   relations:
-    User:               { foreignType: one, class: sfGuardUser, local: user_id, foreign: id, cascade: [delete] } 
-    Event:              { type: one, local: event_id, foreign: id, cascade: [delete] }
+    User:               { foreignType: one, class: sfGuardUser, local: user_id, foreign: id, onDelete: SET NULL } 
+    Event:              { foreignType: one, local: event_id, foreign: id , onDelete: SET NULL }
 
 Auth:
   columns:
@@ -48,8 +47,8 @@ Event:
     redirect:           { type: boolean, default: 0 }
     has_custom_css:     { type: boolean, default: 0 }
   relations:
-    Walls:              { type: many, class: Wall, local: id, foreign: event_id }
-    
+    Walls:              { type: many, class: Wall, local: id, foreign: event_id, cascade: [delete] }
+    Subscription:       { local: id, foreign: event_id }
 Wall:
   actAs:
     Timestampable: ~
@@ -71,8 +70,8 @@ Wall:
     feedback:           { type: string(255) }
     has_custom_css:     { type: boolean, default: 0 }
   relations:
-    Event:              { type: one, foreign: id, local: event_id, cascade: [delete] }
-    Quotes:             { type: many, class: Quote, local: id, foreign: wall_id }
+    Event:              { type: one, foreign: id, local: event_id }
+    Quotes:             { type: many, class: Quote, local: id, foreign: wall_id, cascade: [delete] }
     
 Quote:
   actAs:
@@ -92,12 +91,13 @@ Quote:
     tweet_id:           { type: string(50) } # fixé à 50 dans Wall
     is_favori:          { type: boolean, default: 0 }
   relations:
-    Wall:               { type: one, foreign: id, local: wall_id, cascade: [delete] }
-    User:               { type: one, class: sfGuardUser, local: user_id, foreign: id, cascade: [delete] }
-    Source:             { type: one, foreign: id, local: source_id, onDelete: SET NULL, cascade: [delete] }
-    Anwsers:            { type: many, class: Answer, local: id, foreign: anwser_id }
-    PollChoices:        { type: many, class: PollChoice, local: id, foreign: poll_choice_id }
+    Wall:               { type: one, foreign: id, local: wall_id }
+    User:               { type: one, class: sfGuardUser, local: user_id, foreign: id, onDelete: SET NULL }
+    Source:             { type: one, foreign: id, local: source_id, onDelete: SET NULL }
+    Anwsers:            { type: many, class: Answer, local: id, foreign: anwser_id, cascade: [delete] }
+    PollChoices:        { type: many, class: PollChoice, local: id, foreign: poll_choice_id, cascade: [delete] }
     PollAnswers:        { type: many, class: PollAnswer, local: id, foreign: poll_anwser_id }
+    Votes:              { type: many, class: Vote, local: id, foreign: vote_id }
 
 Answer:
   actAs:
@@ -108,8 +108,8 @@ Answer:
     user_id:            { type: integer }
     answer:             { type: text, notnull: true }
   relations:
-    Quote:              { type: one, foreign: id, local: quote_id, cascade: [delete] }
-    User:               { type: one, class: sfGuardUser, local: user_id, foreign: id, cascade: [delete] }
+    Quote:              { type: one, foreign: id, local: quote_id }
+    User:               { type: one, class: sfGuardUser, local: user_id, foreign: id, onDelete: SET NULL }
     
 Source:
   actAs:
@@ -122,12 +122,14 @@ Source:
     title:              { type: string(25), notnull: true }
     
 PollChoice:
+  actAs:
+    SoftDelete: ~
   columns:
     quote_id:           { type: integer, notnull: true }
     choice_value:       { type: string(150), notnull: true }
     votes_count:        { type: integer, default: 0 }
   relations:
-    Quote:              { type: one, foreign: id, local: quote_id, cascade: [delete] }
+    Quote:              { type: one, foreign: id, local: quote_id }
     
 PollAnswer:
   columns:
@@ -136,9 +138,9 @@ PollAnswer:
     user_id:            { type: integer, notnull: true }
     token:              { type: string(32), notnull: true }
   relations:
-    Quote:              { type: one, foreign: id, local: quote_id, onDelete: CASCADE, cascade: [delete] }
-    Source:             { type: one, foreign: id, local: source_id, onDelete: SET NULL, cascade: [delete] }
-    User:               { type: one, class: sfGuardUser, local: user_id, foreign: id, onDelete: CASCADE, cascade: [delete] }
+    Quote:              { type: one, foreign: id, local: quote_id, onDelete: CASCADE }
+    Source:             { type: one, foreign: id, local: source_id, onDelete: SET NULL }
+    User:               { type: one, class: sfGuardUser, local: user_id, foreign: id, onDelete: CASCADE }
 
 Vote:
   actAs:

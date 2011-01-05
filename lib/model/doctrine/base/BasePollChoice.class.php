@@ -49,9 +49,9 @@ abstract class BasePollChoice extends sfDoctrineRecord
         parent::setUp();
         $this->hasOne('Quote', array(
              'local' => 'quote_id',
-             'foreign' => 'id',
-             'cascade' => array(
-             0 => 'delete',
-             )));
+             'foreign' => 'id'));
+
+        $softdelete0 = new Doctrine_Template_SoftDelete();
+        $this->actAs($softdelete0);
     }
 }

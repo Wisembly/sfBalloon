@@ -19,6 +19,7 @@ abstract class BasePollChoiceForm extends BaseFormDoctrine
       'quote_id'     => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Quote'), 'add_empty' => false)),
       'choice_value' => new sfWidgetFormInputText(),
       'votes_count'  => new sfWidgetFormInputText(),
+      'deleted_at'   => new sfWidgetFormDateTime(),
     ));
 
     $this->setValidators(array(
@@ -26,6 +27,7 @@ abstract class BasePollChoiceForm extends BaseFormDoctrine
       'quote_id'     => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Quote'))),
       'choice_value' => new sfValidatorString(array('max_length' => 150)),
       'votes_count'  => new sfValidatorInteger(array('required' => false)),
+      'deleted_at'   => new sfValidatorDateTime(array('required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('poll_choice[%s]');

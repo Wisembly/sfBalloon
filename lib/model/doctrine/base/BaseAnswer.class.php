@@ -49,17 +49,12 @@ abstract class BaseAnswer extends sfDoctrineRecord
         parent::setUp();
         $this->hasOne('Quote', array(
              'local' => 'quote_id',
-             'foreign' => 'id',
-             'cascade' => array(
-             0 => 'delete',
-             )));
+             'foreign' => 'id'));
 
         $this->hasOne('sfGuardUser as User', array(
              'local' => 'user_id',
              'foreign' => 'id',
-             'cascade' => array(
-             0 => 'delete',
-             )));
+             'onDelete' => 'SET NULL'));
 
         $timestampable0 = new Doctrine_Template_Timestampable();
         $softdelete0 = new Doctrine_Template_SoftDelete();

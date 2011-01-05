@@ -62,25 +62,16 @@ abstract class BasePollAnswer extends sfDoctrineRecord
         $this->hasOne('Quote', array(
              'local' => 'quote_id',
              'foreign' => 'id',
-             'onDelete' => 'CASCADE',
-             'cascade' => array(
-             0 => 'delete',
-             )));
+             'onDelete' => 'CASCADE'));
 
         $this->hasOne('Source', array(
              'local' => 'source_id',
              'foreign' => 'id',
-             'onDelete' => 'SET NULL',
-             'cascade' => array(
-             0 => 'delete',
-             )));
+             'onDelete' => 'SET NULL'));
 
         $this->hasOne('sfGuardUser as User', array(
              'local' => 'user_id',
              'foreign' => 'id',
-             'onDelete' => 'CASCADE',
-             'cascade' => array(
-             0 => 'delete',
-             )));
+             'onDelete' => 'CASCADE'));
     }
 }

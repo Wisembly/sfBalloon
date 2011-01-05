@@ -50,16 +50,12 @@ abstract class BaseSubscription extends sfDoctrineRecord
         $this->hasOne('sfGuardUser as User', array(
              'local' => 'user_id',
              'foreign' => 'id',
-             'cascade' => array(
-             0 => 'delete',
-             )));
+             'onDelete' => 'SET NULL'));
 
         $this->hasOne('Event', array(
              'local' => 'event_id',
              'foreign' => 'id',
-             'cascade' => array(
-             0 => 'delete',
-             )));
+             'onDelete' => 'SET NULL'));
 
         $timestampable0 = new Doctrine_Template_Timestampable();
         $this->actAs($timestampable0);
