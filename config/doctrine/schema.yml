@@ -3,7 +3,13 @@
 
 sfGuardUser:
   actAs:
+    Timestampable: ~
     SoftDelete: ~
+  columns:
+    is_root:            { type: boolean, default: 0 }
+  indexes:
+    is_active_idx:
+      fields: [is_active]
   relations:
     Subscription:       { local: id, foreign: user_id }
     Auth:               { local: id, foreign: user_id }

@@ -15,6 +15,6 @@ class RegisterForm extends sfGuardRegisterForm
    */
   public function configure()
   {
-    unset($this['deleted_at']);
+    unset($this['deleted_at'], $this['is_root']);
   }
 }
