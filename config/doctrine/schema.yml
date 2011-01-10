@@ -39,7 +39,7 @@ Event:
     SoftDelete: ~
   columns:
     name:               { type: string(150), notnull: true }
-    short:              { type: string(20), notnull: true }
+    short:              { type: string(20), notnull: true, unique: true }
     short_description:  { type: string(255) }
     landing_html:       { type: string(255) }
     logo:               { type: string(255), notnull: true } # ça devait pas être un unique id?
