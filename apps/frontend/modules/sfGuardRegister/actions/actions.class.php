@@ -12,6 +12,17 @@ require_once dirname(__FILE__).'/../lib/BasesfGuardRegisterActions.class.php';
  */
 class sfGuardRegisterActions extends BasesfGuardRegisterActions
 {
+  
+  /**
+   * Executes plans action
+   *
+   * @param sfWebRequest $request A request object
+   */
+  public function executePlans(sfWebRequest $request)
+  {
+    
+  }
+  
   public function executeIndex(sfWebRequest $request)
   {
     if ($this->getUser()->isAuthenticated())
@@ -21,6 +32,10 @@ class sfGuardRegisterActions extends BasesfGuardRegisterActions
     }
     
     $this->form = new RegisterForm();
+    if($request->getParameter('plan')){
+      $this->form = new ProRegisterForm();
+    }
+    
   
     if ($request->isMethod('post'))
     {

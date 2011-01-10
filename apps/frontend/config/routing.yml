@@ -24,12 +24,12 @@ sf_guard_register:
   param: { module: sfGuardRegister, action: index }
 
 register:
-  url: /signup
+  url: /signup/:plan
   param: { module: sfGuardRegister, action: index }
 
-register_pro:
-  url: /signup/pro
-  param: { module: sfGuardRegister, action: index }
+plans:
+  url: /plans
+  param: { module: sfGuardRegister, action: plans }
   
 # generic rules
 # please, remove them by adding more specific rules
