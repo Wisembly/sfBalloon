@@ -44,6 +44,10 @@ abstract class BaseEventForm extends BaseFormDoctrine
       'deleted_at'        => new sfValidatorDateTime(array('required' => false)),
     ));
 
+    $this->validatorSchema->setPostValidator(
+      new sfValidatorDoctrineUnique(array('model' => 'Event', 'column' => array('short')))
+    );
+
     $this->widgetSchema->setNameFormat('event[%s]');
 
     $this->errorSchema = new sfValidatorErrorSchema($this->validatorSchema);

@@ -58,6 +58,7 @@ abstract class BaseEvent extends sfDoctrineRecord
         $this->hasColumn('short', 'string', 20, array(
              'type' => 'string',
              'notnull' => true,
+             'unique' => true,
              'length' => 20,
              ));
         $this->hasColumn('short_description', 'string', 255, array(
