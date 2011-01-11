@@ -27,6 +27,11 @@ plans:
   url: /plans
   param: { module: sfGuardRegister, action: plans }
   
+# events
+event:
+  class:   sfDoctrineRouteCollection
+  options: { model: Event }
+
 # generic rules
 # please, remove them by adding more specific rules
 default_index:
