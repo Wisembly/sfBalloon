@@ -24,7 +24,7 @@ class BalloonTestTask extends sfBaseTask
   {
 		
 		$this->addOptions(array(
-      new sfCommandOption('nobuild', null, sfCommandOption::PARAMETER_OPTIONAL, 'build dev database?', false),
+      new sfCommandOption('build', null, sfCommandOption::PARAMETER_OPTIONAL, 'build dev database?', true),
     ));
 
     $this->namespace = 'balloon';
@@ -34,7 +34,8 @@ class BalloonTestTask extends sfBaseTask
 
 	protected function execute($arguments = array(), $options = array())
   {
-		if ($options['nobuild']) {
+
+		if ($options['build']) {
 			$this->logSection('Build', 'Building dev database ...');
 			$task = new sfDoctrineBuildTask($this->dispatcher, $this->formatter);
 	    $task->run(array(), array('env' => 'dev', 'all' => true, 'no-confirmation' => true));
