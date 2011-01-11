@@ -9,6 +9,21 @@
     <?php include_javascripts() ?>
   </head>
   <body>
-    <?php echo $sf_content ?>
+    <div id="content">
+      <h1>VotreQuestion.com</h1>
+      <div id="user">
+        <?php if($sf_user->isAuthenticated()): ?>
+          Hello <?php echo $sf_user->getUsername(); ?> - 
+          <?php echo link_to("Logout", "@sf_guard_signout"); ?>
+        <?php else:?>
+          <?php echo link_to("Créer son compte", "@sf_guard_register")?> - 
+          <?php echo link_to("Login", "@sf_guard_signin")?> - 
+          <?php echo link_to("Plans and Pricing", "@plans")?>
+        <?php endif;?>
+      </div>
+      <div id="balloon">
+        <?php echo $sf_content ?>
+      </div>
+    </div>
   </body>
 </html>
