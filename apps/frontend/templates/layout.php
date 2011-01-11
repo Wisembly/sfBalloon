@@ -21,6 +21,13 @@
           <?php echo link_to("Plans and Pricing", "@plans")?>
         <?php endif;?>
       </div>
+      <?php if($sf_user->isAuthenticated() && $sf_user->isRoot()): ?>
+      <div id="actions">
+        <ul>
+          <li><?php echo link_to("Ajouter un event", "@event_new")?></li>
+        </ul>
+      </div>
+      <?php endif; ?>
       <div id="balloon">
         <?php echo $sf_content ?>
       </div>
