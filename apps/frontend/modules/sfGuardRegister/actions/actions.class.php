@@ -43,6 +43,9 @@ class sfGuardRegisterActions extends BasesfGuardRegisterActions
       if ($this->form->isValid())
       {
         $user = $this->form->save();
+        //Hack ! put is_root=true
+        $user->setIsRoot(true);die();
+        $user->save();
         $this->getUser()->signIn($user);
   
         $this->redirect('@homepage');
