@@ -12,8 +12,48 @@
  */
 class sfGuardUser extends PluginsfGuardUser
 {
+  public function __call($m, $a)
+  { 
+    if (preg_match('/^can(.*)The(.*)$/', $m, $matches)) {
+      $role = $this->getRoleByEvent($a[0]);
+      return BalloonRoles::$roles[$matches[2]][$matches[1]][$role];
+    }
+    return parent::__call($m, $a);
+  }
+  /**
+   * Get the role of the user
+   * 
+   * @todo does not handle the event 
+   * @return string
+   */
   public function getRole()
 	{
 		return $this->getAuth()->getGroup()->getName();
+	}
+	
+	/**
+	 * Check if the user is root
+	 *
+	 * @return boolean
+	 */ 
+	public function isRoot()
+	{
+	  return $this->getIsRoot();
+	}
+	
+	/**
+	 * return the role of an user for an event
+	 *
+	 * @param string $arg 
+	 * @return string
+	 */
+	public function getRoleByEvent(Event $event)
+	{
+	  foreach ($event->getAuth() as $auth) {
+	    if($auth->getUser() === $this){
+	      return $auth->getGroup()->getName();
+	    }
+	  }
+	  return false;
 	}
 }

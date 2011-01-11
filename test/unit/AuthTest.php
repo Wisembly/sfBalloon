@@ -20,6 +20,7 @@ $authgroup->save();
 
 $authgroup2 = create_authgroup(array('name' => 'Modo'));
 $authgroup2->save();
+var_dump($user->getId());
 
 $auth = create_auth(array(
 	'user_id' 					=> $user->getId(),
@@ -36,20 +37,23 @@ $auth2 = create_auth(array(
 $auth2->save();
 
 
-$t = new lime_test(3);
+$t = new lime_test(7);
 $t->comment('User Auth and Group');
 $t->is($user->getRole(), 'Admin', 'User is an admin');
 $t->is($user2->getRole(), 'Modo', 'User2 is an modo');
 $t->isnt($user2->getRole(), 'Admin', 'User2 isnt an admin');
-
+$t->is($user->getRoleByEvent($event), 'Admin', 'User1 is an admin of Event1');
+$t->isnt($user2->getRoleByEvent($event), 'Admin', 'User2 isnt an admin of Event1');
+$t->isnt($user->getRoleByEvent($event), 'Modo', 'User1 isnt an modo of Event1');
+$t->is($user->canUpdateTheEvent($event), true, 'User1 can update the event');
 // Waiting other test (CC Guillaume)
 
 function create_user($defaults = array())
 {
 	$user = new sfGuardUser();
   $user->fromArray(array_merge(array(
-    'email_address' 	=> 'clement@balloonup.com',
-		'username'				=> 'dator',
+    'email_address' 	=> uniqid().'clement@balloonup.com',
+		'username'				=> uniqid().'dator'
   ), $defaults));
  
   return $user;
@@ -60,7 +64,7 @@ function create_event($defaults = array())
 	$event = new Event();
 	$event->fromArray(array_merge(array(
 		'name'						=> 'Start In Paris',
-		'short'						=> 'sip',
+		'short'						=> 'sip_'.uniqid(),
 		'logo'						=> '12356789.jpg'
 	), $defaults));
 	

@@ -64,7 +64,7 @@ function create_event($defaults = array())
 	$event = new Event();
 	$event->fromArray(array_merge(array(
 		'name'						=> 'Start In Paris',
-		'short'						=> 'sip',
+		'short'						=> 'sip'.uniqid(),
 		'logo'						=> '12356789.jpg'
 	), $defaults));
 	
