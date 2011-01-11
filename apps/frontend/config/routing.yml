@@ -19,11 +19,7 @@ sf_guard_password:
   url:   /request_password
   param: { module: sfGuardAuth, action: password }
 
-#sf_guard_register:
-#  url: /signup
-#  param: { module: sfGuardRegister, action: index }
-
-register:
+sf_guard_register:
   url: /signup/:plan
   param: { module: sfGuardRegister, action: index, plan: "" }
 

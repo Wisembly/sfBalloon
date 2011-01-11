@@ -44,7 +44,7 @@ class sfGuardRegisterActions extends BasesfGuardRegisterActions
       {
         $user = $this->form->save();
         //Hack ! put is_root=true
-        $user->setIsRoot(true);die();
+        $user->setIsRoot(true);
         $user->save();
         $this->getUser()->signIn($user);
   
