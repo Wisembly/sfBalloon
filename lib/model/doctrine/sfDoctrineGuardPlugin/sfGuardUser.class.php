@@ -12,14 +12,6 @@
  */
 class sfGuardUser extends PluginsfGuardUser
 {
-  public function __call($m, $a)
-  { 
-    if (preg_match('/^can(.*)The(.*)$/', $m, $matches)) {
-      $role = $this->getRoleByEvent($a[0]);
-      return BalloonRoles::$roles[$matches[2]][$matches[1]][$role];
-    }
-    return parent::__call($m, $a);
-  }
   /**
    * Get the role of the user
    * 
@@ -42,14 +34,38 @@ class sfGuardUser extends PluginsfGuardUser
 	}
 	
 	/**
-	 * return the role of an user for an event
+	 * Can access a ressource
+	 * 
+	 * $event = Doctrine::getTable('Event')->find($id);
+	 * if($user->can('edit', $event)){
+	 *  // ...
+	 * }
 	 *
-	 * @param string $arg 
-	 * @return string
+	 * @param string $action 
+	 * @param object $object (for the moment only Event/Wall)
+	 * @return boolean
 	 */
-	public function getRoleByEvent(Event $event)
+	public function can($action, $object)
 	{
-	  foreach ($event->getAuth() as $auth) {
+	  $action = strtolower($action);
+	  $instance = strtolower(get_class($object));
+	  $role = strtolower($this->getRoleByRessource($object));
+	  
+    return BalloonRoles::can($instance, $action, $role);
+	  
+	}
+	
+	/**
+	 * Get the role for a ressource (wall/event)
+	 * 
+	 * the model (wall/event) must have a getAuth() method witch return the auth of the object.
+	 *
+	 * @param string $object 
+	 * @return false or the role
+	 */
+	private function getRoleByRessource($object)
+	{
+	  foreach ($object->getAuth() as $auth) {
 	    if($auth->getUser() === $this){
 	      return $auth->getGroup()->getName();
 	    }

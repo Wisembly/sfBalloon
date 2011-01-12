@@ -12,4 +12,8 @@
  */
 class Wall extends BaseWall
 {
+  public function getAuth()
+  {
+    return $this->getEvent()->getAuth();
+  }
 }
