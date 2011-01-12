@@ -1,6 +1,7 @@
 <?php
 
 require_once dirname(__FILE__).'/../bootstrap/unit.php';
+require_once dirname(__FILE__).'/TestFunctions.php';
 
 // Database connection
 $configuration = ProjectConfiguration::getApplicationConfiguration('frontend', 'test', true);
@@ -71,7 +72,7 @@ $auth3 = create_auth(array(
 $auth3->save();
 
 
-$t = new lime_test(17);
+$t = new lime_test(19);
 $t->comment('User Auth and Group');
 $t->is($user->getRole(), 'Admin', 'User is an admin');
 $t->is($user2->getRole(), 'Modo', 'User2 is an modo');
@@ -92,58 +93,3 @@ $t->is($user2->can('show_moderating_quotes', $wall1), true, 'User2 can show mode
 $t->is($user3->can('show_moderating_quotes', $wall1), false, 'User2 cannot show moderating quote on the wall');
 $t->is($user3->can('show_moderating_quotes', new stdClass()), false, 'User2 cannot show moderating quote on a random object');
 $t->is($user3->can('not_existing', $wall1), false, 'User2 cannot perform an none existing method on a object');
-
-
-function create_user($defaults = array())
-{
-	$user = new sfGuardUser();
-  $user->fromArray(array_merge(array(
-    'email_address' 	=> uniqid().'clement@balloonup.com',
-		'username'				=> uniqid().'dator'
-  ), $defaults));
- 
-  return $user;
-}
-
-function create_event($defaults = array())
-{
-	$event = new Event();
-	$event->fromArray(array_merge(array(
-		'name'						=> 'Start In Paris',
-		'short'						=> 'sip_'.uniqid(),
-		'logo'						=> '12356789.jpg'
-	), $defaults));
-	
-	return $event;
-}
-
-function create_authgroup($defaults = array())
-{
-	$authgroup = new AuthGroup();
-	$authgroup->fromArray(array_merge(array(
-		'name'						=> 'Admin',
-	), $defaults));
-	
-	return $authgroup;
-}
-
-function create_auth($defaults = array())
-{
-	$auth = new Auth();
-	$auth->fromArray(array_merge(array(
-	), $defaults));
-	
-	return $auth;
-}
-
-function create_wall($defaults = array())
-{
-	$event = new Wall();
-	$event->fromArray(array_merge(array(
-		'name'						=> 'Session',
-		'short'						=> 'sip'.uniqid(),
-		'logo'						=> '12356789.jpg'
-	), $defaults));
-	
-	return $event;
-}

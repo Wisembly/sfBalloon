@@ -1,6 +1,7 @@
 <?php
 
 require_once dirname(__FILE__).'/../bootstrap/unit.php';
+require_once dirname(__FILE__).'/TestFunctions.php';
 
 // Database connection
 $configuration = ProjectConfiguration::getApplicationConfiguration('frontend', 'test', true);
@@ -47,38 +48,4 @@ for ($j=0; $j<2; $j++) {
 	for ($i=0; $i<4; $i++) {
 		$t->isnt($event->Walls[$j]->Quotes[$i]->getDeletedAt(), null, 'Quote'.$j.'.'.$i.' is soft deleted');
 	}
-}
-
-function create_quote($defaults = array())
-{
-	$quote = new Quote();
-	$quote->fromArray(array_merge(array(
-		'quote'						=> 'Question'
-	), $defaults));
-	
-	return $quote;
-}
-
-function create_event($defaults = array())
-{
-	$event = new Event();
-	$event->fromArray(array_merge(array(
-		'name'						=> 'Start In Paris',
-		'short'						=> 'sip'.uniqid(),
-		'logo'						=> '12356789.jpg'
-	), $defaults));
-	
-	return $event;
-}
-
-function create_wall($defaults = array())
-{
-	$event = new Wall();
-	$event->fromArray(array_merge(array(
-		'name'						=> 'Start In Paris',
-		'short'						=> 'sip',
-		'logo'						=> '12356789.jpg'
-	), $defaults));
-	
-	return $event;
 }
