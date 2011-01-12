@@ -1,0 +1,27 @@
+#user{
+  padding:20px;
+}
+
+#content{
+  margin:0 auto;
+  width:960px;
+}
+
+#menu{
+  float: left;
+  width:200px;
+}
+
+.box{
+  border:1px solid #000;
+  padding:10px;
+  margin-bottom:10px;
+}
+
+#balloon{
+}
+
+#maincontent{
+  float:right;
+  width: 750px;
+}

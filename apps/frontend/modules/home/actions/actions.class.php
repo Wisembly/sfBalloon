@@ -19,4 +19,13 @@ class homeActions extends sfActions
   {
     
   }
+  
+  /**
+   * Executes dashboard action
+   *
+   * @param sfWebRequest $request A request object
+   */
+  public function executeDashboard(sfWebRequest $request)
+  {
+  }
 }
