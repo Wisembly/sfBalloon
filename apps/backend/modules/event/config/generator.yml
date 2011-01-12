@@ -14,7 +14,9 @@ generator:
     config:
       actions: ~
       fields:  ~
-      list:    ~
+      list:
+        display: [=name, =short, logo]
+        max_per_page: 10
       filter:  ~
       form:    ~
       edit:    ~
