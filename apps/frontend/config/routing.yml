@@ -26,11 +26,6 @@ sf_guard_register:
 plans:
   url: /plans
   param: { module: sfGuardRegister, action: plans }
-  
-# events
-event:
-  class:   sfDoctrineRouteCollection
-  options: { model: Event }
 
 # dashboard
 
