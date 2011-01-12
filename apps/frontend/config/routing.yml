@@ -32,6 +32,12 @@ event:
   class:   sfDoctrineRouteCollection
   options: { model: Event }
 
+# dashboard
+
+dashboard:
+  url: /dashboard
+  param: { module: home, action: dashboard }
+    
 # generic rules
 # please, remove them by adding more specific rules
 default_index:
