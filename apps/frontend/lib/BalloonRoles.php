@@ -93,6 +93,5 @@ class BalloonRoles
     }else{
       return false;
     }
-    
   }
 }
