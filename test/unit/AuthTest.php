@@ -71,14 +71,14 @@ $auth3 = create_auth(array(
 $auth3->save();
 
 
-$t = new lime_test(15);
+$t = new lime_test(17);
 $t->comment('User Auth and Group');
 $t->is($user->getRole(), 'Admin', 'User is an admin');
 $t->is($user2->getRole(), 'Modo', 'User2 is an modo');
 $t->isnt($user2->getRole(), 'Admin', 'User2 isnt an admin');
-$t->is($user->getRoleByEvent($event), 'Admin', 'User1 is an admin of Event1');
-$t->isnt($user2->getRoleByEvent($event), 'Admin', 'User2 isnt an admin of Event1');
-$t->isnt($user->getRoleByEvent($event), 'Modo', 'User1 isnt an modo of Event1');
+$t->is($user->getRoleByRessource($event), 'Admin', 'User1 is an admin of Event1');
+$t->isnt($user2->getRoleByRessource($event), 'Admin', 'User2 isnt an admin of Event1');
+$t->isnt($user->getRoleByRessource($event), 'Modo', 'User1 isnt an modo of Event1');
 $t->is($user->can('update', $event), true, 'User1 can update the event');
 $t->is($user->can('add_user', $event), true, 'User1 can add user to the event');
 $t->is($user2->can('add_user', $event), false, 'User2 can add user to the event');
@@ -90,6 +90,8 @@ $t->is($user2->can('fav_quote', $wall1), true, 'User2 can fav quote on the wall'
 $t->is($user->can('show_moderating_quotes', $wall1), true, 'User2 can show moderating quote on the wall');
 $t->is($user2->can('show_moderating_quotes', $wall1), true, 'User2 can show moderating quote on the wall');
 $t->is($user3->can('show_moderating_quotes', $wall1), false, 'User2 cannot show moderating quote on the wall');
+$t->is($user3->can('show_moderating_quotes', new stdClass()), false, 'User2 cannot show moderating quote on a random object');
+$t->is($user3->can('not_existing', $wall1), false, 'User2 cannot perform an none existing method on a object');
 
 
 function create_user($defaults = array())

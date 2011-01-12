@@ -63,8 +63,11 @@ class sfGuardUser extends PluginsfGuardUser
 	 * @param string $object 
 	 * @return false or the role
 	 */
-	private function getRoleByRessource($object)
+	public function getRoleByRessource($object)
 	{
+	  if(!is_callable(array($object, 'getAuth'))){
+	    return false;
+	  }
 	  foreach ($object->getAuth() as $auth) {
 	    if($auth->getUser() === $this){
 	      return $auth->getGroup()->getName();
