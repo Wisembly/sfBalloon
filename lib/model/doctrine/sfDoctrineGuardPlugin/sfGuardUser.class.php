@@ -19,8 +19,8 @@ class sfGuardUser extends PluginsfGuardUser
    * @return string
    */
   public function getRole()
-	{
-		return $this->getAuth()->getGroup()->getName();
+  {
+    return $this->getAuth()->getGroup()->getName();
 	}
 	
 	/**
@@ -56,7 +56,7 @@ class sfGuardUser extends PluginsfGuardUser
 	}
 	
 	/**
-	 * Get the role for a ressource (wall/event)
+	 * Get the role for a ressou  rce (wall/event)
 	 * 
 	 * the model (wall/event) must have a getAuth() method witch return the auth of the object.
 	 *
@@ -74,5 +74,16 @@ class sfGuardUser extends PluginsfGuardUser
 	    }
 	  }
 	  return false;
+	}
+	
+	/**
+	 * Get all the rights of events of an user
+	 *
+	 * like array('admin' => arrayofevents, 'modo' => arrayofevents ...)
+	 * @return void
+	 */
+	public function getRights()
+	{
+	  // ... 
 	}
 }
