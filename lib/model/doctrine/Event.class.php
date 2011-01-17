@@ -12,4 +12,8 @@
  */
 class Event extends BaseEvent
 {
+  public function isProtected()
+  {
+    return ($this->getPassword());
+  }
 }
