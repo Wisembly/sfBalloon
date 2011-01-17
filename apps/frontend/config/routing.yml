@@ -32,6 +32,11 @@ plans:
 dashboard:
   url: /dashboard
   param: { module: home, action: dashboard }
+  
+  
+event:
+  url: /:short
+  param: { module: event, action: show }
     
 # generic rules
 # please, remove them by adding more specific rules

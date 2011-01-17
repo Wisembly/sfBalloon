@@ -60,6 +60,11 @@ Wall:
   actAs:
     Timestampable: ~
     SoftDelete: ~
+    Sluggable:
+      name: short
+      unique: true
+      fields: [name]
+      canUpdate: true
     CountCache:
       relations:
         Event:
