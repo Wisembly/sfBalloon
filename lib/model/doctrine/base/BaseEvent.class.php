@@ -13,6 +13,7 @@
  * @property string $password
  * @property boolean $redirect
  * @property boolean $has_custom_css
+ * @property integer $wall_count
  * @property Doctrine_Collection $Walls
  * @property Subscription $Subscription
  * @property Doctrine_Collection $Auth
@@ -25,6 +26,7 @@
  * @method string              getPassword()          Returns the current record's "password" value
  * @method boolean             getRedirect()          Returns the current record's "redirect" value
  * @method boolean             getHasCustomCss()      Returns the current record's "has_custom_css" value
+ * @method integer             getWallCount()         Returns the current record's "wall_count" value
  * @method Doctrine_Collection getWalls()             Returns the current record's "Walls" collection
  * @method Subscription        getSubscription()      Returns the current record's "Subscription" value
  * @method Doctrine_Collection getAuth()              Returns the current record's "Auth" collection
@@ -36,6 +38,7 @@
  * @method Event               setPassword()          Sets the current record's "password" value
  * @method Event               setRedirect()          Sets the current record's "redirect" value
  * @method Event               setHasCustomCss()      Sets the current record's "has_custom_css" value
+ * @method Event               setWallCount()         Sets the current record's "wall_count" value
  * @method Event               setWalls()             Sets the current record's "Walls" collection
  * @method Event               setSubscription()      Sets the current record's "Subscription" value
  * @method Event               setAuth()              Sets the current record's "Auth" collection
@@ -84,6 +87,10 @@ abstract class BaseEvent extends sfDoctrineRecord
              ));
         $this->hasColumn('has_custom_css', 'boolean', null, array(
              'type' => 'boolean',
+             'default' => 0,
+             ));
+        $this->hasColumn('wall_count', 'integer', null, array(
+             'type' => 'integer',
              'default' => 0,
              ));
     }

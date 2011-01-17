@@ -52,6 +52,7 @@ Event:
     password:           { type: string(255) }
     redirect:           { type: boolean, default: 0 }
     has_custom_css:     { type: boolean, default: 0 }
+    wall_count:         { type: integer, default: 0 }
   relations:
     Walls:              { type: many, class: Wall, local: id, foreign: event_id, cascade: [delete] }
     Subscription:       { local: id, foreign: event_id }
@@ -59,6 +60,11 @@ Wall:
   actAs:
     Timestampable: ~
     SoftDelete: ~
+    CountCache:
+      relations:
+        Event:
+          columnName: wall_count
+          foreignAlias: Walls
   columns:
     event_id:           { type: integer }
     name:               { type: string(150), notnull: true }

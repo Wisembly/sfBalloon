@@ -150,7 +150,18 @@ abstract class BaseWall extends sfDoctrineRecord
 
         $timestampable0 = new Doctrine_Template_Timestampable();
         $softdelete0 = new Doctrine_Template_SoftDelete();
+        $countcache0 = new CountCache(array(
+             'relations' => 
+             array(
+              'Event' => 
+              array(
+              'columnName' => 'wall_count',
+              'foreignAlias' => 'Walls',
+              ),
+             ),
+             ));
         $this->actAs($timestampable0);
         $this->actAs($softdelete0);
+        $this->actAs($countcache0);
     }
 }
