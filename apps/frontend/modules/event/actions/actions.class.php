@@ -21,5 +21,9 @@ class eventActions extends sfActions
     $this->event = Doctrine::getTable('Event')->findByShort($eventShort);
     
     $this->forward404Unless($this->event); 
+    
+    if($this->event->getWallCount() == 1){
+      $this->redirect(sprintf('@wall?event=%s&wall=%s', $this->event->getShort(), $this->event->Walls[0]->getShort()));
+    }
   }
 }
