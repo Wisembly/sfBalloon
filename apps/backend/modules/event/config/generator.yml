@@ -15,7 +15,7 @@ generator:
       actions: ~
       fields:  ~
       list:
-        display: [=name, =short, logo]
+        display: [=name, =short, logo, wall_count]
         max_per_page: 10
       filter:  ~
       form:    ~
