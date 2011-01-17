@@ -38,7 +38,6 @@ class eventActions extends sfActions
       }
     }
     
-    
     if($this->event->getWallCount() == 1){
       $this->redirect(sprintf('@wall?event=%s&wall=%s', $this->event->getShort(), $this->event->Walls[0]->getShort()));
     }
