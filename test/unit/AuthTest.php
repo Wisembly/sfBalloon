@@ -72,7 +72,7 @@ $auth3 = create_auth(array(
 $auth3->save();
 
 
-$t = new lime_test(19);
+$t = new lime_test(17);
 $t->comment('User Auth and Group');
 $t->is($user->getRole(), 'Admin', 'User is an admin');
 $t->is($user2->getRole(), 'Modo', 'User2 is an modo');

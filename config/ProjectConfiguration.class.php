@@ -11,7 +11,7 @@ class ProjectConfiguration extends sfProjectConfiguration
   }
   
   public function configureDoctrine(Doctrine_Manager $manager) 
-  { 
+  {
      $manager->setAttribute(Doctrine_Core::ATTR_USE_DQL_CALLBACKS, true);
   }
 }
