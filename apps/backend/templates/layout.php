@@ -7,6 +7,8 @@
     <link rel="shortcut icon" href="/favicon.ico" />
     <?php include_stylesheets() ?>
     <?php include_javascripts() ?>
+    <link rel="stylesheet" type="text/css" media="screen" href="/sfDoctrinePlugin/css/global.css" /> 
+    <link rel="stylesheet" type="text/css" media="screen" href="/sfDoctrinePlugin/css/default.css" />
   </head>
   <body>
     <?php echo $sf_content ?>

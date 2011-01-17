@@ -1,3 +1,35 @@
+#### WALL
+
+wall:
+  url: /event/:event/walls
+  param: { module: wall, action: index }
+  requirements: { sf_method: get }
+  
+wall_new:
+  url: /event/:event/walls/new
+  param: { module: wall, action: new }
+  requirements: { sf_method: get }
+
+wall_create:
+  url: /event/:event/walls/create
+  param: { module: wall, action: create }
+  requirements: { sf_method: post }
+
+wall_edit:
+  url: /event/:event/walls/edit/:id
+  param: { module: wall, action: edit }
+  requirements: { sf_method: get }
+
+wall_update:
+  url: /event/:event/walls/update/:id
+  param: { module: wall, action: update }
+  requirements: { sf_method: put }
+
+wall_delete:
+  url: /event/:event/walls/delete/:id
+  param: { module: wall, action: delete }
+  requirements: { sf_method: delete }
+
 event:
   class: sfDoctrineRouteCollection
   options:
@@ -14,12 +46,3 @@ event:
 homepage:
   url:   /
   param: { module: default, action: index }
-
-# generic rules
-# please, remove them by adding more specific rules
-default_index:
-  url:   /:module
-  param: { action: index }
-
-default:
-  url:   /:module/:action/*
