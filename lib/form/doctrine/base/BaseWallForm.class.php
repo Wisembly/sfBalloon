@@ -34,6 +34,7 @@ abstract class BaseWallForm extends BaseFormDoctrine
       'created_at'        => new sfWidgetFormDateTime(),
       'updated_at'        => new sfWidgetFormDateTime(),
       'deleted_at'        => new sfWidgetFormDateTime(),
+      'short'             => new sfWidgetFormInputText(),
     ));
 
     $this->setValidators(array(
@@ -56,7 +57,12 @@ abstract class BaseWallForm extends BaseFormDoctrine
       'created_at'        => new sfValidatorDateTime(),
       'updated_at'        => new sfValidatorDateTime(),
       'deleted_at'        => new sfValidatorDateTime(array('required' => false)),
+      'short'             => new sfValidatorString(array('max_length' => 255, 'required' => false)),
     ));
+
+    $this->validatorSchema->setPostValidator(
+      new sfValidatorDoctrineUnique(array('model' => 'Wall', 'column' => array('short')))
+    );
 
     $this->widgetSchema->setNameFormat('wall[%s]');
 

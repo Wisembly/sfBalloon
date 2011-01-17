@@ -150,6 +150,15 @@ abstract class BaseWall extends sfDoctrineRecord
 
         $timestampable0 = new Doctrine_Template_Timestampable();
         $softdelete0 = new Doctrine_Template_SoftDelete();
+        $sluggable0 = new Doctrine_Template_Sluggable(array(
+             'name' => 'short',
+             'unique' => true,
+             'fields' => 
+             array(
+              0 => 'name',
+             ),
+             'canUpdate' => true,
+             ));
         $countcache0 = new CountCache(array(
              'relations' => 
              array(
@@ -162,6 +171,7 @@ abstract class BaseWall extends sfDoctrineRecord
              ));
         $this->actAs($timestampable0);
         $this->actAs($softdelete0);
+        $this->actAs($sluggable0);
         $this->actAs($countcache0);
     }
 }

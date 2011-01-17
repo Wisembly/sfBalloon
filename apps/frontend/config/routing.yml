@@ -37,7 +37,11 @@ dashboard:
 event:
   url: /:short
   param: { module: event, action: show }
-    
+
+wall:
+  url: /:event/:wall
+  param: { module: wall, action: show }
+  
 # generic rules
 # please, remove them by adding more specific rules
 default_index:
