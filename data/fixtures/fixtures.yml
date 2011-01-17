@@ -15,3 +15,67 @@
 #     password: changeme
 #     name:     Kris Wallsmith
 #     email:    kris.wallsmith@symfony-project.com
+
+Event:
+  hec:
+    name:               HEC
+    short:              hec
+    short_description:  HEC Sessions
+    landing_html:       "<strong>COUCOU</strong>"
+    logo:               1234567.png
+    password:           ""
+    has_custom_css:     1
+  sip:
+    name:               Start in Paris
+    short:              sip
+    short_description:  Start In Paris !
+    landing_html:       "<strong>Weclome to startin paris</strong>"
+    logo:               1234567.png
+    password:           "test"
+    has_custom_css:     1
+    
+# Wall:
+#   wall1:
+#     Event:              hec
+#     name:               "HEC Salle 1"
+#     tw_hashtag:         "hec1"
+#     sms_hashtag:        "hec1"
+#     lang:               "FR-fr"
+#     short_description:  "test"
+#     start:              "2012-04-05 03:02:00"
+#     stop:               "2010-03-04 03:02:00"
+#     real_start_date:    "2009-04-04 03:04:00"
+#     has_custom_css:     1
+  #wall2:
+  #  Event:              event1
+  #  name:               HEC Salle 2
+  #  tw_hashtag:         hec2
+  #  sms_hashtag:        hec2
+  #  lang:               FR-fr
+  #  short_description:  "test2"
+  #  start:              2012-04-05 03:02:00
+  #  stop:               2010-03-04 03:02:00
+  #  real_start_date:    2009-04-04 03:04:00
+  #  has_custom_css:     1
+  #wall3:
+  #  Event:              event1
+  #  name:               HEC Salle 3
+  #  tw_hashtag:         hec3
+  #  sms_hashtag:        hec3
+  #  lang:               FR-fr
+  #  short_description:  "test3"
+  #  start:              2012-04-05 03:02:00
+  #  stop:               2010-03-04 03:02:00
+  #  real_start_date:    2009-04-04 03:04:00
+  #  has_custom_css:     1
+  #wall4:
+  #  Event:              event2
+  #  name:               Start in Paris - Startup Pitch
+  #  tw_hashtag:         sip
+  #  sms_hashtag:        sip
+  #  lang:               FR-fr
+  #  short_description:  "test4"
+  #  start:              2012-04-05 03:02:00
+  #  stop:               2010-03-04 03:02:00
+  #  real_start_date:    2009-04-04 03:04:00
+  #  has_custom_css:     1

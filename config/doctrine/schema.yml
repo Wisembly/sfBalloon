@@ -82,8 +82,8 @@ Wall:
     stop:               { type: timestamp, notnull: true }
     real_start_date:    { type: timestamp, notnull: true }
     is_moderated:       { type: boolean, default: 0 }
-    alaune_quote_id:    { type: integer }
-    survey:             { type: integer }
+    alaune_quote_id:    { type: integer } # Toggle fullscreen with quote id (null if not)
+    survey:             { type: integer } # Sondage en cours, avec id
     feedback:           { type: string(255) }
     has_custom_css:     { type: boolean, default: 0 }
   relations:
