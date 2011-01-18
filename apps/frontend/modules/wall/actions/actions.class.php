@@ -17,15 +17,22 @@ class wallActions extends sfActions
    */
   public function executeShow(sfWebRequest $request)
   {
-    $this->event  = $request->getParameter('event');
-    $this->wall   = $request->getParameter('wall');
+    $this->eventId  = $request->getParameter('event');
+    $this->wallId   = $request->getParameter('wall');
     
-    $wall = Doctrine::getTable('Wall')->findByShort($this->wall);
+    $this->wall = Doctrine::getTable('Wall')->findByShortWithQuotes($this->wallId);
     $quote = new Quote();
-    // $quote->setUser($this->getUser()->getGuardUser())
-    $quote->setWall($wall);
+    $quote->setWall($this->wall);
     $this->form   = new SimpleQuoteForm($quote);
+  }
+  
+  /**
+   * Executes vote action
+   *
+   * @param sfWebRequest $request A request object
+   */
+  public function executeVote(sfWebRequest $request)
+  {
     
-    $this->quotes = Doctrine::getTable('Quote')->findAllByWall($wall->getId()); // Peut être passer par Wall::findByShort
   }
 }
