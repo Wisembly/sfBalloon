@@ -42,6 +42,10 @@ wall:
   url: /:event/:wall
   param: { module: wall, action: show }
   
+quote_create:
+  url: /:event/:wall/quote/create
+  param: { module: quote, action: create }
+  
 # generic rules
 # please, remove them by adding more specific rules
 default_index:

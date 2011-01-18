@@ -12,4 +12,9 @@
  */
 class Source extends BaseSource
 {
+  
+  public static function find($request, $force = "")
+  {
+    return 1; // To Change (with test on the user agent ());
+  }
 }
