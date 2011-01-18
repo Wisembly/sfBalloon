@@ -27,7 +27,7 @@ abstract class BasePollAnswerForm extends BaseFormDoctrine
       'quote_id'  => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Quote'))),
       'source_id' => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Source'), 'required' => false)),
       'user_id'   => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('User'))),
-      'token'     => new sfValidatorString(array('max_length' => 32)),
+      'token'     => new sfValidatorString(array('max_length' => 40)),
     ));
 
     $this->widgetSchema->setNameFormat('poll_answer[%s]');

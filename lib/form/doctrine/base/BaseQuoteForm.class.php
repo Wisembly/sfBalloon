@@ -44,7 +44,7 @@ abstract class BaseQuoteForm extends BaseFormDoctrine
       'has_answer'   => new sfValidatorBoolean(array('required' => false)),
       'is_validated' => new sfValidatorBoolean(array('required' => false)),
       'is_poll'      => new sfValidatorBoolean(array('required' => false)),
-      'token'        => new sfValidatorString(array('max_length' => 32, 'required' => false)),
+      'token'        => new sfValidatorString(array('max_length' => 40, 'required' => false)),
       'tweet_id'     => new sfValidatorString(array('max_length' => 50, 'required' => false)),
       'is_favori'    => new sfValidatorBoolean(array('required' => false)),
       'created_at'   => new sfValidatorDateTime(),

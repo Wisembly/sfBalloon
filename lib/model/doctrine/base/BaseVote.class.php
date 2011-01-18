@@ -38,12 +38,11 @@ abstract class BaseVote extends sfDoctrineRecord
              ));
         $this->hasColumn('user_id', 'integer', null, array(
              'type' => 'integer',
-             'notnull' => true,
              ));
-        $this->hasColumn('token', 'string', 32, array(
+        $this->hasColumn('token', 'string', 40, array(
              'type' => 'string',
              'notnull' => true,
-             'length' => 32,
+             'length' => 40,
              ));
     }
 
@@ -61,6 +60,17 @@ abstract class BaseVote extends sfDoctrineRecord
              'onDelete' => 'CASCADE'));
 
         $timestampable0 = new Doctrine_Template_Timestampable();
+        $countcache0 = new CountCache(array(
+             'relations' => 
+             array(
+              'Quote' => 
+              array(
+              'columnName' => 'votes_count',
+              'foreignAlias' => 'Votes',
+              ),
+             ),
+             ));
         $this->actAs($timestampable0);
+        $this->actAs($countcache0);
     }
 }

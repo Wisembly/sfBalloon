@@ -10,6 +10,26 @@
  */
 class quoteActions extends sfActions
 {
+  
+  /**
+   * Executes vote action
+   *
+   * @param sfWebRequest $request A request object
+   */
+  public function executeVote(sfWebRequest $request)
+  {
+    $this->eventId  = $request->getParameter('event');
+    $this->wallId   = $request->getParameter('wall');
+    $this->quoteId   = $request->getParameter('quote');
+    
+    $quote = Doctrine::getTable('Quote')->find($this->quoteId);
+    
+    $this->forward404Unless($quote);
+    
+    $this->getUser()->vote($quote);
+    $this->redirect(sprintf('@wall?event=%s&wall=%s', $this->eventId, $this->wallId));
+  }
+  
   /**
    * Executes create action
    *

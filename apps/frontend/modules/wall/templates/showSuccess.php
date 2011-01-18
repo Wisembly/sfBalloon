@@ -10,6 +10,11 @@
 
 <ul>
   <?php foreach($wall->getQuotes() as $quote): ?>
-  <li><?php echo $quote->getQuote();?> - <?php echo distance_of_time_in_words(strtotime($quote->getCreatedAt())); ?></li>
+  <li>
+    <?php echo $quote->getQuote();?> - 
+    <?php echo distance_of_time_in_words(strtotime($quote->getCreatedAt())); ?> - 
+    <?php echo link_to('Vote', sprintf('@quote_vote?event=%s&wall=%s&quote=%s', $eventId, $wallId, $quote->getId()))?> 
+    (<?php echo $quote->getVotesCount()?>)
+  </li>
   <?php endforeach;?>
 </ul>

@@ -33,7 +33,6 @@ dashboard:
   url: /dashboard
   param: { module: home, action: dashboard }
   
-  
 event:
   url: /:short
   param: { module: event, action: show }
@@ -46,6 +45,9 @@ quote_create:
   url: /:event/:wall/quote/create
   param: { module: quote, action: create }
   
+quote_vote:
+  url: /:event/:wall/quote/:quote/vote
+  param: { module: quote, action: vote }
 # generic rules
 # please, remove them by adding more specific rules
 default_index:

@@ -108,9 +108,9 @@ abstract class BaseQuote extends sfDoctrineRecord
              'type' => 'boolean',
              'default' => 0,
              ));
-        $this->hasColumn('token', 'string', 32, array(
+        $this->hasColumn('token', 'string', 40, array(
              'type' => 'string',
-             'length' => 32,
+             'length' => 40,
              ));
         $this->hasColumn('tweet_id', 'string', 50, array(
              'type' => 'string',

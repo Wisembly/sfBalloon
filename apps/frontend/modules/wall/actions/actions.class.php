@@ -21,18 +21,10 @@ class wallActions extends sfActions
     $this->wallId   = $request->getParameter('wall');
     
     $this->wall = Doctrine::getTable('Wall')->findByShortWithQuotes($this->wallId);
+
+    $this->forward404Unless($this->wall);
     $quote = new Quote();
     $quote->setWall($this->wall);
     $this->form   = new SimpleQuoteForm($quote);
-  }
-  
-  /**
-   * Executes vote action
-   *
-   * @param sfWebRequest $request A request object
-   */
-  public function executeVote(sfWebRequest $request)
-  {
-    
   }
 }

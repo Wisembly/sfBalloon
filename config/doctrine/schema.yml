@@ -13,7 +13,8 @@ sfGuardUser:
   relations:
     Subscription:       { local: id, foreign: user_id }
     Auth:               { local: id, foreign: user_id }
-      
+    Votes:              { type: many, class: Vote, local: id, foreign: user_id }
+    
 Subscription:
   actAs:
     Timestampable: ~
@@ -56,6 +57,7 @@ Event:
   relations:
     Walls:              { type: many, class: Wall, local: id, foreign: event_id, cascade: [delete] }
     Subscription:       { local: id, foreign: event_id }
+    
 Wall:
   actAs:
     Timestampable: ~
@@ -104,7 +106,7 @@ Quote:
     has_answer:         { type: boolean, default: 0 }
     is_validated:       { type: boolean, default: 0 }
     is_poll:            { type: boolean, default: 0 }
-    token:              { type: string(32) } # taille d'un md5
+    token:              { type: string(40) } # taille d'un sha1
     tweet_id:           { type: string(50) } # fixé à 50 dans Wall
     is_favori:          { type: boolean, default: 0 }
   relations:
@@ -153,7 +155,7 @@ PollAnswer:
     quote_id:           { type: integer, notnull: true }
     source_id:          { type: integer }
     user_id:            { type: integer, notnull: true }
-    token:              { type: string(32), notnull: true }
+    token:              { type: string(40), notnull: true }
   relations:
     Quote:              { type: one, foreign: id, local: quote_id, onDelete: CASCADE }
     Source:             { type: one, foreign: id, local: source_id, onDelete: SET NULL }
@@ -162,10 +164,15 @@ PollAnswer:
 Vote:
   actAs:
     Timestampable: ~
+    CountCache:
+      relations:
+        Quote:
+          columnName: votes_count
+          foreignAlias: Votes
   columns:
     quote_id:           { type: integer, notnull: true }
-    user_id:            { type: integer, notnull: true }
-    token:              { type: string(32), notnull: true }
+    user_id:            { type: integer }
+    token:              { type: string(40), notnull: true }
   relations:
     Quote:              { type: one, foreign: id, local: quote_id, onDelete: CASCADE }
     User:               { type: one, class: sfGuardUser, local: user_id, foreign: id, onDelete: CASCADE }

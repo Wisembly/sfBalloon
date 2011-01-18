@@ -49,10 +49,10 @@ abstract class BasePollAnswer extends sfDoctrineRecord
              'type' => 'integer',
              'notnull' => true,
              ));
-        $this->hasColumn('token', 'string', 32, array(
+        $this->hasColumn('token', 'string', 40, array(
              'type' => 'string',
              'notnull' => true,
-             'length' => 32,
+             'length' => 40,
              ));
     }
 

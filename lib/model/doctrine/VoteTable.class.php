@@ -3,9 +3,11 @@
 
 class VoteTable extends Doctrine_Table
 {
-    
-    public static function getInstance()
-    {
-        return Doctrine_Core::getTable('Vote');
-    }
+  public function existsByQuoteAndUserOrToken($quote, $userOrToken)
+  {
+    return $this->createQuery('v')
+                ->where('v.user_id = ? OR v.token = ?', array($userOrToken, $userOrToken))
+                ->andWhere('v.quote_id= ?', $quote)
+                ->fetchOne();
+  }
 }

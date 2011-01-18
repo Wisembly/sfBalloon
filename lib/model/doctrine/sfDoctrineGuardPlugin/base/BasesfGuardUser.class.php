@@ -20,6 +20,7 @@
  * @property Doctrine_Collection $Permissions
  * @property Subscription $Subscription
  * @property Auth $Auth
+ * @property Doctrine_Collection $Votes
  * @property Doctrine_Collection $sfGuardUserPermission
  * @property Doctrine_Collection $sfGuardUserGroup
  * @property sfGuardRememberKey $RememberKeys
@@ -27,7 +28,6 @@
  * @property Doctrine_Collection $Quote
  * @property Doctrine_Collection $Answer
  * @property Doctrine_Collection $PollAnswer
- * @property Doctrine_Collection $Vote
  * @property Doctrine_Collection $StatUser
  * 
  * @method string                getFirstName()             Returns the current record's "first_name" value
@@ -45,6 +45,7 @@
  * @method Doctrine_Collection   getPermissions()           Returns the current record's "Permissions" collection
  * @method Subscription          getSubscription()          Returns the current record's "Subscription" value
  * @method Auth                  getAuth()                  Returns the current record's "Auth" value
+ * @method Doctrine_Collection   getVotes()                 Returns the current record's "Votes" collection
  * @method Doctrine_Collection   getSfGuardUserPermission() Returns the current record's "sfGuardUserPermission" collection
  * @method Doctrine_Collection   getSfGuardUserGroup()      Returns the current record's "sfGuardUserGroup" collection
  * @method sfGuardRememberKey    getRememberKeys()          Returns the current record's "RememberKeys" value
@@ -52,7 +53,6 @@
  * @method Doctrine_Collection   getQuote()                 Returns the current record's "Quote" collection
  * @method Doctrine_Collection   getAnswer()                Returns the current record's "Answer" collection
  * @method Doctrine_Collection   getPollAnswer()            Returns the current record's "PollAnswer" collection
- * @method Doctrine_Collection   getVote()                  Returns the current record's "Vote" collection
  * @method Doctrine_Collection   getStatUser()              Returns the current record's "StatUser" collection
  * @method sfGuardUser           setFirstName()             Sets the current record's "first_name" value
  * @method sfGuardUser           setLastName()              Sets the current record's "last_name" value
@@ -69,6 +69,7 @@
  * @method sfGuardUser           setPermissions()           Sets the current record's "Permissions" collection
  * @method sfGuardUser           setSubscription()          Sets the current record's "Subscription" value
  * @method sfGuardUser           setAuth()                  Sets the current record's "Auth" value
+ * @method sfGuardUser           setVotes()                 Sets the current record's "Votes" collection
  * @method sfGuardUser           setSfGuardUserPermission() Sets the current record's "sfGuardUserPermission" collection
  * @method sfGuardUser           setSfGuardUserGroup()      Sets the current record's "sfGuardUserGroup" collection
  * @method sfGuardUser           setRememberKeys()          Sets the current record's "RememberKeys" value
@@ -76,7 +77,6 @@
  * @method sfGuardUser           setQuote()                 Sets the current record's "Quote" collection
  * @method sfGuardUser           setAnswer()                Sets the current record's "Answer" collection
  * @method sfGuardUser           setPollAnswer()            Sets the current record's "PollAnswer" collection
- * @method sfGuardUser           setVote()                  Sets the current record's "Vote" collection
  * @method sfGuardUser           setStatUser()              Sets the current record's "StatUser" collection
  * 
  * @package    balloon
@@ -169,6 +169,10 @@ abstract class BasesfGuardUser extends sfDoctrineRecord
              'local' => 'id',
              'foreign' => 'user_id'));
 
+        $this->hasMany('Vote as Votes', array(
+             'local' => 'id',
+             'foreign' => 'user_id'));
+
         $this->hasMany('sfGuardUserPermission', array(
              'local' => 'id',
              'foreign' => 'user_id'));
@@ -194,10 +198,6 @@ abstract class BasesfGuardUser extends sfDoctrineRecord
              'foreign' => 'user_id'));
 
         $this->hasMany('PollAnswer', array(
-             'local' => 'id',
-             'foreign' => 'user_id'));
-
-        $this->hasMany('Vote', array(
              'local' => 'id',
              'foreign' => 'user_id'));
 
