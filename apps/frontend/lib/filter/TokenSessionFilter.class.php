@@ -11,10 +11,9 @@ class TokenSessionFilter extends sfFilter
 			$ip = $this->getContext()->getRequest()->getRemoteAddress();
 			$info = $this->getContext()->getRequest()->getPathInfoArray();
 			$agent = $info['HTTP_USER_AGENT'];
-
-			if(!$user->hasToken()){
-			  $user->setToken(sha1($ip.$agent.time().uniqid())); 
-			}
+      
+      $token = Tokenisable::generate($ip, $agent);
+			$user->setToken($token, $this->getContext()->getResponse(), $this->getContext()->getRequest());
 		}
 		
 		$filterChain->execute();
