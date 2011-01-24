@@ -6,10 +6,21 @@
   </form>
 </p>
 
-<h3>Liste</h3>
 
+<?php if($wall->isModerated()): ?>
+  <h3>Quote Moderated</h3>
+  <ul>
+    <?php foreach($moderatedQuotes as $quote): ?>
+      <li>
+        <?php echo $quote->getQuote();?> - 
+        <?php echo distance_of_time_in_words(strtotime($quote->getCreatedAt())); ?> - 
+      </li>
+    <?php endforeach; ?>
+  </ul>
+<?php endif;?>
+<h3>Quotes</h3>
 <ul>
-  <?php foreach($wall->getQuotes() as $quote): ?>
+  <?php foreach($publishedQuotes as $quote): ?>
   <li>
     <?php echo $quote->getQuote();?> - 
     <?php echo distance_of_time_in_words(strtotime($quote->getCreatedAt())); ?> - 

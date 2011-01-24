@@ -16,4 +16,14 @@ class Wall extends BaseWall
   {
     return $this->getEvent()->getAuth();
   }
+  
+  public function isModerated()
+  {
+    return ($this->getIsModerated());
+  }
+  
+  public function getPublishedQuotes()
+  {
+    return $this->getQuotes();
+  }
 }

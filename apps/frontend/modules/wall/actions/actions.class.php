@@ -22,6 +22,8 @@ class wallActions extends sfActions
     
     $this->wall = Doctrine::getTable('Wall')->findByShortWithQuotes($this->wallId);
 
+    $this->moderatedQuotes  = Doctrine::getTable('Quote')->getModeratedQuotesForWall($this->wall->getId());
+    $this->publishedQuotes  = Doctrine::getTable('Quote')->getPublishedQuotesForWall($this->wall->getId());
     $this->forward404Unless($this->wall);
     $quote = new Quote();
     $quote->setWall($this->wall);

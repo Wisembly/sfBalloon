@@ -52,7 +52,7 @@ class quoteActions extends sfActions
     
     //$quote->setSource(Source::find($request));
     
-    if(!$wall->getIsModerated()){
+    if(!$wall->isModerated()){
       $quote->setIsValidated(true);
     }
     
