@@ -12,4 +12,14 @@
  */
 class Quote extends BaseQuote
 {
+  /**
+   * Alias to setValidated
+   *
+   * @return void
+   * @author Clément JOBEILI
+   */
+  public function validate()
+  {
+    $this->setValidated(true);
+  }
 }

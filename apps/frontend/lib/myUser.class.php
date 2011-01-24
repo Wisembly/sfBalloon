@@ -2,7 +2,7 @@
 
 class myUser extends Tokenisable
 {
-  
+	
   public function vote(Quote $quote)
   {
     if($this->hasAlreadyVote($quote)){

@@ -21,9 +21,4 @@ class Wall extends BaseWall
   {
     return ($this->getIsModerated());
   }
-  
-  public function getPublishedQuotes()
-  {
-    return $this->getQuotes();
-  }
 }

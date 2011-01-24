@@ -48,6 +48,11 @@ quote_create:
 quote_vote:
   url: /:event/:wall/quote/:quote/vote
   param: { module: quote, action: vote }
+  
+quote_validate:
+  url: /:event/:wall/quote/:quote/validate
+  param: { module: quote, action: validate }
+  
 # generic rules
 # please, remove them by adding more specific rules
 default_index:
