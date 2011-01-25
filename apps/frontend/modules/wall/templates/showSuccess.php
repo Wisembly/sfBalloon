@@ -14,7 +14,7 @@
       <li>
         <?php echo $quote->getQuote();?> - 
         <?php echo distance_of_time_in_words(strtotime($quote->getCreatedAt())); ?> -
-        <?php if(can($sf_user, 'validate_moderating_quote', $quote)): ?> 
+        <?php if(can($sf_user, 'validate_moderating_quote', $wall)): ?> 
           <?php echo link_to('Validate', sprintf('@quote_validate?event=%s&wall=%s&quote=%s', $eventId, $wallId, $quote->getId()))?> 
         <?php endif;?>
       </li>
