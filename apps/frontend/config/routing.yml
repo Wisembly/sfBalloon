@@ -76,6 +76,9 @@ answer_delete:
   param: { module: answer, action: delete }
   requirements: { sf_method: delete }
 
+answer_edit:
+  url: /:event/:wall/quote/:quote/answer/:answer/edit
+  param: { module: answer, action: edit }
 # generic rules
 # please, remove them by adding more specific rules
 default_index:

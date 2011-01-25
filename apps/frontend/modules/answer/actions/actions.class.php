@@ -64,4 +64,37 @@ class answerActions extends sfActions
     
     $this->redirect(sprintf('@quote_answer?event=%s&wall=%s&quote=%s', $this->eventId, $this->wallId, $this->quoteId));
   }
+  
+  /**
+   * Executes edit action
+   *
+   * @param sfWebRequest $request A request object
+   */
+  public function executeEdit(sfWebRequest $request)
+  {
+    $this->eventId  = $request->getParameter('event');
+    $this->wallId   = $request->getParameter('wall');
+    $this->quoteId  = $request->getParameter('quote');
+    $this->answerId = $request->getParameter('answer');
+  
+    $wall   = Doctrine::getTable('Wall')->findByShort($this->wallId);
+    $answer = Doctrine::getTable('Answer')->find($this->answerId);
+
+    $this->forward404Unless($answer && $this->getUser()->can('answer_quote', $wall));
+    
+    $form = new SimpleAnswerForm($answer);
+    
+    if($request->getMethod() == "POST"){
+      $form->bind($request->getPostParameter($form->getName()), $request->getFiles($form->getName()));
+
+      if ($form->isValid()){
+        $answer = $form->save();
+        $this->redirect(sprintf('@quote_answer?event=%s&wall=%s&quote=%s', 
+                        $this->eventId, $this->wallId, $this->quoteId));
+      }
+    }
+    
+    $this->answer = $answer;
+    $this->form   = $form;
+  }
 }
