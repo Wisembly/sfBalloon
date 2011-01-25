@@ -44,6 +44,7 @@ wall:
 quote_create:
   url: /:event/:wall/quote/create
   param: { module: quote, action: create }
+  requirements: { sf_method: post }
   
 quote_vote:
   url: /:event/:wall/quote/:quote/vote
@@ -56,6 +57,14 @@ quote_validate:
 quote_remove:
   url: /:event/:wall/quote/:quote/delete
   param: { module: quote, action: delete }
+  
+quote_edit:
+  url: /:event/:wall/quote/:quote/edit
+  param: { module: quote, action: edit }
+  
+quote_answer:
+  url: /:event/:wall/quote/:quote/answer
+  param: { module: quote, action: answer }
   
 # generic rules
 # please, remove them by adding more specific rules

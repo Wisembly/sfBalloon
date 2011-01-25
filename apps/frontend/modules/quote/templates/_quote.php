@@ -21,3 +21,12 @@
                 $wall->getShort(), 
                 $quote->getId())) ?> -
 <?php endif;?>
+
+<?php if(can($sf_user, 'update_moderating_quote', $wall) && !$quote->isValidated()): ?> 
+  <?php echo link_to('Edit', 
+              sprintf('@quote_edit?event=%s&wall=%s&quote=%s', 
+                $eventId, 
+                $wall->getShort(), 
+                $quote->getId())) ?> -
+<?php endif;?>
+
