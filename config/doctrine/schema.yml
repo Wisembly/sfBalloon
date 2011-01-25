@@ -113,7 +113,7 @@ Quote:
     Wall:               { type: one, foreign: id, local: wall_id }
     User:               { type: one, class: sfGuardUser, local: user_id, foreign: id, onDelete: SET NULL }
     Source:             { type: one, foreign: id, local: source_id, onDelete: SET NULL }
-    Anwsers:            { type: many, class: Answer, local: id, foreign: quote_id, cascade: [delete] }
+    Answers:            { type: many, class: Answer, local: id, foreign: quote_id, cascade: [delete] }
     PollChoices:        { type: many, class: PollChoice, local: id, foreign: quote_id, cascade: [delete] }
     PollAnswers:        { type: many, class: PollAnswer, local: id, foreign: quote_id }
     Votes:              { type: many, class: Vote, local: id, foreign: quote_id }

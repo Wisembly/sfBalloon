@@ -20,7 +20,7 @@
  * @property Wall $Wall
  * @property sfGuardUser $User
  * @property Source $Source
- * @property Doctrine_Collection $Anwsers
+ * @property Doctrine_Collection $Answers
  * @property Doctrine_Collection $PollChoices
  * @property Doctrine_Collection $PollAnswers
  * @property Doctrine_Collection $Votes
@@ -40,7 +40,7 @@
  * @method Wall                getWall()         Returns the current record's "Wall" value
  * @method sfGuardUser         getUser()         Returns the current record's "User" value
  * @method Source              getSource()       Returns the current record's "Source" value
- * @method Doctrine_Collection getAnwsers()      Returns the current record's "Anwsers" collection
+ * @method Doctrine_Collection getAnswers()      Returns the current record's "Answers" collection
  * @method Doctrine_Collection getPollChoices()  Returns the current record's "PollChoices" collection
  * @method Doctrine_Collection getPollAnswers()  Returns the current record's "PollAnswers" collection
  * @method Doctrine_Collection getVotes()        Returns the current record's "Votes" collection
@@ -59,7 +59,7 @@
  * @method Quote               setWall()         Sets the current record's "Wall" value
  * @method Quote               setUser()         Sets the current record's "User" value
  * @method Quote               setSource()       Sets the current record's "Source" value
- * @method Quote               setAnwsers()      Sets the current record's "Anwsers" collection
+ * @method Quote               setAnswers()      Sets the current record's "Answers" collection
  * @method Quote               setPollChoices()  Sets the current record's "PollChoices" collection
  * @method Quote               setPollAnswers()  Sets the current record's "PollAnswers" collection
  * @method Quote               setVotes()        Sets the current record's "Votes" collection
@@ -139,7 +139,7 @@ abstract class BaseQuote extends sfDoctrineRecord
              'foreign' => 'id',
              'onDelete' => 'SET NULL'));
 
-        $this->hasMany('Answer as Anwsers', array(
+        $this->hasMany('Answer as Answers', array(
              'local' => 'id',
              'foreign' => 'quote_id',
              'cascade' => array(
