@@ -23,4 +23,15 @@ class Quote extends BaseQuote
     $this->setIsValidated(true);
     $this->save();
   }
+  
+  /**
+   * Alias to getIsValidated
+   *
+   * @return boolean
+   * @author Clément JOBEILI
+   */
+  public function isValidated()
+  {
+    return $this->getIsValidated();
+  }
 }
