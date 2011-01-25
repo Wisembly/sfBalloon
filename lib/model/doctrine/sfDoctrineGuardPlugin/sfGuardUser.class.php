@@ -47,11 +47,15 @@ class sfGuardUser extends PluginsfGuardUser
 	 */
 	public function can($action, $object)
 	{
+	  if($this->isRoot()){
+	    return true;
+	  }
+	  
 	  $action = strtolower($action);
 	  $instance = strtolower(get_class($object));
 	  $role = strtolower($this->getRoleByRessource($object));
 	  
-    return BalloonRoles::can($instance, $action, $role);
+	  return BalloonRoles::can($instance, $action, $role);
 	  
 	}
 	
