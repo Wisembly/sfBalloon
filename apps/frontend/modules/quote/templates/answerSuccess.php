@@ -14,6 +14,9 @@
 <h4>Réponses</h4>
 <ul>
 <?php foreach($quote->getAnswers() as $answer): ?>
-  <li><?php echo $answer->getAnswer()?></li>
+  <li>
+    <?php echo $answer->getAnswer()?> - 
+    <?php echo link_to('Delete', sprintf('@answer_delete?event=%s&wall=%s&quote=%s&answer=%d', $eventId, $wallId, $quoteId, $answer->getId()), array('method' => 'delete', 'confirm' => 'Are you sure')); ?>
+  </li>
 <?php endforeach; ?>
 </ul>

@@ -43,4 +43,25 @@ class answerActions extends sfActions
       }
     }
   }
+  
+  /**
+   * Executes delete action
+   *
+   * @param sfWebRequest $request A request object
+   */
+  public function executeDelete(sfWebRequest $request)
+  {
+    $this->eventId  = $request->getParameter('event');
+    $this->wallId   = $request->getParameter('wall');
+    $this->quoteId  = $request->getParameter('quote');
+    $this->answerId = $request->getParameter('answer');
+  
+    $wall   = Doctrine::getTable('Wall')->findByShort($this->wallId);
+    $answer = Doctrine::getTable('Answer')->find($this->answerId);
+    
+    $this->forward404Unless($answer && $this->getUser()->can('answer_quote', $wall));
+    $answer->delete();
+    
+    $this->redirect(sprintf('@quote_answer?event=%s&wall=%s&quote=%s', $this->eventId, $this->wallId, $this->quoteId));
+  }
 }

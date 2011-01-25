@@ -70,7 +70,12 @@ answer_create:
   url: /:event/:wall/quote/:quote/answer/create
   param: { module: answer, action: create }
   requirements: { sf_method: post }
-  
+
+answer_delete:
+  url: /:event/:wall/quote/:quote/answer/:answer/delete
+  param: { module: answer, action: delete }
+  requirements: { sf_method: delete }
+
 # generic rules
 # please, remove them by adding more specific rules
 default_index:
