@@ -3,6 +3,15 @@
 class myUser extends Tokenisable
 {
 	
+	public function can($action, $object)
+	{
+	  if(!$this->isAuthenticated()){
+	    return false;
+	  }
+	  
+	  return $this->getGuardUser()->can($action, $object);
+	}
+	
   public function vote(Quote $quote)
   {
     if($this->hasAlreadyVote($quote)){
