@@ -20,7 +20,7 @@ class wallActions extends sfActions
     $this->eventId  = $request->getParameter('event');
     $this->wallId   = $request->getParameter('wall');
     
-    $this->wall = Doctrine::getTable('Wall')->findByShortWithQuotes($this->wallId);
+    $this->wall = Doctrine::getTable('Wall')->findByShort($this->wallId);
 
     $this->moderatedQuotes  = Doctrine::getTable('Quote')->getModeratedQuotesForWall($this->wall->getId());
     $this->publishedQuotes  = Doctrine::getTable('Quote')->getPublishedQuotesForWall($this->wall->getId());
