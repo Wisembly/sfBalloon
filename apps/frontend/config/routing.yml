@@ -52,6 +52,10 @@ quote_vote:
 quote_validate:
   url: /:event/:wall/quote/:quote/validate
   param: { module: quote, action: validate }
+
+quote_remove:
+  url: /:event/:wall/quote/:quote/delete
+  param: { module: quote, action: delete }
   
 # generic rules
 # please, remove them by adding more specific rules

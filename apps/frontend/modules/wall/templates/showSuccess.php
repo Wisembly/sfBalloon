@@ -7,16 +7,12 @@
 </p>
 
 
-<?php if($wall->isModerated()): ?>
+<?php if($wall->isModerated() && can($sf_user, 'show_moderating_quote', $wall)): ?>
   <h3>Quote Moderated</h3>
   <ul>
     <?php foreach($moderatedQuotes as $quote): ?>
       <li>
-        <?php echo $quote->getQuote();?> - 
-        <?php echo distance_of_time_in_words(strtotime($quote->getCreatedAt())); ?> -
-        <?php if(can($sf_user, 'validate_moderating_quote', $wall)): ?> 
-          <?php echo link_to('Validate', sprintf('@quote_validate?event=%s&wall=%s&quote=%s', $eventId, $wallId, $quote->getId()))?> 
-        <?php endif;?>
+        <?php include_partial('quote/quote', array('wall' => $wall, 'quote' => $quote, 'eventId' => $eventId)); ?>
       </li>
     <?php endforeach; ?>
   </ul>
@@ -25,10 +21,7 @@
 <ul>
   <?php foreach($publishedQuotes as $quote): ?>
   <li>
-    <?php echo $quote->getQuote();?> - 
-    <?php echo distance_of_time_in_words(strtotime($quote->getCreatedAt())); ?> - 
-    <?php echo link_to('Vote', sprintf('@quote_vote?event=%s&wall=%s&quote=%s', $eventId, $wallId, $quote->getId()))?> 
-    (<?php echo $quote->getVotesCount()?>)
+    <?php include_partial('quote/quote', array('wall' => $wall, 'quote' => $quote, 'eventId' => $eventId)); ?>
   </li>
   <?php endforeach;?>
 </ul>
