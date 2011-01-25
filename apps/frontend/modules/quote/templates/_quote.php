@@ -1,8 +1,4 @@
-<?php if(can($sf_user, 'answer_quote', $wall)): ?>
-  <?php echo link_to($quote->getQuote(), sprintf('@quote_answer?event=%s&wall=%s&quote=%s', $eventId, $wall->getShort(), $quote->getId()))?> 
-<?php else: ?>
-  <?php echo $quote->getQuote(); ?>
-<?php endif; ?>
+<?php echo link_to($quote->getQuote(), sprintf('@quote_answer?event=%s&wall=%s&quote=%s', $eventId, $wall->getShort(), $quote->getId()))?>
  - 
 <?php echo distance_of_time_in_words(strtotime($quote->getCreatedAt())); ?> -
 
