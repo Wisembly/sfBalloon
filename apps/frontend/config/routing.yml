@@ -66,6 +66,11 @@ quote_answer:
   url: /:event/:wall/quote/:quote/answer
   param: { module: quote, action: answer }
   
+answer_create:
+  url: /:event/:wall/quote/:quote/answer/create
+  param: { module: answer, action: create }
+  requirements: { sf_method: post }
+  
 # generic rules
 # please, remove them by adding more specific rules
 default_index:

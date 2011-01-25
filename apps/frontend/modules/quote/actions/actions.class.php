@@ -149,6 +149,18 @@ class quoteActions extends sfActions
    */
   public function executeAnswer(sfWebRequest $request)
   {
+    $this->eventId  = $request->getParameter('event');
+    $this->wallId   = $request->getParameter('wall');
+    $this->quoteId   = $request->getParameter('quote');
     
+    $quote  = Doctrine::getTable('Quote')->find($this->quoteId);
+    $wall   = Doctrine::getTable('Wall')->findByShort($this->wallId);
+    
+    $this->quote  = $quote;
+    $this->wall   = $wall;
+    
+    $answer = new Answer();
+    $answer->setQuote($quote);
+    $this->form = new SimpleAnswerForm($answer);
   }
 }
