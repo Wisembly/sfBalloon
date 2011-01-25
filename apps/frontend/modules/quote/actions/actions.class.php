@@ -76,16 +76,17 @@ class quoteActions extends sfActions
    *
    * @param sfWebRequest $request A request object
    */
-  public function executeValidated(sfWebRequest $request)
+  public function executeValidate(sfWebRequest $request)
   {
     $this->eventId  = $request->getParameter('event');
     $this->wallId   = $request->getParameter('wall');
     $this->quoteId   = $request->getParameter('quote');
     
-    $quote = Doctrine::getTable('Quote')->find($this->quoteId);
-    
-    $this->forward404Unless($quote && $this->getUser()->can('validate_moderating_quote', $quote));
-    
+    $quote  = Doctrine::getTable('Quote')->find($this->quoteId);
+    $wall   = Doctrine::getTable('Wall')->findByShort($this->wallId);
+
+    $this->forward404Unless($quote && $this->getUser()->can('validate_moderating_quote', $wall));
+
     $quote->validate();
     $this->redirect(sprintf('@wall?event=%s&wall=%s', $this->eventId, $this->wallId));
   }

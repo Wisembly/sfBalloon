@@ -20,6 +20,7 @@ class Quote extends BaseQuote
    */
   public function validate()
   {
-    $this->setValidated(true);
+    $this->setIsValidated(true);
+    $this->save();
   }
 }
