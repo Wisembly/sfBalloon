@@ -4,7 +4,7 @@ wall:
   url: /event/:event/walls
   param: { module: wall, action: index }
   requirements: { sf_method: get }
-  
+
 wall_new:
   url: /event/:event/walls/new
   param: { module: wall, action: new }
