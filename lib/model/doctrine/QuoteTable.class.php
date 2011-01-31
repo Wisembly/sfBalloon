@@ -8,6 +8,8 @@ class QuoteTable extends Doctrine_Table
   {
     return $this->createQuery('q')
                 ->orderBy('q.created_at DESC')
+                ->leftJoin('q.User u')
+                ->leftJoin('q.PollChoices pc')
                 ->where('q.wall_id = ?', $wall);
   }
   
