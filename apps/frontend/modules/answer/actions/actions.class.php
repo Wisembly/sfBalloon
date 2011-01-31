@@ -24,7 +24,7 @@ class answerActions extends sfActions
     $quote  = Doctrine::getTable('Quote')->find($this->quoteId);
     $wall   = Doctrine::getTable('Wall')->findByShort($this->wallId);
     
-    $this->forward404Unless($quote && $this->getUser()->can('answer_quote', $wall));
+    $this->forward404Unless($quote && $this->getUser()->can('answer_quote', $wall) && $quote->isActive());
     
     $this->quote  = $quote;
     $this->wall   = $wall;

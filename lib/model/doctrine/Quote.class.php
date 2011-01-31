@@ -52,12 +52,41 @@ class Quote extends BaseQuote
    * That's mean if the quote(which is a survey) is open to vote
    *
    * @return boolean
-   * @todo implement this.
    * @author Clément JOBEILI
    */
   public function isActive()
   {
+    $createAt = new Datetime($this->getCreatedAt());
+    
+    $duration = $this->getPollDuration();
+    $now = new Datetime();
+
+    $createAt->add(new DateInterval('P0Y0DT0H'.$duration.'M'));
+    
+    if($createAt < $now){
+      return false;
+    }
+    
     return true;
+  }
+
+  /**
+   * Returns the rest of the time available for the poll
+   *
+   * @todo not yet tested
+   * @return DateInterval
+   * @author Clément JOBEILI
+   */
+  public function getPollTimeLeft()
+  {
+    $createAt = new Datetime($this->getCreatedAt());
+    
+    $duration = $this->getPollDuration();
+    $now = new Datetime();
+
+    $createAt->add(new DateInterval('P0Y0DT0H'.$duration.'M'));
+
+    return $now->diff($createdAt);
   }
   
   public function getTotalPollAnswer()

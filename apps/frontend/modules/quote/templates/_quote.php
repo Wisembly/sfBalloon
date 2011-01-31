@@ -3,7 +3,7 @@
 ?>
 
 <?php if($quote->isSurvey()): ?>
-  <?php if(!$sf_user->hasAlreadyVote($quote->getRawValue(), true)): ?>
+  <?php if(!$sf_user->hasAlreadyVote($quote->getRawValue(), true) && $quote->isActive()): ?>
   <form action="<?php echo url_for(sprintf("@choice_vote?event=%s&wall=%s&quote=%s", $eventId, $wall->getShort(), $quote->getId())); ?>" method="post">
     <ul>
       <?php $isActive = $quote->isActive(); ?>

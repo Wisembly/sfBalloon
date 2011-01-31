@@ -14,6 +14,10 @@ class PollChoice extends BasePollChoice
 {
   private function _percent($totalVotes, $count)
   {
+  	if($totalVotes == 0){
+  		return 0;
+  	}
+  	
     return ($count / $totalVotes) * 100;
   }
   

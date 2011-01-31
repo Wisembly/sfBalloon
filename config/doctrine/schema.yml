@@ -14,7 +14,7 @@ sfGuardUser:
     Subscription:       { local: id, foreign: user_id }
     Auth:               { local: id, foreign: user_id }
     Votes:              { type: many, class: Vote, local: id, foreign: user_id }
-    
+
 Subscription:
   actAs:
     Timestampable: ~
@@ -35,7 +35,7 @@ Auth:
     User:               { foreignType: one, class: sfGuardUser, local: user_id, foreign: id, onDelete: CASCADE }
     Event:              { type: one, local: event_id, foreign: id, onDelete: CASCADE } # On delete le tuple non si plus d'Event à gêrer
     Group:              { type: one, class: AuthGroup, local: group_id, foreign: id, onDelete: CASCADE } # Idem, si plus de groupe correspondant, on del Event.
-      
+
 AuthGroup:
   columns:
     name:               { type: string(255) }
@@ -57,7 +57,7 @@ Event:
   relations:
     Walls:              { type: many, class: Wall, local: id, foreign: event_id, cascade: [delete] }
     Subscription:       { local: id, foreign: event_id }
-    
+
 Wall:
   actAs:
     Timestampable: ~
@@ -91,7 +91,7 @@ Wall:
   relations:
     Event:              { type: one, foreign: id, local: event_id }
     Quotes:             { type: many, class: Quote, local: id, foreign: wall_id, cascade: [delete] }
-    
+
 Quote:
   actAs:
     Timestampable: ~
@@ -109,6 +109,8 @@ Quote:
     token:              { type: string(40) } # taille d'un sha1
     tweet_id:           { type: string(50) } # fixé à 50 dans Wall
     is_favori:          { type: boolean, default: 0 }
+    poll_duration:      { type: integer(2), default: 1 } # durée d'un sondage.
+    is_poll_active:     { type: boolean, default: 1 }
   relations:
     Wall:               { type: one, foreign: id, local: wall_id }
     User:               { type: one, class: sfGuardUser, local: user_id, foreign: id, onDelete: SET NULL }
@@ -129,7 +131,7 @@ Answer:
   relations:
     Quote:              { type: one, foreign: id, local: quote_id }
     User:               { type: one, class: sfGuardUser, local: user_id, foreign: id, onDelete: SET NULL }
-    
+
 Source:
   actAs:
     Sluggable:
@@ -139,7 +141,7 @@ Source:
       canUpdate: true
   columns:
     title:              { type: string(25), notnull: true }
-    
+
 PollChoice:
   actAs:
     SoftDelete: ~
@@ -150,7 +152,7 @@ PollChoice:
   relations:
     Quote:              { type: one, foreign: id, local: quote_id }
     Answers:            { type: many, class: PollAnswer, local: id, foreign: choice_id }
-    
+
 PollAnswer:
   actAs:
     CountCache:
@@ -185,7 +187,7 @@ Vote:
   relations:
     Quote:              { type: one, foreign: id, local: quote_id, onDelete: CASCADE }
     User:               { type: one, class: sfGuardUser, local: user_id, foreign: id, onDelete: CASCADE }
-    
+
 #stats
 StatUser:
   columns:
@@ -199,7 +201,7 @@ StatUser:
     walls_used:         { type: integer, notnull: true, default: 0 }
   relations:
     User:               { type: one, class: sfGuardUser, local: user_id, foreign: id }
-    
+
 StatWall:
   columns:
     wall_id:            { type: integer, notnull: true }

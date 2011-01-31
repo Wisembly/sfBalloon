@@ -17,6 +17,8 @@
  * @property string $token
  * @property string $tweet_id
  * @property boolean $is_favori
+ * @property integer $poll_duration
+ * @property boolean $is_poll_active
  * @property Wall $Wall
  * @property sfGuardUser $User
  * @property Source $Source
@@ -25,44 +27,48 @@
  * @property Doctrine_Collection $PollAnswers
  * @property Doctrine_Collection $Votes
  * 
- * @method integer             getWallId()       Returns the current record's "wall_id" value
- * @method integer             getUserId()       Returns the current record's "user_id" value
- * @method integer             getSourceId()     Returns the current record's "source_id" value
- * @method string              getTwUsername()   Returns the current record's "tw_username" value
- * @method string              getQuote()        Returns the current record's "quote" value
- * @method integer             getVotesCount()   Returns the current record's "votes_count" value
- * @method boolean             getHasAnswer()    Returns the current record's "has_answer" value
- * @method boolean             getIsValidated()  Returns the current record's "is_validated" value
- * @method boolean             getIsPoll()       Returns the current record's "is_poll" value
- * @method string              getToken()        Returns the current record's "token" value
- * @method string              getTweetId()      Returns the current record's "tweet_id" value
- * @method boolean             getIsFavori()     Returns the current record's "is_favori" value
- * @method Wall                getWall()         Returns the current record's "Wall" value
- * @method sfGuardUser         getUser()         Returns the current record's "User" value
- * @method Source              getSource()       Returns the current record's "Source" value
- * @method Doctrine_Collection getAnswers()      Returns the current record's "Answers" collection
- * @method Doctrine_Collection getPollChoices()  Returns the current record's "PollChoices" collection
- * @method Doctrine_Collection getPollAnswers()  Returns the current record's "PollAnswers" collection
- * @method Doctrine_Collection getVotes()        Returns the current record's "Votes" collection
- * @method Quote               setWallId()       Sets the current record's "wall_id" value
- * @method Quote               setUserId()       Sets the current record's "user_id" value
- * @method Quote               setSourceId()     Sets the current record's "source_id" value
- * @method Quote               setTwUsername()   Sets the current record's "tw_username" value
- * @method Quote               setQuote()        Sets the current record's "quote" value
- * @method Quote               setVotesCount()   Sets the current record's "votes_count" value
- * @method Quote               setHasAnswer()    Sets the current record's "has_answer" value
- * @method Quote               setIsValidated()  Sets the current record's "is_validated" value
- * @method Quote               setIsPoll()       Sets the current record's "is_poll" value
- * @method Quote               setToken()        Sets the current record's "token" value
- * @method Quote               setTweetId()      Sets the current record's "tweet_id" value
- * @method Quote               setIsFavori()     Sets the current record's "is_favori" value
- * @method Quote               setWall()         Sets the current record's "Wall" value
- * @method Quote               setUser()         Sets the current record's "User" value
- * @method Quote               setSource()       Sets the current record's "Source" value
- * @method Quote               setAnswers()      Sets the current record's "Answers" collection
- * @method Quote               setPollChoices()  Sets the current record's "PollChoices" collection
- * @method Quote               setPollAnswers()  Sets the current record's "PollAnswers" collection
- * @method Quote               setVotes()        Sets the current record's "Votes" collection
+ * @method integer             getWallId()         Returns the current record's "wall_id" value
+ * @method integer             getUserId()         Returns the current record's "user_id" value
+ * @method integer             getSourceId()       Returns the current record's "source_id" value
+ * @method string              getTwUsername()     Returns the current record's "tw_username" value
+ * @method string              getQuote()          Returns the current record's "quote" value
+ * @method integer             getVotesCount()     Returns the current record's "votes_count" value
+ * @method boolean             getHasAnswer()      Returns the current record's "has_answer" value
+ * @method boolean             getIsValidated()    Returns the current record's "is_validated" value
+ * @method boolean             getIsPoll()         Returns the current record's "is_poll" value
+ * @method string              getToken()          Returns the current record's "token" value
+ * @method string              getTweetId()        Returns the current record's "tweet_id" value
+ * @method boolean             getIsFavori()       Returns the current record's "is_favori" value
+ * @method integer             getPollDuration()   Returns the current record's "poll_duration" value
+ * @method boolean             getIsPollActive()   Returns the current record's "is_poll_active" value
+ * @method Wall                getWall()           Returns the current record's "Wall" value
+ * @method sfGuardUser         getUser()           Returns the current record's "User" value
+ * @method Source              getSource()         Returns the current record's "Source" value
+ * @method Doctrine_Collection getAnswers()        Returns the current record's "Answers" collection
+ * @method Doctrine_Collection getPollChoices()    Returns the current record's "PollChoices" collection
+ * @method Doctrine_Collection getPollAnswers()    Returns the current record's "PollAnswers" collection
+ * @method Doctrine_Collection getVotes()          Returns the current record's "Votes" collection
+ * @method Quote               setWallId()         Sets the current record's "wall_id" value
+ * @method Quote               setUserId()         Sets the current record's "user_id" value
+ * @method Quote               setSourceId()       Sets the current record's "source_id" value
+ * @method Quote               setTwUsername()     Sets the current record's "tw_username" value
+ * @method Quote               setQuote()          Sets the current record's "quote" value
+ * @method Quote               setVotesCount()     Sets the current record's "votes_count" value
+ * @method Quote               setHasAnswer()      Sets the current record's "has_answer" value
+ * @method Quote               setIsValidated()    Sets the current record's "is_validated" value
+ * @method Quote               setIsPoll()         Sets the current record's "is_poll" value
+ * @method Quote               setToken()          Sets the current record's "token" value
+ * @method Quote               setTweetId()        Sets the current record's "tweet_id" value
+ * @method Quote               setIsFavori()       Sets the current record's "is_favori" value
+ * @method Quote               setPollDuration()   Sets the current record's "poll_duration" value
+ * @method Quote               setIsPollActive()   Sets the current record's "is_poll_active" value
+ * @method Quote               setWall()           Sets the current record's "Wall" value
+ * @method Quote               setUser()           Sets the current record's "User" value
+ * @method Quote               setSource()         Sets the current record's "Source" value
+ * @method Quote               setAnswers()        Sets the current record's "Answers" collection
+ * @method Quote               setPollChoices()    Sets the current record's "PollChoices" collection
+ * @method Quote               setPollAnswers()    Sets the current record's "PollAnswers" collection
+ * @method Quote               setVotes()          Sets the current record's "Votes" collection
  * 
  * @package    balloon
  * @subpackage model
@@ -119,6 +125,15 @@ abstract class BaseQuote extends sfDoctrineRecord
         $this->hasColumn('is_favori', 'boolean', null, array(
              'type' => 'boolean',
              'default' => 0,
+             ));
+        $this->hasColumn('poll_duration', 'integer', 2, array(
+             'type' => 'integer',
+             'default' => 1,
+             'length' => 2,
+             ));
+        $this->hasColumn('is_poll_active', 'boolean', null, array(
+             'type' => 'boolean',
+             'default' => 1,
              ));
     }
 

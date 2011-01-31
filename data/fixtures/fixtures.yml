@@ -33,7 +33,7 @@ Event:
     logo:               1234567.png
     password:           "test"
     has_custom_css:     1
-    
+
 # Wall:
 #   wall1:
 #     Event:              hec
