@@ -72,6 +72,10 @@ class quoteActions extends sfActions
     
     if ($form->isValid()){
       $quote = $form->save();
+      if($quote->isSurvey()){ // Si la quote est un sondage.
+        $wall->setAlauneQuoteId($quote->getId());
+        $wall->save();
+      }
       $this->redirect(sprintf('@wall?event=%s&wall=%s', $this->eventId, $this->wallId));
     }
     
