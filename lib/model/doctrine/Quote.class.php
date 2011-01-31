@@ -34,4 +34,9 @@ class Quote extends BaseQuote
   {
     return $this->getIsValidated();
   }
+  
+  public function isSurvey()
+  {
+    return $this->getIsPoll();
+  }
 }

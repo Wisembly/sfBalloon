@@ -12,5 +12,9 @@ class PollChoiceForm extends BasePollChoiceForm
 {
   public function configure()
   {
+    $this->useFields(array('choice_value'));
+    
+    $this->setValidator('choice_value', new sfValidatorString(array('max_length' => 150, 'required' => false)));
+    
   }
 }

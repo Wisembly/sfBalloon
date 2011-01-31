@@ -7,6 +7,7 @@ class QuoteTable extends Doctrine_Table
   public function getQuotesQuery($wall)
   {
     return $this->createQuery('q')
+                ->orderBy('q.created_at DESC')
                 ->where('q.wall_id = ?', $wall);
   }
   

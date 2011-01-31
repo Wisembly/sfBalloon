@@ -37,11 +37,11 @@ class quoteActions extends sfActions
    */
   public function executeCreate(sfWebRequest $request)
   {
-    $this->event  = $request->getParameter('event');
-    $this->wall   = $request->getParameter('wall');
+    $this->eventId  = $request->getParameter('event');
+    $this->wallId   = $request->getParameter('wall');
     $user = $this->getUser();
     
-    $wall = Doctrine::getTable('Wall')->findByShort($this->wall);
+    $wall = Doctrine::getTable('Wall')->findByShort($this->wallId);
     $quote = new Quote();
     
     if($user->isAuthenticated()){
@@ -49,6 +49,9 @@ class quoteActions extends sfActions
     }else{
       $quote->setToken($user->getToken());
     }
+    
+    $this->moderatedQuotes  = Doctrine::getTable('Quote')->getModeratedQuotesForWall($wall->getId());
+    $this->publishedQuotes  = Doctrine::getTable('Quote')->getPublishedQuotesForWall($wall->getId());
     
     //$quote->setSource(Source::find($request));
     
@@ -58,16 +61,22 @@ class quoteActions extends sfActions
     
     $quote->setWall($wall);
     
-    $form = new SimpleQuoteForm($quote);
+    if($this->getUser()->can('add_survey', $this->wall)){
+      $quote->setIsPoll(true);
+      $form = new SimpleSurveyForm($quote);
+    }else{
+        $form = new SimpleQuoteForm($quote);
+    }
     
     $form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
     
     if ($form->isValid()){
       $quote = $form->save();
-      $this->redirect(sprintf('@wall?event=%s&wall=%s', $this->event, $this->wall));
+      $this->redirect(sprintf('@wall?event=%s&wall=%s', $this->eventId, $this->wallId));
     }
     
     $this->form = $form;
+    $this->wall = $wall;
     $this->setTemplate('show', 'wall');
   }
   
