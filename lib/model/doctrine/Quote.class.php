@@ -35,8 +35,37 @@ class Quote extends BaseQuote
     return $this->getIsValidated();
   }
   
+  /**
+   * Alias to getIsPoll
+   *
+   * @return boolean
+   * @author Clément JOBEILI
+   */
   public function isSurvey()
   {
     return $this->getIsPoll();
+  }
+  
+  /**
+   * check if the quote is active 
+   * 
+   * That's mean if the quote(which is a survey) is open to vote
+   *
+   * @return boolean
+   * @todo implement this.
+   * @author Clément JOBEILI
+   */
+  public function isActive()
+  {
+    return true;
+  }
+  
+  public function getTotalPollAnswer()
+  {
+    $total = 0;
+    foreach ($this->getPollChoices() as $k => $v) {
+      $total += $v->getAnswers()->count();
+    }
+    return $total;
   }
 }

@@ -79,6 +79,11 @@ answer_delete:
 answer_edit:
   url: /:event/:wall/quote/:quote/answer/:answer/edit
   param: { module: answer, action: edit }
+
+choice_vote:
+  url: /:event/:wall/quote/:quote/choice/vote
+  param: { module: choice, action: vote }
+  
 # generic rules
 # please, remove them by adding more specific rules
 default_index:

@@ -9,15 +9,18 @@
  * @property string $choice_value
  * @property integer $votes_count
  * @property Quote $Quote
+ * @property Doctrine_Collection $Answers
  * 
- * @method integer    getQuoteId()      Returns the current record's "quote_id" value
- * @method string     getChoiceValue()  Returns the current record's "choice_value" value
- * @method integer    getVotesCount()   Returns the current record's "votes_count" value
- * @method Quote      getQuote()        Returns the current record's "Quote" value
- * @method PollChoice setQuoteId()      Sets the current record's "quote_id" value
- * @method PollChoice setChoiceValue()  Sets the current record's "choice_value" value
- * @method PollChoice setVotesCount()   Sets the current record's "votes_count" value
- * @method PollChoice setQuote()        Sets the current record's "Quote" value
+ * @method integer             getQuoteId()      Returns the current record's "quote_id" value
+ * @method string              getChoiceValue()  Returns the current record's "choice_value" value
+ * @method integer             getVotesCount()   Returns the current record's "votes_count" value
+ * @method Quote               getQuote()        Returns the current record's "Quote" value
+ * @method Doctrine_Collection getAnswers()      Returns the current record's "Answers" collection
+ * @method PollChoice          setQuoteId()      Sets the current record's "quote_id" value
+ * @method PollChoice          setChoiceValue()  Sets the current record's "choice_value" value
+ * @method PollChoice          setVotesCount()   Sets the current record's "votes_count" value
+ * @method PollChoice          setQuote()        Sets the current record's "Quote" value
+ * @method PollChoice          setAnswers()      Sets the current record's "Answers" collection
  * 
  * @package    balloon
  * @subpackage model
@@ -50,6 +53,10 @@ abstract class BasePollChoice extends sfDoctrineRecord
         $this->hasOne('Quote', array(
              'local' => 'quote_id',
              'foreign' => 'id'));
+
+        $this->hasMany('PollAnswer as Answers', array(
+             'local' => 'id',
+             'foreign' => 'choice_id'));
 
         $softdelete0 = new Doctrine_Template_SoftDelete();
         $this->actAs($softdelete0);

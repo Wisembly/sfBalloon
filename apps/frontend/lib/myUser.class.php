@@ -29,13 +29,15 @@ class myUser extends Tokenisable
     $vote->save();
   }
   
-  public function hasAlreadyVote(Quote $quote)
+  public function hasAlreadyVote(Quote $quote, $isPoll = false)
   {
     $userOrToken = $this->getToken();
     if($this->isAuthenticated()){
       $userOrToken = $this->getGuardUser()->getId();
     }
     
-    return (Doctrine::getTable('Vote')->existsByQuoteAndUserOrToken($quote->getId(), $userOrToken));
+    $model = ($isPoll) ? 'PollAnswer' : 'Vote';
+    
+    return (Doctrine::getTable($model)->existsByQuoteAndUserOrToken($quote->getId(), $userOrToken));
   }
 }

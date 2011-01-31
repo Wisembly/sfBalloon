@@ -149,14 +149,23 @@ PollChoice:
     votes_count:        { type: integer, default: 0 }
   relations:
     Quote:              { type: one, foreign: id, local: quote_id }
+    Answers:            { type: many, class: PollAnswer, local: id, foreign: choice_id }
     
 PollAnswer:
+  actAs:
+    CountCache:
+      relations:
+        Choice:
+          columnName: votes_count
+          foreignAlias: Answers
   columns:
+    choice_id:          { type: integer, notnull: true }
     quote_id:           { type: integer, notnull: true }
     source_id:          { type: integer }
-    user_id:            { type: integer, notnull: true }
+    user_id:            { type: integer }
     token:              { type: string(40), notnull: true }
   relations:
+    Choice:             { type: one, class: PollChoice, foreign: id, local: choice_id, onDelete: CASCADE }
     Quote:              { type: one, foreign: id, local: quote_id, onDelete: CASCADE }
     Source:             { type: one, foreign: id, local: source_id, onDelete: SET NULL }
     User:               { type: one, class: sfGuardUser, local: user_id, foreign: id, onDelete: CASCADE }

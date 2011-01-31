@@ -23,6 +23,7 @@ class QuoteTable extends Doctrine_Table
   public function getPublishedQuotesForWall($wall)
   {
     return $this->getQuotesQuery($wall)
+                ->leftJoin('pc.Answers a')
                 ->andWhere('q.is_validated = ?', true)
                 ->execute();
   }

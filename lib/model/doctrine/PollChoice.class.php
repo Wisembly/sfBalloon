@@ -12,4 +12,15 @@
  */
 class PollChoice extends BasePollChoice
 {
+  private function _percent($totalVotes, $count)
+  {
+    return ($count / $totalVotes) * 100;
+  }
+  
+  public function getFormattedPercent($totalVotes)
+  {
+    $count = $this->getAnswers()->count();
+
+    return sprintf("%1.1f %% (%s vote%s)", $this->_percent($totalVotes, $count), $count, (($count > 1) ? "s" : ""));
+  }
 }

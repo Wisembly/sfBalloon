@@ -13,6 +13,7 @@ abstract class BasePollAnswerFormFilter extends BaseFormFilterDoctrine
   public function setup()
   {
     $this->setWidgets(array(
+      'choice_id' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Choice'), 'add_empty' => true)),
       'quote_id'  => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Quote'), 'add_empty' => true)),
       'source_id' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Source'), 'add_empty' => true)),
       'user_id'   => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('User'), 'add_empty' => true)),
@@ -20,6 +21,7 @@ abstract class BasePollAnswerFormFilter extends BaseFormFilterDoctrine
     ));
 
     $this->setValidators(array(
+      'choice_id' => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('Choice'), 'column' => 'id')),
       'quote_id'  => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('Quote'), 'column' => 'id')),
       'source_id' => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('Source'), 'column' => 'id')),
       'user_id'   => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('User'), 'column' => 'id')),
@@ -44,6 +46,7 @@ abstract class BasePollAnswerFormFilter extends BaseFormFilterDoctrine
   {
     return array(
       'id'        => 'Number',
+      'choice_id' => 'ForeignKey',
       'quote_id'  => 'ForeignKey',
       'source_id' => 'ForeignKey',
       'user_id'   => 'ForeignKey',
