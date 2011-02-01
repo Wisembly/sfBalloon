@@ -11,31 +11,31 @@
  * @property integer $voucher_id
  * @property integer $offer_id
  * @property boolean $is_payed
- * @property sfGuardUser $User
  * @property Event $Event
  * @property Wall $Wall
  * @property Offer $Offer
+ * @property sfGuardUser $sfGuardUser
  * 
- * @method integer      getUserId()     Returns the current record's "user_id" value
- * @method integer      getWallId()     Returns the current record's "wall_id" value
- * @method integer      getEventId()    Returns the current record's "event_id" value
- * @method integer      getVoucherId()  Returns the current record's "voucher_id" value
- * @method integer      getOfferId()    Returns the current record's "offer_id" value
- * @method boolean      getIsPayed()    Returns the current record's "is_payed" value
- * @method sfGuardUser  getUser()       Returns the current record's "User" value
- * @method Event        getEvent()      Returns the current record's "Event" value
- * @method Wall         getWall()       Returns the current record's "Wall" value
- * @method Offer        getOffer()      Returns the current record's "Offer" value
- * @method Subscription setUserId()     Sets the current record's "user_id" value
- * @method Subscription setWallId()     Sets the current record's "wall_id" value
- * @method Subscription setEventId()    Sets the current record's "event_id" value
- * @method Subscription setVoucherId()  Sets the current record's "voucher_id" value
- * @method Subscription setOfferId()    Sets the current record's "offer_id" value
- * @method Subscription setIsPayed()    Sets the current record's "is_payed" value
- * @method Subscription setUser()       Sets the current record's "User" value
- * @method Subscription setEvent()      Sets the current record's "Event" value
- * @method Subscription setWall()       Sets the current record's "Wall" value
- * @method Subscription setOffer()      Sets the current record's "Offer" value
+ * @method integer      getUserId()      Returns the current record's "user_id" value
+ * @method integer      getWallId()      Returns the current record's "wall_id" value
+ * @method integer      getEventId()     Returns the current record's "event_id" value
+ * @method integer      getVoucherId()   Returns the current record's "voucher_id" value
+ * @method integer      getOfferId()     Returns the current record's "offer_id" value
+ * @method boolean      getIsPayed()     Returns the current record's "is_payed" value
+ * @method Event        getEvent()       Returns the current record's "Event" value
+ * @method Wall         getWall()        Returns the current record's "Wall" value
+ * @method Offer        getOffer()       Returns the current record's "Offer" value
+ * @method sfGuardUser  getSfGuardUser() Returns the current record's "sfGuardUser" value
+ * @method Subscription setUserId()      Sets the current record's "user_id" value
+ * @method Subscription setWallId()      Sets the current record's "wall_id" value
+ * @method Subscription setEventId()     Sets the current record's "event_id" value
+ * @method Subscription setVoucherId()   Sets the current record's "voucher_id" value
+ * @method Subscription setOfferId()     Sets the current record's "offer_id" value
+ * @method Subscription setIsPayed()     Sets the current record's "is_payed" value
+ * @method Subscription setEvent()       Sets the current record's "Event" value
+ * @method Subscription setWall()        Sets the current record's "Wall" value
+ * @method Subscription setOffer()       Sets the current record's "Offer" value
+ * @method Subscription setSfGuardUser() Sets the current record's "sfGuardUser" value
  * 
  * @package    balloon
  * @subpackage model
@@ -70,11 +70,6 @@ abstract class BaseSubscription extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
-        $this->hasOne('sfGuardUser as User', array(
-             'local' => 'user_id',
-             'foreign' => 'id',
-             'onDelete' => 'SET NULL'));
-
         $this->hasOne('Event', array(
              'local' => 'event_id',
              'foreign' => 'id',
@@ -89,6 +84,10 @@ abstract class BaseSubscription extends sfDoctrineRecord
              'local' => 'offer_id',
              'foreign' => 'id',
              'onDelete' => 'SET NULL'));
+
+        $this->hasOne('sfGuardUser', array(
+             'local' => 'user_id',
+             'foreign' => 'id'));
 
         $timestampable0 = new Doctrine_Template_Timestampable();
         $this->actAs($timestampable0);

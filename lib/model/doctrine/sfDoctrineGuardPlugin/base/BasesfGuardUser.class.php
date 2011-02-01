@@ -18,7 +18,7 @@
  * @property boolean $is_root
  * @property Doctrine_Collection $Groups
  * @property Doctrine_Collection $Permissions
- * @property Subscription $Subscription
+ * @property Doctrine_Collection $Subscriptions
  * @property Auth $Auth
  * @property Doctrine_Collection $Votes
  * @property Doctrine_Collection $sfGuardUserPermission
@@ -44,7 +44,7 @@
  * @method boolean               getIsRoot()                Returns the current record's "is_root" value
  * @method Doctrine_Collection   getGroups()                Returns the current record's "Groups" collection
  * @method Doctrine_Collection   getPermissions()           Returns the current record's "Permissions" collection
- * @method Subscription          getSubscription()          Returns the current record's "Subscription" value
+ * @method Doctrine_Collection   getSubscriptions()         Returns the current record's "Subscriptions" collection
  * @method Auth                  getAuth()                  Returns the current record's "Auth" value
  * @method Doctrine_Collection   getVotes()                 Returns the current record's "Votes" collection
  * @method Doctrine_Collection   getSfGuardUserPermission() Returns the current record's "sfGuardUserPermission" collection
@@ -69,7 +69,7 @@
  * @method sfGuardUser           setIsRoot()                Sets the current record's "is_root" value
  * @method sfGuardUser           setGroups()                Sets the current record's "Groups" collection
  * @method sfGuardUser           setPermissions()           Sets the current record's "Permissions" collection
- * @method sfGuardUser           setSubscription()          Sets the current record's "Subscription" value
+ * @method sfGuardUser           setSubscriptions()         Sets the current record's "Subscriptions" collection
  * @method sfGuardUser           setAuth()                  Sets the current record's "Auth" value
  * @method sfGuardUser           setVotes()                 Sets the current record's "Votes" collection
  * @method sfGuardUser           setSfGuardUserPermission() Sets the current record's "sfGuardUserPermission" collection
@@ -164,9 +164,12 @@ abstract class BasesfGuardUser extends sfDoctrineRecord
              'local' => 'user_id',
              'foreign' => 'permission_id'));
 
-        $this->hasOne('Subscription', array(
+        $this->hasMany('Subscription as Subscriptions', array(
              'local' => 'id',
-             'foreign' => 'user_id'));
+             'foreign' => 'user_id',
+             'cascade' => array(
+             0 => 'delete',
+             )));
 
         $this->hasOne('Auth', array(
              'local' => 'id',

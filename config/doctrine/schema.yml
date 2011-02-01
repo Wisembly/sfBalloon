@@ -11,7 +11,7 @@ sfGuardUser:
     is_active_idx:
       fields: [is_active]
   relations:
-    Subscription:       { local: id, foreign: user_id }
+    Subscriptions:      { type: many, class: Subscription, local: id, foreign: user_id, cascade: [delete] }
     Auth:               { local: id, foreign: user_id }
     Votes:              { type: many, class: Vote, local: id, foreign: user_id }
 
@@ -38,7 +38,7 @@ Subscription:
     offer_id:           { type: integer } # id de la table qui gardera les configs défaut de l'event/Wall en fonction des offres/options
     is_payed:           { type: boolean }
   relations:
-    User:               { foreignType: one, class: sfGuardUser, local: user_id, foreign: id, onDelete: SET NULL }
+    User:               { type: one, foreign: id, local: event_id }
     Event:              { foreignType: one, local: event_id, foreign: id , onDelete: SET NULL }
     Wall:               { foreignType: one, local: wall_id, foreign: id , onDelete: SET NULL }
     Offer:              { foreignType: one, local: offer_id, foreign: id , onDelete: SET NULL }
