@@ -430,15 +430,33 @@ form inlabel_poster br {display: none;}
 	background-color:#b71a1a;
 	color:#EEE;
 	font-weight:bold;
+        -moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	border-radius:5px;
+}
+
+#wall .content .moderation .delete:hover
+{
+	background-color:red;
+        font-weight:bold;
 }
 
 #wall .content .moderation .alaune
 {
 	border:1px solid #666;
 	padding:4px;
-	background-color:#339;
+	background-color:#333399;
 	color:#EEE;
 	font-weight:bold;
+        -moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	border-radius:5px;
+}
+
+#wall .content .moderation .alaune:hover
+{
+    background-color:#36C;
+    font-weight:bold;
 }
 
 #wall .content .moderation .valider
@@ -490,6 +508,11 @@ form inlabel_poster br {display: none;}
 	border-radius:3px;
 	-moz-border-radius:3px;
 	-webkit-border-radius:3px;
+}
+
+#suivantes:hover
+{
+    background-color:#6CF;
 }
 .color2 {
   background-color: #e8e9eb; }

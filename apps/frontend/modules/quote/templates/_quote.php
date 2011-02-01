@@ -58,7 +58,8 @@
   <?php endif;?>
 <?php endif; ?>
   <div class="date"><?php echo distance_of_time_in_words(strtotime($quote->getCreatedAt())); ?> -
-  
+  </div>
+      <div class="moderation">
   <?php if(can($sf_user, 'validate_moderating_quote', $wall) && !$quote->isValidated()): ?> 
     <?php echo link_to('Validate', 
                 sprintf('@quote_validate?event=%s&wall=%s&quote=%s', 
@@ -68,11 +69,13 @@
   <?php endif; ?>
 
   <?php if(can($sf_user, 'remove_quote', $wall)): ?> 
-    <?php echo link_to('Delete', 
+    <?php echo link_to('Supprimer',
                 sprintf('@quote_remove?event=%s&wall=%s&quote=%s', 
                   $eventId, 
                   $wall->getShort(), 
-                  $quote->getId())) ?> -
+                  $quote->getId()),
+                'class=delete') ?>
+                <a href="" class="alaune">A la une</a>
   <?php endif;?>
 
   <?php if(can($sf_user, 'update_moderating_quote', $wall) && !$quote->isValidated()): ?> 
