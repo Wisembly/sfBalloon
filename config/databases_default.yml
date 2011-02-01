@@ -1,0 +1,19 @@
+dev:
+  doctrine:
+    class: sfDoctrineDatabase
+
+test:
+  doctrine:
+    class: sfDoctrineDatabase
+    param:
+      dsn: 'mysql:dbname=balloon_test;hostname=localhost'
+      username: root
+      password: root
+
+all:
+  doctrine:
+    class: sfDoctrineDatabase
+    param:
+      dsn: 'mysql:dbname=balloon;hostname=localhost'
+      username: root
+      password: root
