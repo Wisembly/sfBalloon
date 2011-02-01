@@ -40,3 +40,11 @@
 	</ul>
 
 </div>
+<div class="footer">
+	<div id="menu_suivant">
+		<a class="suivantes" href="#more"><div class="color4" id="suivantes">Load more questions</div></a>
+	</div>
+	<div id="copyright" class="color2">
+		<a href="http://balloonup.com">Copyright &copy; 2010 Balloon, tous droits réserv&eacute;s</a>
+	</div>
+</div>
