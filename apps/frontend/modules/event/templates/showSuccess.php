@@ -10,13 +10,32 @@
       <input type="submit" value="Envoyer">  
   </form>
 <?php else: ?>
+<div id="centerpage">
+
+<div id="place_content">
+
+<div id="admin_place_members">
+                	<a href="">Gérer les Utilisateurs</a>
+                </div>
+                <div id="admin_edit_place">
+                	<a href="">Modifier Place</a>
+                </div>
+                <br>
+
+
+<div id="place_1" class="place_edit">
   <h2><?php echo $event->getName(); ?></h2>
-  
-  <ul>
+</div>
+
+  <ul id="events">
     <?php foreach($event->getWalls() as $wall):?>
     <li>
       <?php echo link_to($wall->getName(), sprintf('@wall?event=%s&wall=%s', $event->getShort(), $wall->getShort())); ?>
     </li>
     <?php endforeach; ?>
   </ul>
+  
+  
+</div>  
+</div>
 <?php endif; ?>
