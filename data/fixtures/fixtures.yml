@@ -25,6 +25,27 @@ Event:
     logo:               1234567.png
     password:           ""
     has_custom_css:     1
+    Walls:
+      wall1:
+        name:               "HEC Session 1"
+        tw_hashtag:         "hec1"
+        sms_hashtag:        "hec1"
+        lang:               "FR-fr"
+        short_description:  "test"
+        start:              "2012-04-05 03:02:00"
+        stop:               "2010-03-04 03:02:00"
+        real_start_date:    "2009-04-04 03:04:00"
+        has_custom_css:     1
+      wall2:
+        name:               HEC Session 2
+        tw_hashtag:         hec2
+        sms_hashtag:        hec2
+        lang:               FR-fr
+        short_description:  "test2"
+        start:              2012-04-05 03:02:00
+        stop:               2010-03-04 03:02:00
+        real_start_date:    2009-04-04 03:04:00
+        has_custom_css:     1
   sip:
     name:               Start in Paris
     short:              sip
@@ -34,6 +55,15 @@ Event:
     password:           "test"
     has_custom_css:     1
 
+sfGuardUser:
+  User_admin:
+    first_name:     Clément
+    last_name:      JOBEILI
+    email_address:  clement.jobeili@gmail.com
+    username:       Dator
+    password:       test
+    is_super_admin: true
+    is_root: true
 # Wall:
 #   wall1:
 #     Event:              hec
