@@ -1,4 +1,21 @@
-<div class="sondage"></div>
+<?php if(!$quote->isSurvey()): ?>
+    <?php if($quote->isValidated()): ?>
+      <a href="<?php echo url_for(sprintf('@quote_vote?event=%s&wall=%s&quote=%s', $eventId, $wall->getShort(), $quote->getId())); ?>"
+      <div class="vote" id="vote">
+      <!--<div class="reponse" id="ie_reponse"></div>-->
+      <div>
+        <span class="num" id="num"><?php echo $quote->getVotesCount()?></span><br>
+	<span class="votes" id="votes">votes</span>
+	</div>
+      </div>
+      </a>
+
+    <?php endif; ?>
+
+<?php else:?>
+    <!--cest in sondage on affiche l'image-->
+    <div class="sondage"></div>
+<?php endif; ?>
 <div class="content">
 <div class="head">
 <?php echo link_to($quote->getQuote(), sprintf('@quote_answer?event=%s&wall=%s&quote=%s', 
@@ -38,16 +55,8 @@
     </div>
   <?php endif;?>
 <?php endif; ?>
-
-<p>
   <div class="date"><?php echo distance_of_time_in_words(strtotime($quote->getCreatedAt())); ?> -
-  <?php if(!$quote->isSurvey()): ?>
-    <?php if($quote->isValidated()): ?>
-      <?php echo link_to('Vote', sprintf('@quote_vote?event=%s&wall=%s&quote=%s', $eventId, $wall->getShort(), $quote->getId()))?> 
-      (<?php echo $quote->getVotesCount()?>)
-      -
-    <?php endif; ?>
-  <?php endif; ?>
+  
   <?php if(can($sf_user, 'validate_moderating_quote', $wall) && !$quote->isValidated()): ?> 
     <?php echo link_to('Validate', 
                 sprintf('@quote_validate?event=%s&wall=%s&quote=%s', 
@@ -72,5 +81,4 @@
                   $quote->getId())) ?> -
   <?php endif;?>
   </div>
-</p>
 </div>
