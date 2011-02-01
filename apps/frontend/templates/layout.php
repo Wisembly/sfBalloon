@@ -9,6 +9,9 @@
     <?php include_javascripts() ?>
   </head>
   <body>
+  	<div class="header">
+    	<a href=""><div class="logo"></div></a>
+    </div>
     <div id="content">
       <h1>VotreQuestion.com</h1>
       <div id="user">
