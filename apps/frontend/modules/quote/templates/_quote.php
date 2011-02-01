@@ -1,7 +1,10 @@
+<div class="sondage"></div>
+<div class="content">
+<div class="head">
 <?php echo link_to($quote->getQuote(), sprintf('@quote_answer?event=%s&wall=%s&quote=%s', 
   $eventId, $wall->getShort(), $quote->getId())); 
 ?>
-
+</div>
 <?php if($quote->isSurvey()): ?>
   <?php if(!$sf_user->hasAlreadyVote($quote->getRawValue(), true) && $quote->isActive()): ?>
   <form action="<?php echo url_for(sprintf("@choice_vote?event=%s&wall=%s&quote=%s", $eventId, $wall->getShort(), $quote->getId())); ?>" method="post">
@@ -20,7 +23,8 @@
     <p><input type="submit" value="Voter !"></p>
   </form>
   <?php else:?>
-    <h4>Résultat</h4>
+    <!--<h4>Résultat</h4>-->
+    <div class="reponses">
     <ul>
       <?php $totalVotes = $quote->getTotalPollAnswer()?>
       <?php foreach($quote->getPollChoices() as $key => $choice): ?>
@@ -31,11 +35,12 @@
         </li>
       <?php endforeach; ?>
     </ul>
+    </div>
   <?php endif;?>
 <?php endif; ?>
 
 <p>
-  <?php echo distance_of_time_in_words(strtotime($quote->getCreatedAt())); ?> -
+  <div class="date"><?php echo distance_of_time_in_words(strtotime($quote->getCreatedAt())); ?> -
   <?php if(!$quote->isSurvey()): ?>
     <?php if($quote->isValidated()): ?>
       <?php echo link_to('Vote', sprintf('@quote_vote?event=%s&wall=%s&quote=%s', $eventId, $wall->getShort(), $quote->getId()))?> 
@@ -66,5 +71,6 @@
                   $wall->getShort(), 
                   $quote->getId())) ?> -
   <?php endif;?>
-  
+  </div>
 </p>
+</div>

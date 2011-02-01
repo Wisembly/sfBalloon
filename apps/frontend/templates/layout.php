@@ -12,8 +12,9 @@
   	<div class="header">
     	<a href=""><div class="logo"></div></a>
     </div>
+    
+    
     <div id="content">
-      <h1>VotreQuestion.com</h1>
       <div id="user">
         <?php if($sf_user->isAuthenticated()): ?>
           Hello <?php echo $sf_user->getUsername(); ?> - 
@@ -24,9 +25,20 @@
           <?php echo link_to("Plans and Pricing", "@plans")?>
         <?php endif;?>
       </div>
-      <div id="balloon">
-        <?php echo $sf_content ?>
+    </div>
+    
+    <div class="conteneur">
+	      <div id="balloon">
+	        <?php echo $sf_content ?>
+	      </div>
       </div>
+    
+    
+    
+    <div class="powered">
+    	<a href="http://balloonup.com#hec">Powered by 
+    	<?php echo image_tag('logo_balloon_small.png'); ?>
+    	</a>
     </div>
   </body>
 </html>
