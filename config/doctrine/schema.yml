@@ -15,16 +15,46 @@ sfGuardUser:
     Auth:               { local: id, foreign: user_id }
     Votes:              { type: many, class: Vote, local: id, foreign: user_id }
 
+Offer:
+  columns:
+    name:               { type: string(150), notnull: true }
+    price:              { type: float }
+    sms_allowed:        { type: boolean, default: 0 }
+    tw_allowed:         { type: boolean, default: 0 }
+    email_allowed:      { type: boolean, default: 0 }
+    moderation_allowed: { type: boolean, default: 0 }
+    polls_allowed:      { type: boolean, default: 0 }
+    duration_time:      { type: timestamp }
+    forms_allowed:      { type: boolean, default: 0 }
+
 Subscription:
   actAs:
     Timestampable: ~
   columns:          
     user_id:            { type: integer }
+    wall_id:            { type: integer }
     event_id:           { type: integer }
-    selected_offer:     { type: integer(2) } # id de la table qui gardera les configs défaut de l'event/Wall en fonction des offres/options
+    voucher_id:         { type: integer }
+    offer_id:           { type: integer } # id de la table qui gardera les configs défaut de l'event/Wall en fonction des offres/options
   relations:
-    User:               { foreignType: one, class: sfGuardUser, local: user_id, foreign: id, onDelete: SET NULL } 
+    User:               { foreignType: one, class: sfGuardUser, local: user_id, foreign: id, onDelete: SET NULL }
     Event:              { foreignType: one, local: event_id, foreign: id , onDelete: SET NULL }
+    Wall:               { foreignType: one, local: wall_id, foreign: id , onDelete: SET NULL }
+    Offer:              { foreignType: one, local: offer_id, foreign: id , onDelete: SET NULL }
+
+Voucher:
+  columns:
+    user_id:            { type: integer }
+    offer_id:           { type: integer }
+    type:               { type: integer } # Faire variable classes, 1 => % 0 => (€/$)?
+    value:              { type: float }
+    expired_at:         { type: timestamp }
+    max_uses:           { type: integer }
+    uses_count:         { type: integer }
+    active:             { type: boolean, default: 0 }
+  relations:
+    User:               { foreignType: one, class: sfGuardUser, local: user_id, foreign: id, onDelete: SET NULL }
+    Offer:              { foreignType: one, local: offer_id, foreign: id , onDelete: SET NULL }
 
 Auth:
   columns:

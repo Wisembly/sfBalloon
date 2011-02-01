@@ -22,6 +22,7 @@
  * @property boolean $has_custom_css
  * @property Event $Event
  * @property Doctrine_Collection $Quotes
+ * @property Subscription $Subscription
  * @property Doctrine_Collection $StatWall
  * 
  * @method integer             getEventId()           Returns the current record's "event_id" value
@@ -41,6 +42,7 @@
  * @method boolean             getHasCustomCss()      Returns the current record's "has_custom_css" value
  * @method Event               getEvent()             Returns the current record's "Event" value
  * @method Doctrine_Collection getQuotes()            Returns the current record's "Quotes" collection
+ * @method Subscription        getSubscription()      Returns the current record's "Subscription" value
  * @method Doctrine_Collection getStatWall()          Returns the current record's "StatWall" collection
  * @method Wall                setEventId()           Sets the current record's "event_id" value
  * @method Wall                setName()              Sets the current record's "name" value
@@ -59,6 +61,7 @@
  * @method Wall                setHasCustomCss()      Sets the current record's "has_custom_css" value
  * @method Wall                setEvent()             Sets the current record's "Event" value
  * @method Wall                setQuotes()            Sets the current record's "Quotes" collection
+ * @method Wall                setSubscription()      Sets the current record's "Subscription" value
  * @method Wall                setStatWall()          Sets the current record's "StatWall" collection
  * 
  * @package    balloon
@@ -143,6 +146,10 @@ abstract class BaseWall extends sfDoctrineRecord
              'cascade' => array(
              0 => 'delete',
              )));
+
+        $this->hasOne('Subscription', array(
+             'local' => 'id',
+             'foreign' => 'wall_id'));
 
         $this->hasMany('StatWall', array(
              'local' => 'id',

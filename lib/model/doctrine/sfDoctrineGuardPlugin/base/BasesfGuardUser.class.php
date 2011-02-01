@@ -25,6 +25,7 @@
  * @property Doctrine_Collection $sfGuardUserGroup
  * @property sfGuardRememberKey $RememberKeys
  * @property sfGuardForgotPassword $ForgotPassword
+ * @property Voucher $Voucher
  * @property Doctrine_Collection $Quote
  * @property Doctrine_Collection $Answer
  * @property Doctrine_Collection $PollAnswer
@@ -50,6 +51,7 @@
  * @method Doctrine_Collection   getSfGuardUserGroup()      Returns the current record's "sfGuardUserGroup" collection
  * @method sfGuardRememberKey    getRememberKeys()          Returns the current record's "RememberKeys" value
  * @method sfGuardForgotPassword getForgotPassword()        Returns the current record's "ForgotPassword" value
+ * @method Voucher               getVoucher()               Returns the current record's "Voucher" value
  * @method Doctrine_Collection   getQuote()                 Returns the current record's "Quote" collection
  * @method Doctrine_Collection   getAnswer()                Returns the current record's "Answer" collection
  * @method Doctrine_Collection   getPollAnswer()            Returns the current record's "PollAnswer" collection
@@ -74,6 +76,7 @@
  * @method sfGuardUser           setSfGuardUserGroup()      Sets the current record's "sfGuardUserGroup" collection
  * @method sfGuardUser           setRememberKeys()          Sets the current record's "RememberKeys" value
  * @method sfGuardUser           setForgotPassword()        Sets the current record's "ForgotPassword" value
+ * @method sfGuardUser           setVoucher()               Sets the current record's "Voucher" value
  * @method sfGuardUser           setQuote()                 Sets the current record's "Quote" collection
  * @method sfGuardUser           setAnswer()                Sets the current record's "Answer" collection
  * @method sfGuardUser           setPollAnswer()            Sets the current record's "PollAnswer" collection
@@ -186,6 +189,10 @@ abstract class BasesfGuardUser extends sfDoctrineRecord
              'foreign' => 'user_id'));
 
         $this->hasOne('sfGuardForgotPassword as ForgotPassword', array(
+             'local' => 'id',
+             'foreign' => 'user_id'));
+
+        $this->hasOne('Voucher', array(
              'local' => 'id',
              'foreign' => 'user_id'));
 
