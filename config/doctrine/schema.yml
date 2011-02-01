@@ -36,6 +36,7 @@ Subscription:
     event_id:           { type: integer }
     voucher_id:         { type: integer }
     offer_id:           { type: integer } # id de la table qui gardera les configs défaut de l'event/Wall en fonction des offres/options
+    is_payed:           { type: boolean }
   relations:
     User:               { foreignType: one, class: sfGuardUser, local: user_id, foreign: id, onDelete: SET NULL }
     Event:              { foreignType: one, local: event_id, foreign: id , onDelete: SET NULL }

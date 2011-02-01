@@ -10,6 +10,7 @@
  * @property integer $event_id
  * @property integer $voucher_id
  * @property integer $offer_id
+ * @property boolean $is_payed
  * @property sfGuardUser $User
  * @property Event $Event
  * @property Wall $Wall
@@ -20,6 +21,7 @@
  * @method integer      getEventId()    Returns the current record's "event_id" value
  * @method integer      getVoucherId()  Returns the current record's "voucher_id" value
  * @method integer      getOfferId()    Returns the current record's "offer_id" value
+ * @method boolean      getIsPayed()    Returns the current record's "is_payed" value
  * @method sfGuardUser  getUser()       Returns the current record's "User" value
  * @method Event        getEvent()      Returns the current record's "Event" value
  * @method Wall         getWall()       Returns the current record's "Wall" value
@@ -29,6 +31,7 @@
  * @method Subscription setEventId()    Sets the current record's "event_id" value
  * @method Subscription setVoucherId()  Sets the current record's "voucher_id" value
  * @method Subscription setOfferId()    Sets the current record's "offer_id" value
+ * @method Subscription setIsPayed()    Sets the current record's "is_payed" value
  * @method Subscription setUser()       Sets the current record's "User" value
  * @method Subscription setEvent()      Sets the current record's "Event" value
  * @method Subscription setWall()       Sets the current record's "Wall" value
@@ -58,6 +61,9 @@ abstract class BaseSubscription extends sfDoctrineRecord
              ));
         $this->hasColumn('offer_id', 'integer', null, array(
              'type' => 'integer',
+             ));
+        $this->hasColumn('is_payed', 'boolean', null, array(
+             'type' => 'boolean',
              ));
     }
 

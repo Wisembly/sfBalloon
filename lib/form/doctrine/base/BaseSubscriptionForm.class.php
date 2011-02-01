@@ -21,6 +21,7 @@ abstract class BaseSubscriptionForm extends BaseFormDoctrine
       'event_id'   => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Event'), 'add_empty' => true)),
       'voucher_id' => new sfWidgetFormInputText(),
       'offer_id'   => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Offer'), 'add_empty' => true)),
+      'is_payed'   => new sfWidgetFormInputCheckbox(),
       'created_at' => new sfWidgetFormDateTime(),
       'updated_at' => new sfWidgetFormDateTime(),
     ));
@@ -32,6 +33,7 @@ abstract class BaseSubscriptionForm extends BaseFormDoctrine
       'event_id'   => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Event'), 'required' => false)),
       'voucher_id' => new sfValidatorInteger(array('required' => false)),
       'offer_id'   => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Offer'), 'required' => false)),
+      'is_payed'   => new sfValidatorBoolean(array('required' => false)),
       'created_at' => new sfValidatorDateTime(),
       'updated_at' => new sfValidatorDateTime(),
     ));
