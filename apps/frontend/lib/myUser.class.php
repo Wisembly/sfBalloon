@@ -20,7 +20,7 @@ class myUser extends Tokenisable
     
     $vote = new Vote();
     if($this->isAuthenticated()){
-      $vote->setUser($this);
+      $vote->setUser($this->getGuardUser());
     }else{
       $vote->setToken($this->getToken());
     }
