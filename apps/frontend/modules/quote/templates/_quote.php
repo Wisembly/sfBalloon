@@ -1,6 +1,6 @@
 <?php if(!$quote->isSurvey()): ?>
     <?php if($quote->isValidated()): ?>
-      <a href="<?php echo url_for(sprintf('@quote_vote?event=%s&wall=%s&quote=%s', $eventId, $wall->getShort(), $quote->getId())); ?>"
+      <a href="<?php echo url_for(sprintf('@quote_vote?event=%s&wall=%s&quote=%s', $eventId, $wall->getShort(), $quote->getId())); ?>">
       <div class="vote" id="vote">
       <!--<div class="reponse" id="ie_reponse"></div>-->
       <div>
@@ -10,11 +10,13 @@
       </div>
       </a>
 
+
     <?php endif; ?>
 
-<?php else:?>
+      <?php else:?>
     <!--cest in sondage on affiche l'image-->
     <div class="sondage"></div>
+
 <?php endif; ?>
 <div class="content">
 <div class="head">
