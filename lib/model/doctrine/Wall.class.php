@@ -21,4 +21,22 @@ class Wall extends BaseWall
   {
     return ($this->getIsModerated());
   }
+  
+  /**
+   * Check if the wall support a action with his offer
+   *
+   * @param string $action 
+   * @return boolean
+   * @author Clément JOBEILI
+   */
+  function supports($action)
+  {
+    $actions = WallActions::getActions();
+    if(!isset($actions[$action])){
+      throw new Exception(sprintf('The action "%s" does not exists', $action));
+    }
+    
+    $offer = Doctrine::getTable('Subscription')->findOneByWall($this)->getOffer();
+    return ($offer->get($actions[$action]));
+  }
 }
