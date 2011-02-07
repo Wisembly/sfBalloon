@@ -64,6 +64,44 @@ sfGuardUser:
     password:       test
     is_super_admin: true
     is_root: true
+    
+Offer:
+  startup:
+    name:               Startup
+    price:              149
+    sms_allowed:        0
+    tw_allowed:         1
+    email_allowed:      0
+    widget_allowed:     0
+    moderation_allowed: 1
+    polls_allowed:      0
+    duration_time:      24
+    forms_allowed:      0
+    export_allowed:     0
+  assoc:
+    name:               Association
+    price:              590
+    sms_allowed:        1
+    tw_allowed:         1
+    email_allowed:      0
+    widget_allowed:     0
+    moderation_allowed: 1
+    polls_allowed:      0
+    duration_time:      72
+    forms_allowed:      0
+    export_allowed:     1
+  agence:
+    name:               Agence
+    price:              1190
+    sms_allowed:        1
+    tw_allowed:         1
+    email_allowed:      1
+    widget_allowed:     1
+    moderation_allowed: 1
+    polls_allowed:      1
+    duration_time:      336
+    forms_allowed:      1
+    export_allowed:     1
 # Wall:
 #   wall1:
 #     Event:              hec

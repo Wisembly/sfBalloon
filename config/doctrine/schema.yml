@@ -21,12 +21,13 @@ Offer:
     price:              { type: float }
     sms_allowed:        { type: boolean, default: 0 }
     tw_allowed:         { type: boolean, default: 0 }
+    widget_allowed:     { type: boolean, default: 0 }
     email_allowed:      { type: boolean, default: 0 }
     moderation_allowed: { type: boolean, default: 0 }
     polls_allowed:      { type: boolean, default: 0 }
     duration_time:      { type: timestamp }
     forms_allowed:      { type: boolean, default: 0 }
-
+    export_allowed:     { type: boolean, default: 0 }
 Subscription:
   actAs:
     Timestampable: ~

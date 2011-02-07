@@ -20,11 +20,13 @@ abstract class BaseOfferForm extends BaseFormDoctrine
       'price'              => new sfWidgetFormInputText(),
       'sms_allowed'        => new sfWidgetFormInputCheckbox(),
       'tw_allowed'         => new sfWidgetFormInputCheckbox(),
+      'widget_allowed'     => new sfWidgetFormInputCheckbox(),
       'email_allowed'      => new sfWidgetFormInputCheckbox(),
       'moderation_allowed' => new sfWidgetFormInputCheckbox(),
       'polls_allowed'      => new sfWidgetFormInputCheckbox(),
       'duration_time'      => new sfWidgetFormDateTime(),
       'forms_allowed'      => new sfWidgetFormInputCheckbox(),
+      'export_allowed'     => new sfWidgetFormInputCheckbox(),
     ));
 
     $this->setValidators(array(
@@ -33,11 +35,13 @@ abstract class BaseOfferForm extends BaseFormDoctrine
       'price'              => new sfValidatorNumber(array('required' => false)),
       'sms_allowed'        => new sfValidatorBoolean(array('required' => false)),
       'tw_allowed'         => new sfValidatorBoolean(array('required' => false)),
+      'widget_allowed'     => new sfValidatorBoolean(array('required' => false)),
       'email_allowed'      => new sfValidatorBoolean(array('required' => false)),
       'moderation_allowed' => new sfValidatorBoolean(array('required' => false)),
       'polls_allowed'      => new sfValidatorBoolean(array('required' => false)),
       'duration_time'      => new sfValidatorDateTime(array('required' => false)),
       'forms_allowed'      => new sfValidatorBoolean(array('required' => false)),
+      'export_allowed'     => new sfValidatorBoolean(array('required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('offer[%s]');
