@@ -20,7 +20,7 @@ class sfGuardRegisterActions extends BasesfGuardRegisterActions
    */
   public function executePlans(sfWebRequest $request)
   {
-    
+    $this->plans = Doctrine::getTable('Offer')->findAll();
   }
   
   public function executeIndex(sfWebRequest $request)
@@ -32,7 +32,9 @@ class sfGuardRegisterActions extends BasesfGuardRegisterActions
     }
     
     $this->form = new RegisterForm();
-    if($request->getParameter('plan')){
+    $this->plan = $request->getParameter('plan');
+    
+    if($this->plan){
       $this->form = new ProRegisterForm();
     }
     
