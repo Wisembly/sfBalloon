@@ -18,7 +18,7 @@ class BalloonRoles
     if(isset($roles[$instance]) 
       && isset($roles[$instance][$action])
       && isset($roles[$instance][$action][$role])){
-        return self::$roles[$instance][$action][$role];
+        return $roles[$instance][$action][$role];
     }else{
       return false;
     }
