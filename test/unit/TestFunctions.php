@@ -63,3 +63,8 @@ function create_wall($defaults = array())
 	
 	return $event;
 }
+
+function fetch_offer($offer)
+{
+  return Doctrine::getTable('Offer')->find($offer);
+}

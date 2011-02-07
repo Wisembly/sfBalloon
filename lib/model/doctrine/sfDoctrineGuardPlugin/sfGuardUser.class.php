@@ -81,6 +81,43 @@ class sfGuardUser extends PluginsfGuardUser
 	}
 	
 	/**
+	 * add a subscription to an user,
+	 * 
+	 * this is a factory method, so you have to passe the offer.
+	 * If you passe an already existed event, it's just add a new wall to the event, with the offer
+	 * and if event is newelly created, it will add a new event and a new wall with the offer
+	 * 
+	 * @param Offer $offer
+	 * @param Event $event
+	 * @param Wall $wall
+	 * @param Voucher/null $voucher
+	 * @param boolean $isPayed
+	 * 
+	 * @return Subscription $subscription
+	 */ 
+	public function addSubscription($offer, $event, $wall, $voucher = null, $isPayed = false)
+	{
+	  $event->Walls[] = $wall;
+	  $event->save();
+	  
+	  $subscription = new Subscription();
+	  $subscription->setWall($wall);
+	  $subscription->setEvent($event);
+	  $subscription->setOffer($offer);
+	  if ($voucher) {
+	    $subscription->setVoucher($voucher);
+	  }
+	  $subscription->setIsPayed($isPayed);
+	  $subscription->save();
+	  return $subscription;
+	}
+	
+	public function findSubscriptionForWall($wall)
+	{
+	  return Doctrine::getTable('Subscription')->findOneByWall($wall);	
+	}
+	
+	/**
 	 * Get all the rights of events of an user
 	 *
 	 * like array('admin' => arrayofevents, 'modo' => arrayofevents ...)
