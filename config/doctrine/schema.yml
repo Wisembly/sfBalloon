@@ -28,6 +28,7 @@ Offer:
     duration_time:      { type: timestamp }
     forms_allowed:      { type: boolean, default: 0 }
     export_allowed:     { type: boolean, default: 0 }
+    
 Subscription:
   actAs:
     Timestampable: ~
