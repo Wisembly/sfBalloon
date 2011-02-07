@@ -104,6 +104,8 @@ class sfGuardUser extends PluginsfGuardUser
 	  $subscription->setWall($wall);
 	  $subscription->setEvent($event);
 	  $subscription->setOffer($offer);
+	  $subscription->setUser($this);
+	  
 	  if ($voucher) {
 	    $subscription->setVoucher($voucher);
 	  }
