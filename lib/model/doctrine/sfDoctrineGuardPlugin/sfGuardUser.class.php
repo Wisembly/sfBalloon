@@ -112,11 +112,6 @@ class sfGuardUser extends PluginsfGuardUser
 	  return $subscription;
 	}
 	
-	public function findSubscriptionForWall($wall)
-	{
-	  return Doctrine::getTable('Subscription')->findOneByWall($wall);	
-	}
-	
 	/**
 	 * Get all the rights of events of an user
 	 *

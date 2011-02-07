@@ -29,9 +29,7 @@ $subscription2 = $user->addSubscription($assoc_offer, $event, $wall2);
 */
 
 
-$t = new lime_test(13);
-$t->is($user->findSubscriptionForWall($wall)->getOffer()->getPrice(), '149', 'Subscription is for startup offer');
-$t->isnt($user->findSubscriptionForWall($wall)->getOffer()->getPrice(), '590', 'Subscription is not for assoc');
+$t = new lime_test(11);
 $t->isnt($wall->supports('sms'), true, 'Wall (startup) does not support sms');
 $t->is($wall->supports('twitter'), true, 'Wall (startup) does support twitter');
 $t->is($wall->supports('form'), false, 'Wall (startup) does support form');
