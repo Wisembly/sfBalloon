@@ -17,6 +17,7 @@ class ProRegisterForm extends sfGuardRegisterForm
   {
     unset($this['deleted_at'], $this['is_root']);
     
-    // Embed all relations with events ?
+    $eventForm  = new RegisterEventForm();
+    $this->embedForm('event', $eventForm);
   }
 }
