@@ -17,6 +17,7 @@
  * @property Doctrine_Collection $Walls
  * @property Subscription $Subscription
  * @property Doctrine_Collection $Auth
+ * @property Doctrine_Collection $Invitation
  * 
  * @method string              getName()              Returns the current record's "name" value
  * @method string              getShort()             Returns the current record's "short" value
@@ -30,6 +31,7 @@
  * @method Doctrine_Collection getWalls()             Returns the current record's "Walls" collection
  * @method Subscription        getSubscription()      Returns the current record's "Subscription" value
  * @method Doctrine_Collection getAuth()              Returns the current record's "Auth" collection
+ * @method Doctrine_Collection getInvitation()        Returns the current record's "Invitation" collection
  * @method Event               setName()              Sets the current record's "name" value
  * @method Event               setShort()             Sets the current record's "short" value
  * @method Event               setShortDescription()  Sets the current record's "short_description" value
@@ -42,6 +44,7 @@
  * @method Event               setWalls()             Sets the current record's "Walls" collection
  * @method Event               setSubscription()      Sets the current record's "Subscription" value
  * @method Event               setAuth()              Sets the current record's "Auth" collection
+ * @method Event               setInvitation()        Sets the current record's "Invitation" collection
  * 
  * @package    balloon
  * @subpackage model
@@ -110,6 +113,10 @@ abstract class BaseEvent extends sfDoctrineRecord
              'foreign' => 'event_id'));
 
         $this->hasMany('Auth', array(
+             'local' => 'id',
+             'foreign' => 'event_id'));
+
+        $this->hasMany('Invitation', array(
              'local' => 'id',
              'foreign' => 'event_id'));
 

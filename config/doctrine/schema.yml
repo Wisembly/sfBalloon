@@ -73,6 +73,7 @@ AuthGroup:
   columns:
     name:               { type: string(100) }
     short:              { type: string(10) }
+    
 Event:
   actAs:
     Timestampable: ~
@@ -91,6 +92,17 @@ Event:
     Walls:              { type: many, class: Wall, local: id, foreign: event_id, cascade: [delete] }
     Subscription:       { local: id, foreign: event_id }
 
+Invitation:
+  actAs:
+    Timestampable: ~
+  columns:
+    event_id:           { type: integer, notnull: true }
+    email:              { type: string(150), notnull: true }
+    group_id:           { type: integer, notnull: true }
+  relations:
+    Event:              { type: one, foreign: id, local: event_id }
+    Group:              { type: one, class: AuthGroup, local: group_id, foreign: id }
+    
 Wall:
   actAs:
     Timestampable: ~

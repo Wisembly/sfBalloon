@@ -2,6 +2,7 @@ CREATE TABLE answer (id BIGINT AUTO_INCREMENT, quote_id BIGINT, user_id BIGINT, 
 CREATE TABLE auth (id BIGINT AUTO_INCREMENT, user_id BIGINT, event_id BIGINT, group_id BIGINT, INDEX user_id_idx (user_id), INDEX event_id_idx (event_id), INDEX group_id_idx (group_id), PRIMARY KEY(id)) ENGINE = INNODB;
 CREATE TABLE auth_group (id BIGINT AUTO_INCREMENT, name VARCHAR(100), short VARCHAR(10), PRIMARY KEY(id)) ENGINE = INNODB;
 CREATE TABLE event (id BIGINT AUTO_INCREMENT, name VARCHAR(150) NOT NULL, short VARCHAR(20) NOT NULL UNIQUE, short_description VARCHAR(255), landing_html VARCHAR(255), logo VARCHAR(255) NOT NULL, password VARCHAR(255), redirect TINYINT(1) DEFAULT '0', has_custom_css TINYINT(1) DEFAULT '0', wall_count BIGINT DEFAULT 0, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, deleted_at DATETIME, PRIMARY KEY(id)) ENGINE = INNODB;
+CREATE TABLE invitation (id BIGINT AUTO_INCREMENT, event_id BIGINT NOT NULL, email VARCHAR(150) NOT NULL, group_id BIGINT NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, INDEX event_id_idx (event_id), INDEX group_id_idx (group_id), PRIMARY KEY(id)) ENGINE = INNODB;
 CREATE TABLE offer (id BIGINT AUTO_INCREMENT, name VARCHAR(150) NOT NULL, price FLOAT(18, 2), sms_allowed TINYINT(1) DEFAULT '0', tw_allowed TINYINT(1) DEFAULT '0', widget_allowed TINYINT(1) DEFAULT '0', email_allowed TINYINT(1) DEFAULT '0', moderation_allowed TINYINT(1) DEFAULT '0', polls_allowed TINYINT(1) DEFAULT '0', duration_time TEXT, forms_allowed TINYINT(1) DEFAULT '0', export_allowed TINYINT(1) DEFAULT '0', PRIMARY KEY(id)) ENGINE = INNODB;
 CREATE TABLE poll_answer (id BIGINT AUTO_INCREMENT, choice_id BIGINT NOT NULL, quote_id BIGINT NOT NULL, source_id BIGINT, user_id BIGINT, token VARCHAR(40) NOT NULL, INDEX choice_id_idx (choice_id), INDEX quote_id_idx (quote_id), INDEX source_id_idx (source_id), INDEX user_id_idx (user_id), PRIMARY KEY(id)) ENGINE = INNODB;
 CREATE TABLE poll_choice (id BIGINT AUTO_INCREMENT, quote_id BIGINT NOT NULL, choice_value VARCHAR(150) NOT NULL, votes_count BIGINT DEFAULT 0, deleted_at DATETIME, INDEX quote_id_idx (quote_id), PRIMARY KEY(id)) ENGINE = INNODB;
@@ -26,6 +27,8 @@ ALTER TABLE answer ADD CONSTRAINT answer_quote_id_quote_id FOREIGN KEY (quote_id
 ALTER TABLE auth ADD CONSTRAINT auth_user_id_sf_guard_user_id FOREIGN KEY (user_id) REFERENCES sf_guard_user(id) ON DELETE CASCADE;
 ALTER TABLE auth ADD CONSTRAINT auth_group_id_auth_group_id FOREIGN KEY (group_id) REFERENCES auth_group(id) ON DELETE CASCADE;
 ALTER TABLE auth ADD CONSTRAINT auth_event_id_event_id FOREIGN KEY (event_id) REFERENCES event(id) ON DELETE CASCADE;
+ALTER TABLE invitation ADD CONSTRAINT invitation_group_id_auth_group_id FOREIGN KEY (group_id) REFERENCES auth_group(id);
+ALTER TABLE invitation ADD CONSTRAINT invitation_event_id_event_id FOREIGN KEY (event_id) REFERENCES event(id);
 ALTER TABLE poll_answer ADD CONSTRAINT poll_answer_user_id_sf_guard_user_id FOREIGN KEY (user_id) REFERENCES sf_guard_user(id) ON DELETE CASCADE;
 ALTER TABLE poll_answer ADD CONSTRAINT poll_answer_source_id_source_id FOREIGN KEY (source_id) REFERENCES source(id) ON DELETE SET NULL;
 ALTER TABLE poll_answer ADD CONSTRAINT poll_answer_quote_id_quote_id FOREIGN KEY (quote_id) REFERENCES quote(id) ON DELETE CASCADE;

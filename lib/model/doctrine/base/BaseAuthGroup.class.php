@@ -8,13 +8,16 @@
  * @property string $name
  * @property string $short
  * @property Doctrine_Collection $Auth
+ * @property Doctrine_Collection $Invitation
  * 
- * @method string              getName()  Returns the current record's "name" value
- * @method string              getShort() Returns the current record's "short" value
- * @method Doctrine_Collection getAuth()  Returns the current record's "Auth" collection
- * @method AuthGroup           setName()  Sets the current record's "name" value
- * @method AuthGroup           setShort() Sets the current record's "short" value
- * @method AuthGroup           setAuth()  Sets the current record's "Auth" collection
+ * @method string              getName()       Returns the current record's "name" value
+ * @method string              getShort()      Returns the current record's "short" value
+ * @method Doctrine_Collection getAuth()       Returns the current record's "Auth" collection
+ * @method Doctrine_Collection getInvitation() Returns the current record's "Invitation" collection
+ * @method AuthGroup           setName()       Sets the current record's "name" value
+ * @method AuthGroup           setShort()      Sets the current record's "short" value
+ * @method AuthGroup           setAuth()       Sets the current record's "Auth" collection
+ * @method AuthGroup           setInvitation() Sets the current record's "Invitation" collection
  * 
  * @package    balloon
  * @subpackage model
@@ -40,6 +43,10 @@ abstract class BaseAuthGroup extends sfDoctrineRecord
     {
         parent::setUp();
         $this->hasMany('Auth', array(
+             'local' => 'id',
+             'foreign' => 'group_id'));
+
+        $this->hasMany('Invitation', array(
              'local' => 'id',
              'foreign' => 'group_id'));
     }
