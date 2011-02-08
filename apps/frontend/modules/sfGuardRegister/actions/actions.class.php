@@ -25,8 +25,7 @@ class sfGuardRegisterActions extends BasesfGuardRegisterActions
   
   public function executeIndex(sfWebRequest $request)
   {
-    if ($this->getUser()->isAuthenticated())
-    {
+    if ($this->getUser()->isAuthenticated()) {
       $this->getUser()->setFlash('notice', 'You are already registered and signed in!');
       $this->redirect('@homepage');
     }
@@ -34,24 +33,52 @@ class sfGuardRegisterActions extends BasesfGuardRegisterActions
     $this->form = new RegisterForm();
     $this->plan = $request->getParameter('plan');
     
-    if($this->plan){
+    if ($this->plan) {
       $this->form = new ProRegisterForm();
     }
     
-  
-    if ($request->isMethod('post'))
-    {
+    if ($request->isMethod('post')) {
       $this->form->bind($request->getParameter($this->form->getName()));
-      if ($this->form->isValid())
-      {
+      if ($this->form->isValid()) {
         $user = $this->form->save();
-        //Hack ! put is_root=true
-        $user->setIsRoot(true);
-        $user->save();
+        if ($this->plan) {
+          $this->prepareSave($user, $this->form, $this->plan);
+          // Todo : redirect to paypal
+        }
         $this->getUser()->signIn($user);
-  
+        $user->save();
         $this->redirect('@homepage');
       }
     }
+  }
+  
+  /**
+   * this method will aim to prepare the form,
+   * 
+   * for example, put the tw_code (strtolower of short) or the start stop date in function of the offer
+   *
+   * @return void
+   * @author Clément JOBEILI
+   */
+  protected function prepareSave($user, $form, $plan)
+  {
+    $eventForm = $form->getEmbeddedForm('event');
+    $event = $eventForm->getObject();
+    $wall = $eventForm->getEmbeddedForm('wall')->getObject();
+
+    $wall->setTwHashtag($event->getShort());
+    $wall->setSmsHashtag($event->getShort());
+    
+    $offer = Doctrine::getTable('Offer')->findOneByName($plan);
+    
+    $real   = new Datetime($wall->getRealStartDate());
+    $real->sub(date_interval_create_from_date_string($offer->getDurationTime().' hours'));
+    $wall->setStart($real->format('Y-m-d H:i:s'));
+    $real->add(date_interval_create_from_date_string(($offer->getDurationTime()*2).' hours'));
+    $wall->setStop($real->format('Y-m-d H:i:s'));
+    
+    $wall->save();
+    $user->addSubscription($offer, $event, $wall);
+    $user->addAuth($event); // Administrateur car créateur de l'event
   }
 }
