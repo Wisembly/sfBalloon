@@ -74,7 +74,7 @@ class sfGuardUser extends PluginsfGuardUser
 	  }
 	  foreach ($object->getAuth() as $auth) {
 	    if($auth->getUser() === $this){
-	      return $auth->getGroup()->getName();
+	      return $auth->getGroup()->getShort();
 	    }
 	  }
 	  return false;
@@ -114,6 +114,14 @@ class sfGuardUser extends PluginsfGuardUser
 	  return $subscription;
 	}
 	
+	public function addAuth(Event $event, $group = 1)
+	{
+	  $auth = new Auth();
+	  $auth->setUser($this);
+	  $auth->setEvent($event);
+	  $auth->setGroupId($group);
+	  $this->Auths[] = $auth;
+	}
 	/**
 	 * Get all the rights of events of an user
 	 *
