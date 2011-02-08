@@ -15,7 +15,7 @@
   </head>
   <body>
   	<div class="header">
-    	<a href=""><div class="logo"></div></a>
+    	<a href="<?php echo url_for("@homepage")?>"><div class="logo"></div></a>
     </div>
 
 
