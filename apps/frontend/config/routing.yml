@@ -37,6 +37,14 @@ event:
   url: /:short
   param: { module: event, action: show }
 
+invitation:
+  url: /:event/invitation
+  param: { module: invitation, action: index }
+  
+invitation_create:
+  url: /:event/invitation/create
+  param: { module: invitation, action: create }
+  
 wall:
   url: /:event/:wall
   param: { module: wall, action: show }
