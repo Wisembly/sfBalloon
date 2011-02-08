@@ -13,7 +13,7 @@
  * @property boolean $email_allowed
  * @property boolean $moderation_allowed
  * @property boolean $polls_allowed
- * @property timestamp $duration_time
+ * @property string $duration_time
  * @property boolean $forms_allowed
  * @property boolean $export_allowed
  * @property Subscription $Subscription
@@ -27,7 +27,7 @@
  * @method boolean      getEmailAllowed()       Returns the current record's "email_allowed" value
  * @method boolean      getModerationAllowed()  Returns the current record's "moderation_allowed" value
  * @method boolean      getPollsAllowed()       Returns the current record's "polls_allowed" value
- * @method timestamp    getDurationTime()       Returns the current record's "duration_time" value
+ * @method string       getDurationTime()       Returns the current record's "duration_time" value
  * @method boolean      getFormsAllowed()       Returns the current record's "forms_allowed" value
  * @method boolean      getExportAllowed()      Returns the current record's "export_allowed" value
  * @method Subscription getSubscription()       Returns the current record's "Subscription" value
@@ -88,8 +88,8 @@ abstract class BaseOffer extends sfDoctrineRecord
              'type' => 'boolean',
              'default' => 0,
              ));
-        $this->hasColumn('duration_time', 'timestamp', null, array(
-             'type' => 'timestamp',
+        $this->hasColumn('duration_time', 'string', null, array(
+             'type' => 'string',
              ));
         $this->hasColumn('forms_allowed', 'boolean', null, array(
              'type' => 'boolean',

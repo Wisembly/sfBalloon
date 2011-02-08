@@ -24,7 +24,7 @@ abstract class BaseOfferForm extends BaseFormDoctrine
       'email_allowed'      => new sfWidgetFormInputCheckbox(),
       'moderation_allowed' => new sfWidgetFormInputCheckbox(),
       'polls_allowed'      => new sfWidgetFormInputCheckbox(),
-      'duration_time'      => new sfWidgetFormDateTime(),
+      'duration_time'      => new sfWidgetFormTextarea(),
       'forms_allowed'      => new sfWidgetFormInputCheckbox(),
       'export_allowed'     => new sfWidgetFormInputCheckbox(),
     ));
@@ -39,7 +39,7 @@ abstract class BaseOfferForm extends BaseFormDoctrine
       'email_allowed'      => new sfValidatorBoolean(array('required' => false)),
       'moderation_allowed' => new sfValidatorBoolean(array('required' => false)),
       'polls_allowed'      => new sfValidatorBoolean(array('required' => false)),
-      'duration_time'      => new sfValidatorDateTime(array('required' => false)),
+      'duration_time'      => new sfValidatorString(array('required' => false)),
       'forms_allowed'      => new sfValidatorBoolean(array('required' => false)),
       'export_allowed'     => new sfValidatorBoolean(array('required' => false)),
     ));

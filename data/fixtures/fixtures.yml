@@ -102,6 +102,17 @@ Offer:
     duration_time:      336
     forms_allowed:      1
     export_allowed:     1
+
+AuthGroup:
+  a:
+    name: Administrateur
+    short: admin
+  m:
+    name: Modérateur
+    short: modo
+  n:
+    name: Animateur
+    short: anim
 # Wall:
 #   wall1:
 #     Event:              hec

@@ -12,7 +12,7 @@ sfGuardUser:
       fields: [is_active]
   relations:
     Subscriptions:      { type: many, class: Subscription, local: id, foreign: user_id, cascade: [delete] }
-    Auth:               { local: id, foreign: user_id }
+    Auths:              { type: many, class: Auth, local: id, foreign: user_id }
     Votes:              { type: many, class: Vote, local: id, foreign: user_id }
 
 Offer:
@@ -25,7 +25,7 @@ Offer:
     email_allowed:      { type: boolean, default: 0 }
     moderation_allowed: { type: boolean, default: 0 }
     polls_allowed:      { type: boolean, default: 0 }
-    duration_time:      { type: timestamp }
+    duration_time:      { type: string }
     forms_allowed:      { type: boolean, default: 0 }
     export_allowed:     { type: boolean, default: 0 }
     
@@ -65,14 +65,14 @@ Auth:
     event_id:           { type: integer }
     group_id:           { type: integer }
   relations:
-    User:               { foreignType: one, class: sfGuardUser, local: user_id, foreign: id, onDelete: CASCADE }
+    User:               { type: one, class: sfGuardUser, local: user_id, foreign: id, onDelete: CASCADE }
     Event:              { type: one, local: event_id, foreign: id, onDelete: CASCADE } # On delete le tuple non si plus d'Event à gêrer
     Group:              { type: one, class: AuthGroup, local: group_id, foreign: id, onDelete: CASCADE } # Idem, si plus de groupe correspondant, on del Event.
 
 AuthGroup:
   columns:
-    name:               { type: string(255) }
-
+    name:               { type: string(100) }
+    short:              { type: string(10) }
 Event:
   actAs:
     Timestampable: ~
