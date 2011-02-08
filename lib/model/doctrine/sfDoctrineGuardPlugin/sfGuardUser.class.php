@@ -12,16 +12,6 @@
  */
 class sfGuardUser extends PluginsfGuardUser
 {
-  /**
-   * Get the role of the user
-   * 
-   * @todo does not handle the event 
-   * @return string
-   */
-  public function getRole()
-  {
-    return $this->getAuth()->getGroup()->getName();
-	}
 	
 	/**
 	 * Check if the user is root

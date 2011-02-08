@@ -72,11 +72,8 @@ $auth3 = create_auth(array(
 $auth3->save();
 
 
-$t = new lime_test(17);
+$t = new lime_test(14);
 $t->comment('User Auth and Group');
-$t->is($user->getRole(), 'Admin', 'User is an admin');
-$t->is($user2->getRole(), 'Modo', 'User2 is an modo');
-$t->isnt($user2->getRole(), 'Admin', 'User2 isnt an admin');
 $t->is($user->getRoleByRessource($event), 'Admin', 'User1 is an admin of Event1');
 $t->isnt($user2->getRoleByRessource($event), 'Admin', 'User2 isnt an admin of Event1');
 $t->isnt($user->getRoleByRessource($event), 'Modo', 'User1 isnt an modo of Event1');
