@@ -12,7 +12,7 @@ require_once dirname(__FILE__).'/../lib/BasesfGuardRegisterActions.class.php';
  */
 class sfGuardRegisterActions extends BasesfGuardRegisterActions
 {
-  
+
   /**
    * Executes plans action
    *
@@ -29,27 +29,54 @@ class sfGuardRegisterActions extends BasesfGuardRegisterActions
       $this->getUser()->setFlash('notice', 'You are already registered and signed in!');
       $this->redirect('@homepage');
     }
-    
-    $this->form = new RegisterForm();
+
+    $email = $request->getParameter('email');
     $this->plan = $request->getParameter('plan');
     
-    if ($this->plan) {
-      $this->form = new ProRegisterForm();
-    }
-    
+    $this->form = $this->createForm($email, $this->plan);
+        
     if ($request->isMethod('post')) {
       $this->form->bind($request->getParameter($this->form->getName()));
       if ($this->form->isValid()) {
+        
         $user = $this->form->save();
+        $invited= Doctrine::getTable('Invitation')->findInvitedByEmail($user->getEmailAddress());
+        
+        if ($invited) {
+          $event = $invited->getEvent();
+          $user->addAuth($event, $invited->getGroupId());
+          $user->save();
+          $invited->delete(); // Delete the invitation.
+        }
+
         if ($this->plan) {
           $this->prepareSave($user, $this->form, $this->plan);
           // Todo : redirect to paypal
         }
+
         $this->getUser()->signIn($user);
         $user->save();
         $this->redirect('@homepage');
       }
     }
+  }
+
+  protected function createForm($email, $plan = null)
+  {
+    $form = new RegisterForm();
+
+    $invited= Doctrine::getTable('Invitation')->findInvitedByEmail($email);
+    if ($invited) {
+        $user = new sfGuardUser();
+        $user->setEmailAddress($email);
+        $form = new RegisterForm($user);
+    }
+
+    if ($plan) {
+      $form = new ProRegisterForm();
+    }
+
+    return $form;
   }
   
   /**
@@ -80,5 +107,11 @@ class sfGuardRegisterActions extends BasesfGuardRegisterActions
     $wall->save();
     $user->addSubscription($offer, $event, $wall);
     $user->addAuth($event); // Administrateur car créateur de l'event
+  }
+
+
+  protected function isInvited()
+  {
+    
   }
 }

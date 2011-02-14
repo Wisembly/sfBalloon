@@ -17,9 +17,16 @@ class invitationActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request)
   {
+
     $this->eventId  = $request->getParameter('event');
+    $event = Doctrine::getTable('Event')->findByShort($this->eventId);
+    if (!$this->getUser()->can('add_user', $event)) {
+      $this->redirect('@event?short='. $this->eventId);
+    }
+    $invitation = new Invitation();
+    $invitation->setEvent($event);
+    $this->form = new SimpleInvitationForm($invitation);  
     
-    $this->form = new SimpleInvitationForm();
   }
   
   /**
@@ -32,10 +39,11 @@ class invitationActions extends sfActions
     $this->eventId  = $request->getParameter('event');
     $event = Doctrine::getTable('Event')->findByShort($this->eventId);
 
-    $invitation = new Invitation();
-    $invitation->setEvent($event);
-    
-    $form = new SimpleInvitationForm($invitation);
+    if (!$this->getUser()->can('add_user', $event)) {
+      $this->redirect('@event?short='. $this->eventId);
+    }
+
+    $form = new SimpleInvitationForm();
     $params = $request->getParameter($form->getName());
     
     $user = Doctrine::getTable('sfGuardUser')->retrieveByUsernameOrEmailAddress($params['email']);
@@ -50,5 +58,8 @@ class invitationActions extends sfActions
         $this->redirect(sprintf('@invitation?event=%s', $this->eventId));
       }
     }
+    
+    $this->form = $form;
+    $this->setTemplate('index');
   }
 }
