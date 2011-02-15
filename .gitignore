@@ -1,5 +1,5 @@
 config/databases.yml
 cache/*
 log/*
-
+apps/frontend/config/factories.yml
 /nbproject/
