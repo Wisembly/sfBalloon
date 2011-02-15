@@ -23,6 +23,10 @@ sf_guard_register:
   url: /signup/:plan
   param: { module: sfGuardRegister, action: index, plan: "" }
 
+sf_guard_forgot_password:
+  url: /user/lostpassword
+  param: { module: sfGuardForgotPassword, action: index }
+
 plans:
   url: /plans
   param: { module: sfGuardRegister, action: plans }
