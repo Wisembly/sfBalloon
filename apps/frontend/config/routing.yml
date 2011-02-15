@@ -41,6 +41,10 @@ event:
   url: /:short
   param: { module: event, action: show }
 
+event_edit:
+  url: /:short/edit
+  param: { module: event, action: edit }
+  
 invitation:
   url: /:event/invitation
   param: { module: invitation, action: index }

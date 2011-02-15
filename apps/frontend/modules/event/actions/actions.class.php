@@ -42,4 +42,34 @@ class eventActions extends sfActions
       $this->redirect(sprintf('@wall?event=%s&wall=%s', $this->event->getShort(), $this->event->Walls[0]->getShort()));
     }
   }
+  
+  /**
+   * Executes edit action
+   *
+   * @param sfRequest $request A request object
+   */
+  public function executeEdit(sfWebRequest $request)
+  {
+    $eventShort = $request->getParameter('short');
+    $this->event = Doctrine::getTable('Event')->findByShort($eventShort);
+
+    $this->forward404Unless($this->event);
+      
+    if(!$this->getUser()->can('update', $this->event)){
+      $this->redirect('@event?short='.$eventShort);
+    }
+    
+    $form = new SimpleEventForm($this->event);
+    
+    if($request->getMethod() == "POST"){
+      $form->bind($request->getPostParameter($form->getName()), $request->getFiles($form->getName()));
+
+      if ($form->isValid()){
+        $event = $form->save();
+        $this->redirect('@event?short='.$eventShort);
+      }
+    }
+    
+    $this->form = $form;
+  }
 }
