@@ -12,7 +12,7 @@ class TokenSessionFilter extends sfFilter
 			$info = $this->getContext()->getRequest()->getPathInfoArray();
 			$agent = $info['HTTP_USER_AGENT'];
       
-     	$token = Tokenisable::generate($ip, $agent);
+     	    $token = Tokenisable::generate($ip, $agent);
 			$user->setToken($token, $this->getContext()->getResponse(), $this->getContext()->getRequest());
 		}
 		

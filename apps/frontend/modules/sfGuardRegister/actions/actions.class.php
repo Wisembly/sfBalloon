@@ -108,10 +108,4 @@ class sfGuardRegisterActions extends BasesfGuardRegisterActions
     $user->addSubscription($offer, $event, $wall);
     $user->addAuth($event); // Administrateur car créateur de l'event
   }
-
-
-  protected function isInvited()
-  {
-    
-  }
 }
