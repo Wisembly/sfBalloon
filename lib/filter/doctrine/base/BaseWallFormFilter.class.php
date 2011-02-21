@@ -6,7 +6,7 @@
  * @package    balloon
  * @subpackage filter
  * @author     Clément JOBEILI <clement.jobeili@gmail.com>
- * @version    SVN: $Id$
+ * @version    SVN: $Id: sfDoctrineFormFilterGeneratedTemplate.php 29570 2010-05-21 14:49:47Z Kris.Wallsmith $
  */
 abstract class BaseWallFormFilter extends BaseFormFilterDoctrine
 {
@@ -25,7 +25,7 @@ abstract class BaseWallFormFilter extends BaseFormFilterDoctrine
       'real_start_date'   => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),
       'is_moderated'      => new sfWidgetFormChoice(array('choices' => array('' => 'yes or no', 1 => 'yes', 0 => 'no'))),
       'alaune_quote_id'   => new sfWidgetFormFilterInput(),
-      'survey'            => new sfWidgetFormFilterInput(),
+      'survey_actived'    => new sfWidgetFormFilterInput(),
       'feedback'          => new sfWidgetFormFilterInput(),
       'has_custom_css'    => new sfWidgetFormChoice(array('choices' => array('' => 'yes or no', 1 => 'yes', 0 => 'no'))),
       'created_at'        => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),
@@ -47,7 +47,7 @@ abstract class BaseWallFormFilter extends BaseFormFilterDoctrine
       'real_start_date'   => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 00:00:00')), 'to_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 23:59:59')))),
       'is_moderated'      => new sfValidatorChoice(array('required' => false, 'choices' => array('', 1, 0))),
       'alaune_quote_id'   => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
-      'survey'            => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
+      'survey_actived'    => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
       'feedback'          => new sfValidatorPass(array('required' => false)),
       'has_custom_css'    => new sfValidatorChoice(array('required' => false, 'choices' => array('', 1, 0))),
       'created_at'        => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 00:00:00')), 'to_date' => new sfValidatorDateTime(array('required' => false, 'datetime_output' => 'Y-m-d 23:59:59')))),
@@ -86,7 +86,7 @@ abstract class BaseWallFormFilter extends BaseFormFilterDoctrine
       'real_start_date'   => 'Date',
       'is_moderated'      => 'Boolean',
       'alaune_quote_id'   => 'Number',
-      'survey'            => 'Number',
+      'survey_actived'    => 'Number',
       'feedback'          => 'Text',
       'has_custom_css'    => 'Boolean',
       'created_at'        => 'Date',

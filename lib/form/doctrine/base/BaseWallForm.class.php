@@ -8,7 +8,7 @@
  * @package    balloon
  * @subpackage form
  * @author     Clément JOBEILI <clement.jobeili@gmail.com>
- * @version    SVN: $Id$
+ * @version    SVN: $Id: sfDoctrineFormGeneratedTemplate.php 29553 2010-05-20 14:33:00Z Kris.Wallsmith $
  */
 abstract class BaseWallForm extends BaseFormDoctrine
 {
@@ -28,7 +28,7 @@ abstract class BaseWallForm extends BaseFormDoctrine
       'real_start_date'   => new sfWidgetFormDateTime(),
       'is_moderated'      => new sfWidgetFormInputCheckbox(),
       'alaune_quote_id'   => new sfWidgetFormInputText(),
-      'survey'            => new sfWidgetFormInputText(),
+      'survey_actived'    => new sfWidgetFormInputText(),
       'feedback'          => new sfWidgetFormInputText(),
       'has_custom_css'    => new sfWidgetFormInputCheckbox(),
       'created_at'        => new sfWidgetFormDateTime(),
@@ -51,7 +51,7 @@ abstract class BaseWallForm extends BaseFormDoctrine
       'real_start_date'   => new sfValidatorDateTime(),
       'is_moderated'      => new sfValidatorBoolean(array('required' => false)),
       'alaune_quote_id'   => new sfValidatorInteger(array('required' => false)),
-      'survey'            => new sfValidatorInteger(array('required' => false)),
+      'survey_actived'    => new sfValidatorInteger(array('required' => false)),
       'feedback'          => new sfValidatorString(array('max_length' => 255, 'required' => false)),
       'has_custom_css'    => new sfValidatorBoolean(array('required' => false)),
       'created_at'        => new sfValidatorDateTime(),
