@@ -40,6 +40,9 @@ dashboard:
   url: /dashboard
   param: { module: home, action: dashboard }
 
+confirm_mail:
+  url: /user/confirm/token/:token
+  param: { module: sfGuardRegister, action: confirm, token: "" }
 
 # Laisser a la fin.
 event:
