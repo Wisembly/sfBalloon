@@ -22,6 +22,10 @@ class wallActions extends sfActions
     
     $this->wall = Doctrine::getTable('Wall')->findByShort($this->wallId);
 
+    if(!$this->wall->isAvailable()){
+      $this->redirect(sprintf('@event?short=%s', $this->eventId));
+    }
+
     $this->forward404Unless($this->wall);
     
     $this->moderatedQuotes  = Doctrine::getTable('Quote')->getModeratedQuotesForWall($this->wall->getId());
@@ -30,7 +34,7 @@ class wallActions extends sfActions
     $quote = new Quote();
     $quote->setWall($this->wall);
     
-    if($this->getUser()->can('add_survey', $this->wall)){
+    if($this->getUser()->can('add_survey', $this->wall) && $this->wall->supports('poll')){
         $this->form = new SimpleSurveyForm($quote);  
     }else{
         $this->form = new SimpleQuoteForm($quote);

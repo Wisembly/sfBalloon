@@ -12,6 +12,12 @@
  */
 class Wall extends BaseWall
 {
+
+  public function isAvailable()
+  {
+    return ($this->getStart() < $this->getRealStartDate() && $this->getRealStartDate() < $this->getStop());
+  }
+
   public function getAuth()
   {
     return $this->getEvent()->getAuth();

@@ -42,6 +42,11 @@ class quoteActions extends sfActions
     $user = $this->getUser();
     
     $wall = Doctrine::getTable('Wall')->findByShort($this->wallId);
+    
+    if(!$wall->isAvailable()){
+      $this->redirect(sprintf('@event?short=%s', $this->eventId));
+    }
+    
     $quote = new Quote();
     
     if($user->isAuthenticated()){
@@ -55,13 +60,13 @@ class quoteActions extends sfActions
     
     //$quote->setSource(Source::find($request));
     
-    if(!$wall->isModerated()){
+    if(!$wall->isModerated() && $wall->supports('moderation')){
       $quote->setIsValidated(true);
     }
     
     $quote->setWall($wall);
     
-    if($this->getUser()->can('add_survey', $this->wall)){
+    if($this->getUser()->can('add_survey', $wall) && $wall->supports('poll')){
       $quote->setIsPoll(true);
       $form = new SimpleSurveyForm($quote);
     }else{
@@ -91,6 +96,7 @@ class quoteActions extends sfActions
    */
   public function executeValidate(sfWebRequest $request)
   {
+    
     $this->eventId  = $request->getParameter('event');
     $this->wallId   = $request->getParameter('wall');
     $this->quoteId   = $request->getParameter('quote');
@@ -98,9 +104,15 @@ class quoteActions extends sfActions
     $quote  = Doctrine::getTable('Quote')->find($this->quoteId);
     $wall   = Doctrine::getTable('Wall')->findByShort($this->wallId);
 
-    $this->forward404Unless($quote && $this->getUser()->can('validate_moderating_quote', $wall));
+    if(!$wall->isAvailable()){
+      $this->redirect(sprintf('@event?short=%s', $this->eventId));
+    }
 
-    $quote->validate();
+    if($wall->supports('moderation')){
+      $this->forward404Unless($quote && $this->getUser()->can('validate_moderating_quote', $wall));
+      $quote->validate();  
+    }
+    
     $this->redirect(sprintf('@wall?event=%s&wall=%s', $this->eventId, $this->wallId));
   }
   
@@ -117,6 +129,10 @@ class quoteActions extends sfActions
     
     $quote  = Doctrine::getTable('Quote')->find($this->quoteId);
     $wall   = Doctrine::getTable('Wall')->findByShort($this->wallId);
+
+    if(!$wall->isAvailable()){
+      $this->redirect(sprintf('@event?short=%s', $this->eventId));
+    }
 
     $this->forward404Unless($quote && $this->getUser()->can('remove_quote', $wall));
 
@@ -139,6 +155,10 @@ class quoteActions extends sfActions
     $quote  = Doctrine::getTable('Quote')->find($this->quoteId);
     $wall   = Doctrine::getTable('Wall')->findByShort($this->wallId);
     
+    if(!$wall->isAvailable()){
+      $this->redirect(sprintf('@event?short=%s', $this->eventId));
+    }
+
     $this->forward404Unless($quote && $this->getUser()->can('update_moderating_quote', $wall));
     
     $form = new SimpleQuoteForm($quote);
@@ -168,6 +188,10 @@ class quoteActions extends sfActions
     
     $quote  = Doctrine::getTable('Quote')->find($this->quoteId);
     $wall   = Doctrine::getTable('Wall')->findByShort($this->wallId);
+    
+    if(!$wall->isAvailable()){
+      $this->redirect(sprintf('@event?short=%s', $this->eventId));
+    }
     
     $this->quote  = $quote;
     $this->wall   = $wall;
