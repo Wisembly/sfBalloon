@@ -34,8 +34,8 @@
 <fieldset id="signin_menu">
 <?php if($sf_user->isAuthenticated()): ?>
     <ul>
-        <li><?php echo link_to("Se déconecter", "@sf_guard_signout"); ?></li>
-        <li>Mon compte</li>
+        <li><?php echo link_to("Se déconnecter", "@sf_guard_signout"); ?></li>
+        <li><?php echo link_to("Mon compte", "@user_edit");?></li>
     </ul>
     <?php else:?>
     <ul>

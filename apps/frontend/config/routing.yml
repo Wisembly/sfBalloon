@@ -31,12 +31,17 @@ plans:
   url: /plans
   param: { module: sfGuardRegister, action: plans }
 
+user_edit:
+  url: /me
+  param: { module: user, action: edit }
 # dashboard
 
 dashboard:
   url: /dashboard
   param: { module: home, action: dashboard }
 
+
+# Laisser a la fin.
 event:
   url: /:short
   param: { module: event, action: show }
