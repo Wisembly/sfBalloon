@@ -8,7 +8,7 @@
  * @package    balloon
  * @subpackage form
  * @author     Clément JOBEILI <clement.jobeili@gmail.com>
- * @version    SVN: $Id$
+ * @version    SVN: $Id: sfDoctrineFormGeneratedTemplate.php 29553 2010-05-20 14:33:00Z Kris.Wallsmith $
  */
 abstract class BaseQuoteForm extends BaseFormDoctrine
 {

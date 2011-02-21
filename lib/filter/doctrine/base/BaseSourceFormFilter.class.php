@@ -6,7 +6,7 @@
  * @package    balloon
  * @subpackage filter
  * @author     Clément JOBEILI <clement.jobeili@gmail.com>
- * @version    SVN: $Id$
+ * @version    SVN: $Id: sfDoctrineFormFilterGeneratedTemplate.php 29570 2010-05-21 14:49:47Z Kris.Wallsmith $
  */
 abstract class BaseSourceFormFilter extends BaseFormFilterDoctrine
 {
