@@ -22,6 +22,10 @@ class wallActions extends sfActions
     
     $this->wall = Doctrine::getTable('Wall')->findByShort($this->wallId);
 
+    if(!$this->wall->isAvailable()){
+      $this->redirect(sprintf('@event?short=%s', $this->eventId));
+    }
+
     $this->forward404Unless($this->wall);
     
     $this->moderatedQuotes  = Doctrine::getTable('Quote')->getModeratedQuotesForWall($this->wall->getId());
