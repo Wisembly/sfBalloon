@@ -13,6 +13,7 @@ class ProjectBaseMessage extends Swift_Message
         parent::__construct($subject, $body);
 
         $this
+          ->setContentType('text/html')
           ->setFrom(array('noreply@votrequestion.com' => 'Votre Question.com'))
           ->setTo($setTo)
           ->setReplyTo(array('contact@balloonup.com' => 'Balloon'))
