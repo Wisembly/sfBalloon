@@ -3,3 +3,4 @@ apps/frontend/config/factories.yml
 cache/*
 log/*
 /nbproject/
+web/uploads/*
