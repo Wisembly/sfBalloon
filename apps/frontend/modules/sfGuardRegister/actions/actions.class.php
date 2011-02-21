@@ -105,6 +105,9 @@ class sfGuardRegisterActions extends BasesfGuardRegisterActions
     $wall->setStop($real->format('Y-m-d H:i:s'));
     
     $wall->save();
+    $event->setWallCount($event->getWallCount() + 1);
+    $event->save();
+
     $user->addSubscription($offer, $event, $wall);
     $user->addAuth($event); // Administrateur car créateur de l'event
   }
