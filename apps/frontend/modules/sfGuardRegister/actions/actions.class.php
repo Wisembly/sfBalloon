@@ -38,8 +38,12 @@ class sfGuardRegisterActions extends BasesfGuardRegisterActions
     if ($request->isMethod('post')) {
       $this->form->bind($request->getParameter($this->form->getName()));
       if ($this->form->isValid()) {
-        
         $user = $this->form->save();
+
+        //On envoye un email de confirmation
+        $setTo = array($user->getEmailAddress() => $user->getName() );
+        $this->getMailer()->send(new ProjectBaseMessage($setTo,'[VotreQuestion.com] Bienvenue','Bienvenue sur votrequestion.com'));
+
         $invited= Doctrine::getTable('Invitation')->findInvitedByEmail($user->getEmailAddress());
         
         if ($invited) {
