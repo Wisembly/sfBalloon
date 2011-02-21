@@ -14,7 +14,7 @@ class ProjectBaseMessage extends Swift_Message
 
         $this
           ->setContentType('text/html')
-          ->setFrom(array('noreply@votrequestion.com' => 'Votre Question.com'))
+          ->setFrom(array('noreply@votrequestion.com' => 'noreply@votrequestion.com'))
           ->setTo($setTo)
           ->setReplyTo(array('contact@balloonup.com' => 'Balloon'))
         ;

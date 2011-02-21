@@ -46,10 +46,10 @@ class sfGuardRegisterActions extends BasesfGuardRegisterActions
         //On defini l'adresse du lien de confirmation
         $url = 'http://votrequestion.com/confirm.php?token='.$code;
         //On ajoute un logo en header
-        $image = '<div style="background:#4F85BB;width:130;height:100%;border:0;padding:10px;">';
+        $image = '<div style="background:#4F85BB;width:100%;height:40px;border:0;padding:10px;position:relative;">';
         $image .='<img src="http://balloonup.com/images/balloonlogo.png" width="110"/></div>';
         //On envoye le mail
-        $this->getMailer()->send(new ProjectBaseMessage($setTo,'[VotreQuestion.com] Bienvenue',$image.'<div style="float:left;height:100%;">Bienvenue sur votrequestion.com<br/>Cliquer sur '.$url.' pour confirmer votre email<br/><br/><b>L\'équipe Balloon</b></div>'));
+        $this->getMailer()->send(new ProjectBaseMessage($setTo,'[VotreQuestion.com] Bienvenue','<body style="border:0;margin:0;">'.$image.'<div style="float:left;height:100%;">Bienvenue sur votrequestion.com<br/>Cliquer sur '.$url.' pour confirmer votre email<br/><br/><b>L\'équipe Balloon</b></div></body>'));
 
         $invited= Doctrine::getTable('Invitation')->findInvitedByEmail($user->getEmailAddress());
         
