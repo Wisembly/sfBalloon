@@ -589,3 +589,71 @@ form inlabel_poster br {display: none;}
 	padding-top:5px;
     padding-bottom:2px;
 }
+
+.conteneur #balloon .field input{
+    border:1px solid #484848;
+    padding:8px;
+    width:200px;
+    border-radius: 5px ;
+    -moz-border-radius:5px;
+    -webkit-border-radius: 5px;
+    margin-bottom: 10px;
+}
+.conteneur #balloon th label{
+    color:#666666;
+}
+.conteneur #balloon .sign_table{
+    padding-left: 20px;
+}
+.conteneur #balloon .sign_table .error ul{
+    padding:0px;
+    margin:0px;
+}
+.conteneur #balloon .sign_table .error li{
+    list-style: none ;
+    color:red;
+}
+.conteneur #balloon .tab-center{
+    width:100%;
+}
+.conteneur #balloon .tab-center td{
+    text-align: center;
+}
+.conteneur #balloon .entete{
+    padding: 10px;
+}
+.conteneur #balloon .entete h1{
+    font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+    font-size:30px;
+    color:#213E7C;
+}
+.conteneur #balloon .register {
+	width:100px;
+	height:30px;
+	font-size:1.1em;
+	font-weight:bold;
+	border:none;
+	color: #fff;
+	border:1px solid #ccc;
+/*	background: rgb(137,190,107);
+*/
+	margin-top:0;
+	background:rgb(137,190,107) url(../images/envoyer_bg.png) repeat;
+/*	background:url('../../images/envoyer.png') no-repeat top left;*/
+	/* css3 */
+	-moz-border-radius:3px;
+	-webkit-border-radius:3px;
+	border-radius:3px;
+
+}
+
+.conteneur #balloon .register:hover {
+        width:100px;
+	height:30px;
+	border:none;
+	color: #fff;
+	font-weight:bold;
+	/*background: #6ec539;*/
+	background:url(../images/envoyer_hover.png) repeat top left;
+}
+
