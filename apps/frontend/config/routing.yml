@@ -65,6 +65,10 @@ wall:
   url: /:event/:wall
   param: { module: wall, action: show }
 
+wall_edit:
+  url: /:event/:wall/edit
+  param: { module: wall, action: edit }
+  
 quote_create:
   url: /:event/:wall/quote/create
   param: { module: quote, action: create }
