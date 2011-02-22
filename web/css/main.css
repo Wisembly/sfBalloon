@@ -30,18 +30,18 @@
 body,html
 {
 	background: #5693C9 ;
-	
+
 	background: -moz-linear-gradient(top, #5693C9 0%, #4f85bb 100%) #4f85bb no-repeat;
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#5693C9), color-stop(100%,#4f85bb)) #4f85bb no-repeat;
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5693C9', endColorstr='#4f85bb',GradientType=0 ) #4f85bb no-repeat;
-	
+
 	font-family:'Lucida grande',tahoma,verdana,arial,sans-serif;
 
-	
-	
 
 
-	
+
+
+
 }
 a
 {
@@ -105,7 +105,7 @@ a
 	-moz-border-radius:5px 5px 0px 0px;
 	-webkit-border-radius:5px 5px 0px 0px;
 	border-radius:5px 5px 0px 0px;
-	
+
 	width:100%;
 	background:url(../images/header_bg.png) repeat scroll 0 0 #F8F8F8;
 	border-bottom:1px solid #CCCCCC;
@@ -128,7 +128,7 @@ a
 	font-weight:bold;
 
 }
-#poster p 
+#poster p
 {
 	font-weight:bold;
 }
@@ -140,7 +140,7 @@ form inlabel_poster br {display: none;}
 
 
 
-#poster #textarea 
+#poster #textarea
 {
 	margin-right:20px;
 }
@@ -148,7 +148,7 @@ form inlabel_poster br {display: none;}
 	width:100%;
 	height:50px;
 	border:1px solid #b3b3b3;
-		
+
 	/* css3 */
 	-moz-border-radius:5px;
 	-webkit-border-radius:5px;
@@ -181,7 +181,7 @@ form inlabel_poster br {display: none;}
 	-moz-border-radius:3px;
 	-webkit-border-radius:3px;
 	border-radius:3px;
-	
+
 }
 #bt_hec
 {
@@ -204,7 +204,7 @@ form inlabel_poster br {display: none;}
 	font-weight:bold;
 	/*background: #6ec539;*/
 	background:url(../images/envoyer_hover.png) no-repeat top left;
-	
+
 }
 
 
@@ -270,7 +270,7 @@ form inlabel_poster br {display: none;}
 
 .item_wall
 {
-	
+
 }
 
 #wall .sondage
@@ -286,7 +286,7 @@ form inlabel_poster br {display: none;}
 	width:50px;
 	height:50px;
 	z-index:100;
-	background:url(../images/chart_50.png) no-repeat;	
+	background:url(../images/chart_50.png) no-repeat;
 }
 
 #wall .content .reponses
@@ -320,7 +320,7 @@ form inlabel_poster br {display: none;}
 	margin-left:10px;
 	margin-right:10px;
 	padding:10px;
-	background:#EBEBEB !important; 
+	background:#EBEBEB !important;
 	background:none;
 	-moz-border-radius:4px;
 	-webkit-border-radius:4px;
@@ -347,10 +347,10 @@ form inlabel_poster br {display: none;}
 	width:50px;
 	height:50px;
 	z-index:100;
-	background:url(../images/fond_vote.png) no-repeat;	
+	background:url(../images/fond_vote.png) no-repeat;
 }
 #wall .vote:hover {
-	background:url(../images/fond_vote_hover.png) no-repeat;	
+	background:url(../images/fond_vote_hover.png) no-repeat;
 }
 
 
@@ -389,7 +389,7 @@ form inlabel_poster br {display: none;}
 #wall .content
 {
 	display:block;
-	margin-top:10px;	
+	margin-top:10px;
 }
 #wall .content .head
 {
@@ -420,7 +420,7 @@ form inlabel_poster br {display: none;}
 	float:right;
 	padding-right:130px;
 	padding-bottom:10px;
-	
+
 }
 
 #wall .content .moderation .delete
@@ -503,7 +503,7 @@ form inlabel_poster br {display: none;}
 	text-align:center;
 	margin:auto;
 	margin-top:10px;
-	
+
 	/* css3 */
 	border-radius:3px;
 	-moz-border-radius:3px;
@@ -526,13 +526,13 @@ form inlabel_poster br {display: none;}
 {
 	width:100%;
 	text-align:center;
-	border-top:1px solid #464646; 
+	border-top:1px solid #464646;
 	padding-top:5px;
 	padding-bottom:5px;
 	-moz-border-radius:0px 0px 5px 5px;
 	-webkit-border-radius:0px 0px 5px 5px;
 	border-radius:0px 0px 5px 5px;
-	
+
 }
 
 #centerpage
@@ -563,10 +563,10 @@ form inlabel_poster br {display: none;}
 	background:-webkit-gradient(linear,0% 0%,0% 100%,from(#86b542),to(#86b542));
 	background:-moz-linear-gradient(top,#86b542,#86b542);
 	background-color:#86b542;
-		
+
 	-webkit-transition:all 200ms ease-out;
-	-moz-transition:all 200ms ease-out;	
-	
+	-moz-transition:all 200ms ease-out;
+
 	border-radius: 3px ;
 	-moz-border-radius: 3px;
 	-webkit-border-radius: 3px;
@@ -581,16 +581,63 @@ form inlabel_poster br {display: none;}
 
 #centerpage ul {
     list-style-type: none;
-	margin:0;
-	padding:0;
+    margin:0;
+    padding:0;
 }
 
 #centerpage li {
-	padding-top:5px;
+    padding-top:5px;
     padding-bottom:2px;
 }
+.conteneur #balloon .col-25 {
+    width:25%;
+    float:left;
+    display: block;
+}
+.conteneur #balloon .col-50 {
+    width:50%;
+    float:left;
+    display: block;
+}
+.conteneur #balloon .col-75 {
+    width:75%;
+    float:left;
+    display: block;
+}
+.conteneur #balloon .col-100 {
+    width:100%;
+    float:left;
+    display: block;
+    padding-bottom: 10px;
+}
+.conteneur #balloon .clear{
+    clear: both;
+}
+.conteneur #balloon .col-100 #label{
+    float: left;
+    width: 130px;
+    color:#666666;
+}
+.conteneur #balloon .col-100 #field{
+    width: 216px;
+    float: left;
+}
+.conteneur #balloon .col-100 #error{
+    float: left;
+    padding-left: 8px;
+}
+.conteneur #balloon .col-100 #error ul{
+    padding:0px;
+    margin:0px;
+}
 
-.conteneur #balloon .field input{
+.conteneur #balloon .col-100 #error li{
+    list-style: none ;
+    color:red;
+}
+
+
+.conteneur #balloon .col-100 #field input{
     border:1px solid #484848;
     padding:8px;
     width:200px;
@@ -599,26 +646,14 @@ form inlabel_poster br {display: none;}
     -webkit-border-radius: 5px;
     margin-bottom: 10px;
 }
-.conteneur #balloon th label{
-    color:#666666;
+
+.conteneur #balloon .tab-center{
+    text-align: center;
 }
 .conteneur #balloon .sign_table{
     padding-left: 20px;
 }
-.conteneur #balloon .sign_table .error ul{
-    padding:0px;
-    margin:0px;
-}
-.conteneur #balloon .sign_table .error li{
-    list-style: none ;
-    color:red;
-}
-.conteneur #balloon .tab-center{
-    width:100%;
-}
-.conteneur #balloon .tab-center td{
-    text-align: center;
-}
+
 .conteneur #balloon .entete{
     padding: 10px;
 }
@@ -656,4 +691,37 @@ form inlabel_poster br {display: none;}
 	/*background: #6ec539;*/
 	background:url(../images/envoyer_hover.png) repeat top left;
 }
+
+.conteneur #balloon .login {
+	width:100px;
+	height:30px;
+	font-size:1.1em;
+	font-weight:bold;
+	border:none;
+	color: #fff;
+	border:1px solid #ccc;
+/*	background: rgb(137,190,107);
+*/
+	margin-top:0;
+	background:rgb(137,190,107) url(../images/envoyer_bg.png) repeat;
+/*	background:url('../../images/envoyer.png') no-repeat top left;*/
+	/* css3 */
+	-moz-border-radius:3px;
+	-webkit-border-radius:3px;
+	border-radius:3px;
+
+}
+
+.conteneur #balloon .login:hover {
+        width:100px;
+	height:30px;
+	border:none;
+	color: #fff;
+	font-weight:bold;
+	/*background: #6ec539;*/
+	background:url(../images/envoyer_hover.png) repeat top left;
+}
+
+
+
 
