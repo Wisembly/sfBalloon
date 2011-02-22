@@ -55,6 +55,26 @@ Event:
     password:           "test"
     has_custom_css:     1
 
+Auth:
+  auth1:
+    User: User_admin
+    Group: a
+    Event: hec
+
+Subscription:
+  sub1:
+    User: User_admin
+    Wall: wall1
+    Event: hec
+    Offer: startup
+    is_payed: true
+  sub2:
+    User: User_admin
+    Wall: wall2
+    Event: hec
+    Offer: agence
+    is_payed: true
+
 sfGuardUser:
   User_admin:
     first_name:     Clément

@@ -21,7 +21,7 @@ class SimpleWallForm extends WallForm
   	}
 
   	if ($this->getObject()->supports('poll')) {
-  		array_push($fields, 'survey_activated');
+  		array_push($fields, 'survey_actived');
   	}
 
     $this->useFields($fields);
