@@ -1,6 +1,6 @@
 <?php
 
-class WallActions
+class WallSupport
 {
   public static function getActions()
   {

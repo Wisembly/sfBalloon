@@ -37,7 +37,7 @@ class Wall extends BaseWall
    */
   function supports($action)
   {
-    $actions = WallActions::getActions();
+    $actions = WallSupport::getActions();
     if(!isset($actions[$action])){
       throw new Exception(sprintf('The action "%s" does not exists', $action));
     }
