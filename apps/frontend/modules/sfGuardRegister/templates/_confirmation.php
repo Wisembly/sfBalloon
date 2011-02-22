@@ -1,6 +1,6 @@
 <body style="border:0;margin:0;">
   <div style="background:#4F85BB;width:100%;height:40px;border:0;padding:10px;position:relative;">
-    <img src="http://balloonup.com/images/balloonlogo.png" width="110"/>
+    <img src="http://balloonup.com/images/balloonlogo.png" width="110" alt="Balloon"/>
   </div>
     
   <div style="float:left;height:100%;">
