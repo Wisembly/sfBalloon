@@ -26,11 +26,7 @@ sf_guard_register:
 sf_guard_forgot_password:
   url: /user/lostpassword
   param: { module: sfGuardForgotPassword, action: index }
-
-signup:
-  url: /signup
-  param: { module: sfGuardRegister, action: index }
-
+  
 plans:
   url: /plans
   param: { module: sfGuardRegister, action: plans }

@@ -8,7 +8,7 @@
   <div style="float:left">
     Vous êtes invité à rejoindre votre question.com
     <br />
-    Cliquer sur <a href="<?php echo url_for('@signup?email='.$email, array('absolute' => true)) ?>"> pour vous inscrire</a>
+    Cliquer sur <a href="<?php echo url_for('@sf_guard_register?email='.$email, array('absolute' => true)) ?>"> pour vous inscrire</a>
     <br /><br />
     <strong>L'équipe Balloon</strong>
   </div>
