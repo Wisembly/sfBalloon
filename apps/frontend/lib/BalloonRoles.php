@@ -55,6 +55,11 @@ class BalloonRoles
         )
       ),
       'wall'  => array(
+        'update' => array(
+          'admin' => true,
+          'modo'  => false,
+          'anim'  => false  
+        ),        
         'fav_quote' => array(
           'admin' => true,
           'modo'  => true,
