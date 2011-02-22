@@ -42,7 +42,14 @@ class Wall extends BaseWall
       throw new Exception(sprintf('The action "%s" does not exists', $action));
     }
     
-    $offer = Doctrine::getTable('Subscription')->findOneByWall($this)->getOffer();
+    $offer = Doctrine::getTable('Subscription')->findOneByWall($this);
+
+    if(!$offer){
+      return false;
+    }
+
+    $offer = $offer->getOffer();
+    
     return ($offer->get($actions[$action]));
   }
 }
