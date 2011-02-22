@@ -27,9 +27,11 @@ class wallActions extends sfActions
     if(!$this->wall->isAvailable()){
       $this->redirect(sprintf('@event?short=%s', $this->eventId));
     }
-
-    $this->moderatedQuotes  = Doctrine::getTable('Quote')->getModeratedQuotesForWall($this->wall->getId());
-    $this->publishedQuotes  = Doctrine::getTable('Quote')->getPublishedQuotesForWall($this->wall->getId());
+    
+    $sort = $request->getParameter('sort');
+    
+    $this->moderatedQuotes  = Doctrine::getTable('Quote')->getModeratedQuotesForWall($this->wall->getId(), $sort);
+    $this->publishedQuotes  = Doctrine::getTable('Quote')->getPublishedQuotesForWall($this->wall->getId(), $sort);
     
     $quote = new Quote();
     $quote->setWall($this->wall);
