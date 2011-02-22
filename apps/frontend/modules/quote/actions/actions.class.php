@@ -42,11 +42,13 @@ class quoteActions extends sfActions
     $this->quoteId   = $request->getParameter('quote');
     
     $quote = Doctrine::getTable('Quote')->find($this->quoteId);
-    
+    $wall = Doctrine::getTable('Wall')->findByShort($this->wallId);
+
     $this->forward404Unless($quote);
-    
-    $quote->setIsFavori(!$quote->getIsFavori());
-    $quote->save();
+    if($this->getUser()->can('fav_quote', $wall)){
+      $quote->setIsFavori(!$quote->getIsFavori());
+      $quote->save();  
+    }
 
     $this->redirect(sprintf('@wall?event=%s&wall=%s', $this->eventId, $this->wallId));
   }
@@ -66,10 +68,12 @@ class quoteActions extends sfActions
     $wall = Doctrine::getTable('Wall')->findByShort($this->wallId);
 
     $this->forward404Unless($quote && $wall);
-
-    $wall->setAlauneQuoteId($quote->getId());
-    $wall->save();
-
+    
+    if($this->getUser()->can('une_quote', $wall)){
+      $wall->setAlauneQuoteId($quote->getId());
+      $wall->save();
+    }
+    
     $this->redirect(sprintf('@wall?event=%s&wall=%s', $this->eventId, $this->wallId));
   }
   

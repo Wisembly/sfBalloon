@@ -9,3 +9,9 @@ delete:
 
 validate:
   is_secure: true
+
+favorite:
+	is_secure: true
+
+alaune:
+	is_secure: true
