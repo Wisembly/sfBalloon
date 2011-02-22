@@ -94,6 +94,10 @@ quote_answer:
   url: /:event/:wall/quote/:quote/answer
   param: { module: quote, action: answer }
 
+quote_favorite:
+  url: /:event/:wall/quote/:quote/fav
+  param: { module: quote, action: favorite }
+
 answer_create:
   url: /:event/:wall/quote/:quote/answer/create
   param: { module: answer, action: create }

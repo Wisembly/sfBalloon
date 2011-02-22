@@ -1,30 +1,27 @@
 <?php if(!$quote->isSurvey()): ?>
-    <?php if($quote->isValidated()): ?>
-      <a href="<?php echo url_for(sprintf('@quote_vote?event=%s&wall=%s&quote=%s', $eventId, $wall->getShort(), $quote->getId())); ?>">
-      <div class="vote" id="vote">
-      <!--<div class="reponse" id="ie_reponse"></div>-->
+  <?php if($quote->isValidated()): ?>
+  <a href="<?php echo url_for(sprintf('@quote_vote?event=%s&wall=%s&quote=%s', 
+    $eventId, $wall->getShort(), $quote->getId())); ?>">
+    <div class="vote" id="vote">
+    <!--<div class="reponse" id="ie_reponse"></div>-->
       <div>
         <span class="num" id="num"><?php echo $quote->getVotesCount()?></span><br>
-	<span class="votes" id="votes">votes</span>
-	</div>
+        <span class="votes" id="votes">votes</span>
       </div>
-      </a>
-
-
-    <?php endif; ?>
-
-      <?php else:?>
-    <!--cest in sondage on affiche l'image-->
-    <div class="sondage"></div>
+    </div>
+  </a>
+  <?php endif; ?>
+<?php else:?>
+<!--cest in sondage on affiche l'image-->
+<div class="sondage"></div>
 
 <?php endif; ?>
 <div class="content">
-<div class="head">
-<?php echo link_to($quote->getQuote(), sprintf('@quote_answer?event=%s&wall=%s&quote=%s', 
-  $eventId, $wall->getShort(), $quote->getId())); 
-?>
-</div>
-<?php if($quote->isSurvey()): ?>
+  <div class="head">
+  <?php echo link_to($quote->getQuote(), sprintf('@quote_answer?event=%s&wall=%s&quote=%s', 
+    $eventId, $wall->getShort(), $quote->getId())); ?>
+  </div>
+  <?php if($quote->isSurvey()): ?>
   <?php if(!$sf_user->hasAlreadyVote($quote->getRawValue(), true) && $quote->isActive()): ?>
   <form action="<?php echo url_for(sprintf("@choice_vote?event=%s&wall=%s&quote=%s", $eventId, $wall->getShort(), $quote->getId())); ?>" method="post">
     <ul>
@@ -75,7 +72,7 @@
                   $wall->getShort(), 
                   $quote->getId()),
                 'class=delete') ?>
-                <a href="" class="alaune">A la une</a>
+                
   <?php endif;?>
 
   <?php if(can($sf_user, 'update_moderating_quote', $wall) && !$quote->isValidated()): ?> 
@@ -85,5 +82,14 @@
                   $wall->getShort(), 
                   $quote->getId())) ?> -
   <?php endif;?>
+  <?php if(can($sf_user, 'fav_quote', $wall) ): ?> 
+    <?php echo link_to((!$quote->getIsFavori())? 'Fav': 'Unfav', 
+                sprintf('@quote_favorite?event=%s&wall=%s&quote=%s', 
+                  $eventId,
+                  $wall->getShort(), 
+                  $quote->getId()), array('class', 'fav')) ?> -
+
+  <?php endif;?>
+  <a href="" class="alaune">A la une</a>
   </div>
 </div>
