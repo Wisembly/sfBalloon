@@ -5,8 +5,26 @@ class SimpleWallForm extends WallForm
   public function configure()
   {
   	parent::configure();
+  	
+  	$fields = array('name', 'lang', 'short_description');
+  	
+  	if ($this->getObject()->supports('twitter')) {
+  		array_push($fields, 'tw_hashtag');
+  	}
 
-    $this->useFields(array('name','tw_hashtag','sms_hashtag', 'lang', 'is_moderated', 'short_description', 'survey_actived'));
+  	if ($this->getObject()->supports('sms')) {
+  		array_push($fields, 'sms_hashtag');
+  	}
+
+  	if ($this->getObject()->supports('moderation')) {
+  		array_push($fields, 'is_moderated');
+  	}
+
+  	if ($this->getObject()->supports('poll')) {
+  		array_push($fields, 'survey_activated');
+  	}
+
+    $this->useFields($fields);
 
     $this->setWidget('lang', new sfWidgetFormI18nChoiceLanguage());
     $this->setValidator('lang', new sfValidatorI18nChoiceLanguage());
