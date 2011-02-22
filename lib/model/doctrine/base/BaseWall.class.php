@@ -17,7 +17,7 @@
  * @property timestamp $real_start_date
  * @property boolean $is_moderated
  * @property integer $alaune_quote_id
- * @property integer $survey_actived
+ * @property boolean $survey_actived
  * @property string $feedback
  * @property boolean $has_custom_css
  * @property Event $Event
@@ -37,7 +37,7 @@
  * @method timestamp           getRealStartDate()     Returns the current record's "real_start_date" value
  * @method boolean             getIsModerated()       Returns the current record's "is_moderated" value
  * @method integer             getAlauneQuoteId()     Returns the current record's "alaune_quote_id" value
- * @method integer             getSurveyActived()     Returns the current record's "survey_actived" value
+ * @method boolean             getSurveyActived()     Returns the current record's "survey_actived" value
  * @method string              getFeedback()          Returns the current record's "feedback" value
  * @method boolean             getHasCustomCss()      Returns the current record's "has_custom_css" value
  * @method Event               getEvent()             Returns the current record's "Event" value
@@ -120,8 +120,9 @@ abstract class BaseWall extends sfDoctrineRecord
         $this->hasColumn('alaune_quote_id', 'integer', null, array(
              'type' => 'integer',
              ));
-        $this->hasColumn('survey_actived', 'integer', null, array(
-             'type' => 'integer',
+        $this->hasColumn('survey_actived', 'boolean', null, array(
+             'type' => 'boolean',
+             'default' => 0,
              ));
         $this->hasColumn('feedback', 'string', 255, array(
              'type' => 'string',

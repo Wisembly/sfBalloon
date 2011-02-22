@@ -132,7 +132,7 @@ Wall:
     real_start_date:    { type: timestamp, notnull: true }
     is_moderated:       { type: boolean, default: 0 }
     alaune_quote_id:    { type: integer } # Toggle fullscreen with quote id (null if not)
-    survey_actived:     { type: integer } # Si un utilisateur a un plan qui gère les sondage mais qu'il ne veut pas les utiliser, alors il peut désactiver les sondage et retourner en mode quote normale.
+    survey_actived:     { type: boolean, default: 0 } # Si un utilisateur a un plan qui gère les sondage mais qu'il ne veut pas les utiliser, alors il peut désactiver les sondage et retourner en mode quote normale.
     feedback:           { type: string(255) }
     has_custom_css:     { type: boolean, default: 0 }
   relations:
