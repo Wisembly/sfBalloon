@@ -9,16 +9,7 @@
   </div>
   <div class="clear"></div>
     <div id="menu">
-      <ul>
-          <li class="active">
-            <?php echo link_to('Dernières', url_for(sprintf("@wall?event=%s&wall=%s", $eventId, $wallId)));?>
-          </li>
-          <li>
-            <?php echo link_to('Populaires', 
-              url_for(sprintf("@wall?event=%s&wall=%s&sort=top", $eventId, $wallId)));?>
-          </li>
-          <li><a href="">Réponses</a></li>
-        </ul>
+      <?php echo $menu->render(); ?>
     </div>
 </div>
 <div id="wall">
