@@ -8,6 +8,7 @@ sfGuardUser:
     SoftDelete: ~
   columns:
     is_root:            { type: boolean, default: 0 }
+    token:              { type: string(255), default: 0}
   indexes:
     is_active_idx:
       fields: [is_active]

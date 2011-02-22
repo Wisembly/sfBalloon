@@ -16,6 +16,7 @@
  * @property boolean $is_super_admin
  * @property timestamp $last_login
  * @property boolean $is_root
+ * @property string $token
  * @property Doctrine_Collection $Groups
  * @property Doctrine_Collection $Permissions
  * @property Doctrine_Collection $Subscriptions
@@ -42,6 +43,7 @@
  * @method boolean               getIsSuperAdmin()          Returns the current record's "is_super_admin" value
  * @method timestamp             getLastLogin()             Returns the current record's "last_login" value
  * @method boolean               getIsRoot()                Returns the current record's "is_root" value
+ * @method string                getToken()                 Returns the current record's "token" value
  * @method Doctrine_Collection   getGroups()                Returns the current record's "Groups" collection
  * @method Doctrine_Collection   getPermissions()           Returns the current record's "Permissions" collection
  * @method Doctrine_Collection   getSubscriptions()         Returns the current record's "Subscriptions" collection
@@ -67,6 +69,7 @@
  * @method sfGuardUser           setIsSuperAdmin()          Sets the current record's "is_super_admin" value
  * @method sfGuardUser           setLastLogin()             Sets the current record's "last_login" value
  * @method sfGuardUser           setIsRoot()                Sets the current record's "is_root" value
+ * @method sfGuardUser           setToken()                 Sets the current record's "token" value
  * @method sfGuardUser           setGroups()                Sets the current record's "Groups" collection
  * @method sfGuardUser           setPermissions()           Sets the current record's "Permissions" collection
  * @method sfGuardUser           setSubscriptions()         Sets the current record's "Subscriptions" collection
@@ -140,6 +143,11 @@ abstract class BasesfGuardUser extends sfDoctrineRecord
         $this->hasColumn('is_root', 'boolean', null, array(
              'type' => 'boolean',
              'default' => 0,
+             ));
+        $this->hasColumn('token', 'string', 255, array(
+             'type' => 'string',
+             'default' => 0,
+             'length' => 255,
              ));
 
 
