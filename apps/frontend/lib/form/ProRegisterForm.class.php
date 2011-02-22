@@ -15,7 +15,7 @@ class ProRegisterForm extends sfGuardRegisterForm
    */
   public function configure()
   {
-    unset($this['deleted_at'], $this['is_root']);
+    unset($this['deleted_at'], $this['is_root'], $this['token']);
     
     $eventForm  = new RegisterEventForm();
     $this->embedForm('event', $eventForm);
