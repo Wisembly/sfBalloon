@@ -45,6 +45,11 @@ class invitationActions extends sfActions
 
     $form = new SimpleInvitationForm();
     $params = $request->getParameter($form->getName());
+
+    $html = $this->getPartial('invitation/confirmation', array('email' => $params['email']));
+
+    //On envoye le mail
+    $this->getMailer()->send(new ConfirmationMessage($params['email'], '[VotreQuestion.com] Bienvenue', $html));
     
     $user = Doctrine::getTable('sfGuardUser')->retrieveByUsernameOrEmailAddress($params['email']);
     if($user){
