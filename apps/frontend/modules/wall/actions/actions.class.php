@@ -59,7 +59,7 @@ class wallActions extends sfActions
       $this->redirect(sprintf('@event?short=%s', $this->eventId));
     }
 
-    $form = new SimpleWallForm();
+    $form = new SimpleWallForm($this->wall);
     if ("POST" === $request->getMethod()) {
       $form->bind($request->getPostParameter($form->getName()), $request->getFiles($form->getName()));
 
