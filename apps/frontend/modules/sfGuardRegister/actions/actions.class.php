@@ -62,8 +62,9 @@ class sfGuardRegisterActions extends BasesfGuardRegisterActions
           $this->prepareSave($user, $this->form, $this->plan);
           // Todo : redirect to paypal
         }
-
-        $this->getUser()->signIn($user);
+        
+        $user->setIsActive(false);
+        $user->setToken($token);
         $user->save();
         $this->redirect('@homepage');
       }
@@ -124,10 +125,24 @@ class sfGuardRegisterActions extends BasesfGuardRegisterActions
   /**
    *
    * @param <type> $token
+   * @return void
    * @author Nicolas PHILIPP
    */
-  public function validateEmailByToken($token)
+  public function executeConfirm(sfWebRequest $request)
   {
-      
+    //Todo : ajouter un champ token dans la base de données
+    $token= $request->getParameter('token');
+    if(!$token){
+        $this->redirect('@homepage');
+    }
+    $user = Doctrine::getTable("sfGuardUser")->findOneByToken($token);
+    if($user){
+        $user->setIsActive(true);
+        $user->setToken(null);
+        $user->save();
+        $this->getUser()->signIn($user);
+        $this->getUser()->setFlash('notice', 'Votre compte a bien été activé !');
+    }
+    $this->redirect('@homepage');
   }
 }
