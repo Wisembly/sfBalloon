@@ -80,16 +80,21 @@
                 sprintf('@quote_edit?event=%s&wall=%s&quote=%s', 
                   $eventId, 
                   $wall->getShort(), 
-                  $quote->getId())) ?> -
+                  $quote->getId())) ?>
   <?php endif;?>
   <?php if(can($sf_user, 'fav_quote', $wall) ): ?> 
     <?php echo link_to((!$quote->getIsFavori())? 'Fav': 'Unfav', 
                 sprintf('@quote_favorite?event=%s&wall=%s&quote=%s', 
                   $eventId,
                   $wall->getShort(), 
-                  $quote->getId()), array('class', 'fav')) ?> -
-
+                  $quote->getId()), array('class' => 'fav')) ?>
   <?php endif;?>
-  <a href="" class="alaune">A la une</a>
+  <?php if(can($sf_user, 'une_quote', $wall) ): ?> 
+    <?php echo link_to('A la une', 
+                sprintf('@quote_alaune?event=%s&wall=%s&quote=%s', 
+                  $eventId,
+                  $wall->getShort(), 
+                  $quote->getId()), array('class' => 'alaune')) ?>
+  <?php endif;?>
   </div>
 </div>

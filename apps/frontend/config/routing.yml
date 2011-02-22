@@ -98,6 +98,10 @@ quote_favorite:
   url: /:event/:wall/quote/:quote/fav
   param: { module: quote, action: favorite }
 
+quote_alaune:
+  url: /:event/:wall/quote/:quote/une
+  param: { module: quote, action: alaune }
+
 answer_create:
   url: /:event/:wall/quote/:quote/answer/create
   param: { module: answer, action: create }

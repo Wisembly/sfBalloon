@@ -50,6 +50,28 @@ class quoteActions extends sfActions
 
     $this->redirect(sprintf('@wall?event=%s&wall=%s', $this->eventId, $this->wallId));
   }
+
+  /**
+   * Executes alaune action
+   *
+   * @param sfWebRequest $request A request object
+   */
+  public function executeAlaune(sfWebRequest $request)
+  {
+    $this->eventId  = $request->getParameter('event');
+    $this->wallId   = $request->getParameter('wall');
+    $this->quoteId   = $request->getParameter('quote');
+    
+    $quote = Doctrine::getTable('Quote')->find($this->quoteId);
+    $wall = Doctrine::getTable('Wall')->findByShort($this->wallId);
+
+    $this->forward404Unless($quote && $wall);
+
+    $wall->setAlauneQuoteId($quote->getId());
+    $wall->save();
+
+    $this->redirect(sprintf('@wall?event=%s&wall=%s', $this->eventId, $this->wallId));
+  }
   
   /**
    * Executes create action
