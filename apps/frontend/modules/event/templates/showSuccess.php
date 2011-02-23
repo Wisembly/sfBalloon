@@ -15,7 +15,7 @@
 <div id="place_content">
 
 <div id="admin_event_members">
-    <a href="">Gérer les Utilisateurs</a>
+    <?php echo link_to('Gérer les Utilisateurs',sprintf('@invitation?event='.$event->getShort(), $event->getShort(),$event->getShort())); ?>
 </div>
 <div id="admin_edit_event">
     <?php echo link_to('Modifier Event',sprintf('@event_edit?short='.$event->getShort(), $event->getShort(),$event->getShort())); ?>

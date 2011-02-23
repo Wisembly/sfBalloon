@@ -667,7 +667,7 @@ form inlabel_poster br {display: none;}
     font-size:30px;
     color:#213E7C;
 }
-.conteneur #balloon .register,.edit {
+.conteneur #balloon .register,.edit,.register {
     width:100px;
     height:30px;
     font-size:1.1em;
@@ -686,7 +686,7 @@ form inlabel_poster br {display: none;}
     border-radius:3px;
 }
 
-.conteneur #balloon .register:hover,.edit:hover {
+.conteneur #balloon .register:hover,.edit:hover, .register:hover {
     width:100px;
     height:30px;
     border:none;
