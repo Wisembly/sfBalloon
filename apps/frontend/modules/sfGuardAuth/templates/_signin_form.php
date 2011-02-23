@@ -11,6 +11,8 @@
                         <div id="field"><?php echo $field->render(); ?></div>
                         <div id="error"><?php echo $field->renderError(); ?></div>
                     </div>
+                <?php else: ?>
+                    <?php echo $field->render(); ?>
                 <?php endif ?>
             <?php endforeach ?>
         </div>
@@ -28,5 +30,6 @@
             <?php endif; ?>
         </div>
     </div>
+
 </form>
 <br/>

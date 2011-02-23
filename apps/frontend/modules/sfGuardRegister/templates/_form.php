@@ -14,6 +14,8 @@
                     <?php if($cp == 2) echo'</div><div class="col-50">';?>
                     <?php if($cp == 5) echo'</div><div class="tab-center">';?>
                     <?php $cp++;?>
+                <?php else :?>
+                    <?php echo $field->render(); ?>
                 <?php endif ?>
             <?php endforeach ?>
         </div>
