@@ -20,8 +20,12 @@
                         <?php endif ?>
                         <?php if($cp >= 3):?>
                             <div class="poll">
-                            <?php echo $field->render(); ?>
-                            <?php if($field->renderError()) { echo '<p>'.$field->renderError()."</p>"; }?>
+                                <?php echo $field->renderLabel();?>
+                            <?php foreach($field as $poll) :?>
+                                <?php foreach($poll as $poll_field) :?>
+                                    <?php echo $poll_field->render(); ?>
+                                <?php endforeach ?>
+                            <?php endforeach ?>
                             </div>
                         <?php endif ?>
                 <?php else: ?>
@@ -49,7 +53,9 @@
       <?php endforeach; ?>
     </ul>
   <?php endif;?>
-  <h3>Quotes</h3>
+  <div class="entete">
+    <h3>Quotes</h3>
+  </div>
   <ul>
     <?php foreach($publishedQuotes as $quote): ?>
     <li>
@@ -67,6 +73,6 @@
     <a class="suivantes" href="#more"><div class="color4" id="suivantes">Load more questions</div></a>
   </div>
   <div id="copyright" class="color2">
-    <a href="http://balloonup.com">Copyright &copy; 2010 Balloon, tous droits réserv&eacute;s</a>
+      &nbsp;<a href="http://balloonup.com">Copyright &copy; 2010 Balloon, tous droits réserv&eacute;s</a>
   </div>
 </div>

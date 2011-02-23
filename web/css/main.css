@@ -132,7 +132,9 @@ a
         float:right;
 	padding-right:10px;
 }
-
+#poster .poll input{
+    width: 140px;
+}
 
 #poster p
 {
@@ -416,7 +418,7 @@ form inlabel_poster br {display: none;}
 #wall .content .moderation
 {
 	float:right;
-	padding-right:130px;
+	padding-right:150px;
 	padding-bottom:10px;
 	vertical-align:middle;
 }
@@ -451,7 +453,7 @@ form inlabel_poster br {display: none;}
 {
 	border:1px solid #666;
 	padding:4px;
-	background-color:#333399;
+	background-color:#4f85bb;
 	color:#EEE;
 	font-weight:bold;
         -moz-border-radius:5px;
@@ -472,6 +474,23 @@ form inlabel_poster br {display: none;}
 	background-color:#070;
 	color:#EEE;
 	font-weight:bold;
+}
+
+#wall .content .moderation .edit_quote
+{
+	border:1px solid #666;
+	padding:4px;
+	background-color:#86b542;
+	color:#EEE;
+	font-weight:bold;
+        -moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	border-radius:5px;
+}
+#wall .content .moderation .edit_quote:hover
+{
+	background-color:#A8D764;
+        font-weight:bold;
 }
 
 #wall .content .moderation img
@@ -539,6 +558,9 @@ form inlabel_poster br {display: none;}
 	-webkit-border-radius:0px 0px 5px 5px;
 	border-radius:0px 0px 5px 5px;
 
+}
+.footer #copyright a{
+    display: none;
 }
 
 #centerpage
@@ -683,7 +705,7 @@ form inlabel_poster br {display: none;}
     font-size:30px;
     color:#213E7C;
 }
-.conteneur #balloon .register,.edit,.register {
+.conteneur #balloon .register,.edit,.register,.add_answer {
     width:100px;
     height:30px;
     font-size:1.1em;
@@ -702,7 +724,7 @@ form inlabel_poster br {display: none;}
     border-radius:3px;
 }
 
-.conteneur #balloon .register:hover,.edit:hover, .register:hover {
+.conteneur #balloon .register:hover,.edit:hover, .register:hover,.add_answer:hover {
     width:100px;
     height:30px;
     border:none;
@@ -711,6 +733,13 @@ form inlabel_poster br {display: none;}
     /*background: #6ec539;*/
     background:url(../images/envoyer_hover.png) repeat top left;
 }
+.conteneur #balloon .add_answer{
+    width:220px;
+}
+.conteneur #balloon .add_answer:hover{
+    width:220px;
+}
+
 
 .conteneur #balloon .login {
     width:100px;

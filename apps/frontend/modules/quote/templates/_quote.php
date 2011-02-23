@@ -75,19 +75,13 @@
                 
   <?php endif;?>
 
-  <?php if(can($sf_user, 'update_moderating_quote', $wall) && !$quote->isValidated()): ?> 
+  <?php if(can($sf_user, 'update_moderating_quote', $wall)): ?> 
     <?php echo link_to('Edit', 
                 sprintf('@quote_edit?event=%s&wall=%s&quote=%s', 
                   $eventId, 
                   $wall->getShort(), 
-                  $quote->getId())) ?>
-  <?php endif;?>
-  <?php if(can($sf_user, 'fav_quote', $wall) ): ?> 
-    <?php echo link_to((!$quote->getIsFavori())? 'Fav': 'Unfav', 
-                sprintf('@quote_favorite?event=%s&wall=%s&quote=%s', 
-                  $eventId,
-                  $wall->getShort(), 
-                  $quote->getId()), array('class' => 'fav')) ?>
+                  $quote->getId()),
+                 'class=edit_quote') ?>
   <?php endif;?>
   <?php if(can($sf_user, 'une_quote', $wall) ): ?> 
     <?php echo link_to('A la une', 
@@ -95,6 +89,13 @@
                   $eventId,
                   $wall->getShort(), 
                   $quote->getId()), array('class' => 'alaune')) ?>
+  <?php endif;?>
+  <?php if(can($sf_user, 'fav_quote', $wall) ): ?>
+    <?php echo link_to((!$quote->getIsFavori())? 'Fav': 'Unfav',
+                sprintf('@quote_favorite?event=%s&wall=%s&quote=%s',
+                  $eventId,
+                  $wall->getShort(),
+                  $quote->getId()), array('class' => 'fav')) ?>
   <?php endif;?>
   </div>
 </div>
