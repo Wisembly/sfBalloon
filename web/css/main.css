@@ -242,12 +242,12 @@ form inlabel_poster br {display: none;}
 	text-decoration:none;
 	text-shadow: 0 1px 1px #FFFFFF;
 }
-#menu li.active
+#menu li.current
 {
 	color:#000000;
 }
 
-#menu li.active a
+#menu li.current a
 {
 	-moz-border-radius:3px 3px 3px 3px;
 	background:url(../images/menu_selected_bg.png) repeat scroll 0 0 transparent;
