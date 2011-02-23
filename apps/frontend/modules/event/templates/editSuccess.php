@@ -1,5 +1,5 @@
 <div id="admin_event_edit">
-    <?php echo link_to('Retour à l\'event '.$event->getShort(),sprintf('@event?short='.$event->getShort(), $event->getShort())); ?>
+    <?php echo link_to('Retour à l\'event '.$event->getShort(),sprintf('@event?short=%s', $event->getShort())); ?>
 </div>
 <div class="entete">
     <h1>Editer l'event</h1>

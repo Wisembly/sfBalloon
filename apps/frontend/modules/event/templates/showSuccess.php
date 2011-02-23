@@ -15,10 +15,10 @@
 <div id="place_content">
 
 <div id="admin_event_members">
-    <?php echo link_to('Gérer les Utilisateurs',sprintf('@invitation?event='.$event->getShort(), $event->getShort(),$event->getShort())); ?>
+    <?php echo link_to('Gérer les Utilisateurs',sprintf('@invitation?event=%s', $event->getShort())); ?>
 </div>
 <div id="admin_edit_event">
-    <?php echo link_to('Modifier Event',sprintf('@event_edit?short='.$event->getShort(), $event->getShort(),$event->getShort())); ?>
+    <?php echo link_to('Modifier Event',sprintf('@event_edit?short=%s', $event->getShort())); ?>
 </div>
 <br>
 
