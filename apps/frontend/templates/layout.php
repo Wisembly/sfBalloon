@@ -4,7 +4,7 @@
     <?php include_http_metas() ?>
     <?php include_metas() ?>
     <?php include_title() ?>
-    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="shortcut icon" type="image/png" href="/favicon_balloon.ico" />
     <?php include_stylesheets() ?>
     <?php include_javascripts() ?>
     <?php echo stylesheet_tag('login') ?>
