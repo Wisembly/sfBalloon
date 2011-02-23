@@ -663,65 +663,150 @@ form inlabel_poster br {display: none;}
     color:#213E7C;
 }
 .conteneur #balloon .register {
-	width:100px;
-	height:30px;
-	font-size:1.1em;
-	font-weight:bold;
-	border:none;
-	color: #fff;
-	border:1px solid #ccc;
+    width:100px;
+    height:30px;
+    font-size:1.1em;
+    font-weight:bold;
+    border:none;
+    color: #fff;
+    border:1px solid #ccc;
 /*	background: rgb(137,190,107);
 */
-	margin-top:0;
-	background:rgb(137,190,107) url(../images/envoyer_bg.png) repeat;
+    margin-top:0;
+    background:rgb(137,190,107) url(../images/envoyer_bg.png) repeat;
 /*	background:url('../../images/envoyer.png') no-repeat top left;*/
-	/* css3 */
-	-moz-border-radius:3px;
-	-webkit-border-radius:3px;
-	border-radius:3px;
-
+    /* css3 */
+    -moz-border-radius:3px;
+    -webkit-border-radius:3px;
+    border-radius:3px;
 }
 
 .conteneur #balloon .register:hover {
-        width:100px;
-	height:30px;
-	border:none;
-	color: #fff;
-	font-weight:bold;
-	/*background: #6ec539;*/
-	background:url(../images/envoyer_hover.png) repeat top left;
+    width:100px;
+    height:30px;
+    border:none;
+    color: #fff;
+    font-weight:bold;
+    /*background: #6ec539;*/
+    background:url(../images/envoyer_hover.png) repeat top left;
 }
 
 .conteneur #balloon .login {
-	width:100px;
-	height:30px;
-	font-size:1.1em;
-	font-weight:bold;
-	border:none;
-	color: #fff;
-	border:1px solid #ccc;
+    width:100px;
+    height:30px;
+    font-size:1.1em;
+    font-weight:bold;
+    border:none;
+    color: #fff;
+    border:1px solid #ccc;
 /*	background: rgb(137,190,107);
 */
-	margin-top:0;
-	background:rgb(137,190,107) url(../images/envoyer_bg.png) repeat;
+    margin-top:0;
+    background:rgb(137,190,107) url(../images/envoyer_bg.png) repeat;
 /*	background:url('../../images/envoyer.png') no-repeat top left;*/
-	/* css3 */
-	-moz-border-radius:3px;
-	-webkit-border-radius:3px;
-	border-radius:3px;
-
+    /* css3 */
+    -moz-border-radius:3px;
+    -webkit-border-radius:3px;
+    border-radius:3px;
 }
 
 .conteneur #balloon .login:hover {
-        width:100px;
-	height:30px;
-	border:none;
-	color: #fff;
-	font-weight:bold;
-	/*background: #6ec539;*/
-	background:url(../images/envoyer_hover.png) repeat top left;
+    width:100px;
+    height:30px;
+    border:none;
+    color: #fff;
+    font-weight:bold;
+    /*background: #6ec539;*/
+    background:url(../images/envoyer_hover.png) repeat top left;
+}
+/*POUR LE HOME PAGE*/
+
+.conteneur #balloon .center-page{
+    text-align: center;
+    padding-top: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
+.conteneur #balloon .center-page h1{
+    color:#213E7C;
+    font-size: 153.9%;
+    font-family: 'Lucida grande',tahoma,verdana,arial,sans-serif;
+    font-weight:bold;
+    border: 20px 0 10px;
+    color:#334B61;
+}
 
+.conteneur #balloon .center-page #newquotes_container{
+    background: #FFFFFF;
+    height: 60px;
+    margin: 0 10px;
+    padding-top: 10px;
+}
+.conteneur #balloon .center-page #newquotes_container #m_newaction{
+    background: #FFFBCF;
+    border:1px solid #CCCCCC;
+    display: block;
+    margin:0 auto;
+    padding: 10px;
+    text-align: center;
+    width: 80%;
+}
 
+.conteneur #balloon .left-page{
+    padding: 0px 20px 20px;
+    font-family: 'Lucida grande',tahoma,verdana,arial,sans-serif;
+    font-size:12px;
+    color:#334B61;
+}
+.conteneur #balloon .left-page #corps{
+    margin-top: 10px;
+}
 
+.conteneur #balloon .left-page .img-center{
+    margin-top: 10px;
+    width: 500px;
+    height: 327px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    background-image: url(../images/home_img.png);
+    background-repeat: no-repeat;
+}
+
+.conteneur #balloon .left-page #clear{
+    clear: both;
+}
+
+.conteneur #balloon .left-page .sms{
+    width: 45px;
+    height: 45px;
+    background-image: url(../images/home_sms.png);
+    background-repeat: no-repeat;
+    float: left;
+}
+.conteneur #balloon .left-page .web{
+    width: 45px;
+    height: 45px;
+    background-image: url(../images/home_web.png);
+    background-repeat: no-repeat;
+    float: left;
+}
+.conteneur #balloon .left-page .webmobile{
+    width: 45px;
+    height: 45px;
+    background-image: url(../images/home_webmobile.png);
+    background-repeat: no-repeat;
+    float: left;
+}
+.conteneur #balloon .left-page .txt {
+    float: left;
+    height: 45px;
+    line-height: 45px;
+    padding-left: 10px;
+
+}
+.conteneur #balloon .left-page .etape-2{
+    clear: both;
+    margin-top: 15px;
+}
