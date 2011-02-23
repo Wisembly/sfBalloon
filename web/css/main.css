@@ -128,6 +128,12 @@ a
 	font-weight:bold;
 
 }
+#poster .poll-duration{
+        float:right;
+	padding-right:10px;
+}
+
+
 #poster p
 {
 	font-weight:bold;
@@ -646,6 +652,16 @@ form inlabel_poster br {display: none;}
     border:1px solid #484848;
     padding:8px;
     width:200px;
+    border-radius: 5px ;
+    -moz-border-radius:5px;
+    -webkit-border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.conteneur #balloon .col-100 #field select{
+    border:1px solid #484848;
+    padding:8px;
+    width:218px;
     border-radius: 5px ;
     -moz-border-radius:5px;
     -webkit-border-radius: 5px;
