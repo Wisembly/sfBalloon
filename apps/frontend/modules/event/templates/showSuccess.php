@@ -14,19 +14,19 @@
 
 <div id="place_content">
 
-<div id="admin_place_members">
-                	<a href="">Gérer les Utilisateurs</a>
-                </div>
-                <div id="admin_edit_place">
-                	<a href="">Modifier Place</a>
-                </div>
-                <br>
+<div id="admin_event_members">
+    <a href="">Gérer les Utilisateurs</a>
+</div>
+<div id="admin_edit_event">
+    <?php echo link_to('Modifier Event',sprintf('@event_edit?short='.$event->getShort(), $event->getShort(),$event->getShort())); ?>
+</div>
+<br>
 
 
 <div id="place_1" class="place_edit">
   <h2><?php echo $event->getName(); ?></h2>
 </div>
-
+<br/>
   <ul id="events">
     <?php foreach($event->getWalls() as $wall):?>
     <li>
