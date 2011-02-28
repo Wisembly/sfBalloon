@@ -18,7 +18,7 @@
       <?php echo link_to('Gérer les Utilisateurs',sprintf('@invitation?event=%s', $event->getShort())); ?>
     </div>
     <div id="admin_edit_event">
-      <?php echo link_to('Modifier Event',sprintf('@event_edit?short=%s', $event->getShort())); ?>
+      <?php echo link_to("Modifier l'événement",sprintf('@event_edit?short=%s', $event->getShort())); ?>
     </div>
     <br />
   
