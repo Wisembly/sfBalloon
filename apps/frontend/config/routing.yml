@@ -26,7 +26,7 @@ sf_guard_register:
 sf_guard_forgot_password:
   url: /user/lostpassword
   param: { module: sfGuardForgotPassword, action: index }
-  
+
 plans:
   url: /plans
   param: { module: sfGuardRegister, action: plans }
@@ -34,6 +34,7 @@ plans:
 user_edit:
   url: /me
   param: { module: user, action: edit }
+
 # dashboard
 
 dashboard:
@@ -52,7 +53,11 @@ event:
 event_edit:
   url: /:short/edit
   param: { module: event, action: edit }
-  
+
+event_add_wall:
+  url: /:short/wall/new
+  param: { module: event, action: wall }
+
 invitation:
   url: /:event/invitation
   param: { module: invitation, action: index }
@@ -68,7 +73,7 @@ wall:
 wall_edit:
   url: /:event/:wall/edit
   param: { module: wall, action: edit }
-  
+
 quote_create:
   url: /:event/:wall/quote/create
   param: { module: quote, action: create }

@@ -72,4 +72,36 @@ class eventActions extends sfActions
     
     $this->form = $form;
   }
+
+  /**
+   * Executes wall action
+   *
+   * @param sfRequest $request A request object
+   */
+  public function executeWall(sfWebRequest $request)
+  {
+    $eventShort = $request->getParameter('short');
+    $this->event = Doctrine::getTable('Event')->findByShort($eventShort);
+
+    $form = new AddWallForm();
+
+    if(!$this->getUser()->can('add_wall', $this->event)){
+      $this->redirect('@event?short='.$eventShort);
+    }
+    if($request->getMethod() == "POST"){
+      $form->bind($request->getPostParameter($form->getName()), $request->getFiles($form->getName()));
+
+      if($form->isValid()){
+        $values = $form->getValues();
+        $offer = Doctrine::getTable('Offer')->find($values['offer']);
+        $wall = new Wall();
+        $wall->setName($values['wall']['name']);
+        $wall->setRealStartDate($values['wall']['real_start_date']);
+        $wall->save();
+        $this->getUser()->getGuardUser()->addSubscription($offer, $this->event, $wall);
+        $this->redirect('@event?short='.$eventShort);
+      }
+    }
+    $this->form = $form;
+  }
 }

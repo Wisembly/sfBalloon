@@ -20,6 +20,9 @@
     <div id="admin_edit_event">
       <?php echo link_to("Modifier l'événement",sprintf('@event_edit?short=%s', $event->getShort())); ?>
     </div>
+    <div id="admin_edit_event">
+      <?php echo link_to('Ajouter un wall',sprintf('@event_add_wall?short=%s', $event->getShort())); ?>
+    </div>
     <br />
   
     <div id="place_1" class="place_edit">

@@ -1,2 +1,5 @@
 edit:
   is_secure: true
+
+wall:
+  is_secure: true
