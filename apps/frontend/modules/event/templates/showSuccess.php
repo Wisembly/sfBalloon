@@ -12,30 +12,27 @@
 <?php else: ?>
 <div id="centerpage">
 
-<div id="place_content">
+  <div id="place_content">
 
-<div id="admin_event_members">
-    <?php echo link_to('Gérer les Utilisateurs',sprintf('@invitation?event=%s', $event->getShort())); ?>
-</div>
-<div id="admin_edit_event">
-    <?php echo link_to('Modifier Event',sprintf('@event_edit?short=%s', $event->getShort())); ?>
-</div>
-<br>
-
-
-<div id="place_1" class="place_edit">
-  <h2><?php echo $event->getName(); ?></h2>
-</div>
-<br/>
-  <ul id="events">
-    <?php foreach($event->getWalls() as $wall):?>
-    <li>
-      <?php echo link_to($wall->getName(), sprintf('@wall?event=%s&wall=%s', $event->getShort(), $wall->getShort())); ?>
-    </li>
-    <?php endforeach; ?>
-  </ul>
+    <div id="admin_event_members">
+      <?php echo link_to('Gérer les Utilisateurs',sprintf('@invitation?event=%s', $event->getShort())); ?>
+    </div>
+    <div id="admin_edit_event">
+      <?php echo link_to('Modifier Event',sprintf('@event_edit?short=%s', $event->getShort())); ?>
+    </div>
+    <br />
   
-  
-</div>  
+    <div id="place_1" class="place_edit">
+      <h2><?php echo $event->getName(); ?></h2>
+    </div>
+    <br />
+    <ul id="events">
+      <?php foreach($event->getWalls() as $wall):?>
+      <li>
+        <?php echo link_to($wall->getName(), sprintf('@wall?event=%s&wall=%s', $event->getShort(), $wall->getShort()) ); ?>  
+      </li> 
+      <?php endforeach; ?>
+    </ul>
+  </div>  
 </div>
 <?php endif; ?>
