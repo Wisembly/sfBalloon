@@ -57,19 +57,19 @@ Event:
 
 Auth:
   auth1:
-    User: User_admin
+    User: User_reponsable
     Group: a
     Event: hec
 
 Subscription:
   sub1:
-    User: User_admin
+    User: User_reponsable
     Wall: wall1
     Event: hec
     Offer: startup
     is_payed: true
   sub2:
-    User: User_admin
+    User: User_reponsable
     Wall: wall2
     Event: hec
     Offer: agence
@@ -92,7 +92,13 @@ sfGuardUser:
     password:       test
     is_super_admin: true
     is_root: true
-    
+  User_reponsable:
+    first_name:     Clem
+    last_name:      Job
+    email_address:  clement@balloonup.com
+    username:       Datorfr
+    password:       test
+
 Offer:
   startup:
     name:               Startup
