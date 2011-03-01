@@ -860,3 +860,93 @@ form inlabel_poster br {display: none;}
     clear: both;
     margin-top: 15px;
 }
+
+.bouton_valider a, .bouton_supprimer a, .bouton_alaune a, .bouton_repondre a, .bouton_confirmation a {
+	-webkit-transition:all 200ms ease-out;
+	-moz-transition:all 200ms ease-out;	
+	border-radius: 3px ;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	cursor: pointer;
+	float:right;
+	line-height: 20px;
+	margin: 3px;
+	padding: 5px 10px;
+}
+
+.bouton_valider a:hover, .bouton_supprimer a, .bouton_alaune a, .bouton_repondre a, .bouton_confirmation a {
+	text-decoration:none;
+	-webkit-box-shadow:0 2px 5px rgba(0,0,0,0.2);
+	-moz-box-shadow:0 2px 5px rgba(0,0,0,0.2);
+	box-shadow:0 2px 5px rgba(0,0,0,0.2);
+}
+
+.bouton_fav {
+	float:right;
+}
+
+.admin_buttons {
+	float:right;
+	width:60%;
+}
+
+.admin_buttons span {
+	display:block;
+}
+
+.bouton_valider a {
+	border: 1px solid #53820F;
+	background:-webkit-gradient(linear,0% 0%,0% 100%,from(#86b542),to(#86b542));
+	background:-moz-linear-gradient(top,#86b542,#86b542);	
+	color: #204F00;
+	text-shadow: #A8D764 1px 1px 0px;
+}
+
+.bouton_valider a:hover {
+	background:!color+111;
+	background:-webkit-gradient(linear,0% 0%,0% 100%,from(#97c653),to(#75a431));
+	background:-moz-linear-gradient(top,#97c653,#75a431);
+}
+
+.bouton_supprimer a {
+	border: 1px solid #c6220c;
+	background:-webkit-gradient(linear,0% 0%,0% 100%,from(#f38359),to(#db6539));
+	background:-moz-linear-gradient(top,#f38359,#db6539);	
+	color: #ab1d1c;
+	text-shadow: #f3a587 1px 1px 0px;
+}
+
+.bouton_supprimer a:hover {
+	background:!color+111;
+	background:-webkit-gradient(linear,0% 0%,0% 100%,from(#f5916c),to(#da4710));
+	background:-moz-linear-gradient(top,#f5916c,#da4710);
+}
+
+.bouton_alaune a {
+	border: 1px solid #8ca5d1;
+	background:-webkit-gradient(linear,0% 0%,0% 100%,from(#5274b9),to(#5274b9));
+	background:-moz-linear-gradient(top,#5274b9,#5274b9);	
+	color: #00254A;
+	text-shadow: #6699cc 1px 1px 0px;
+}
+
+.bouton_alaune a:hover {
+	background:!color+111;
+	background:-webkit-gradient(linear,0% 0%,0% 100%,from(#5c81cb),to(#4066b4));
+	background:-moz-linear-gradient(top,#5c81cb,#4066b4);
+}
+
+.bouton_repondre a {
+	border: 1px solid #b4b340;
+	background:-webkit-gradient(linear,0% 0%,0% 100%,from(#cccc33),to(#cccc33));
+	background:-moz-linear-gradient(top,#cccc33,#cccc33);	
+	color: #484848;
+	text-shadow: #cfcf89 1px 1px 0px;
+}
+
+.bouton_repondre a:hover {
+	background:!color+111;
+	background:-webkit-gradient(linear,0% 0%,0% 100%,from(#e1e13a),to(#c1c131));
+	background:-moz-linear-gradient(top,#e1e13a,#c1c131);
+}
+

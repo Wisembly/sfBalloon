@@ -39,24 +39,33 @@
     <p><input type="submit" value="Voter !"></p>
   </form>
   <?php else:?>
-    <!--<h4>Résultat</h4>-->
-    <div class="reponses">
-    <ul>
-      <?php $totalVotes = $quote->getTotalPollAnswer()?>
-      <?php foreach($quote->getPollChoices() as $key => $choice): ?>
-        <li>
-            <?php echo chr($key + 65); ?> - 
-            <?php echo $choice->getChoiceValue(); ?> - 
-            <?php echo $choice->getFormattedPercent($totalVotes);?>
-        </li>
-      <?php endforeach; ?>
-    </ul>
-    </div>
+  <!--<h4>Résultat</h4>-->
+  <div class="reponses">
+  <ul>
+    <?php $totalVotes = $quote->getTotalPollAnswer()?>
+    <?php foreach($quote->getPollChoices() as $key => $choice): ?>
+      <li>
+          <?php echo chr($key + 65); ?> - 
+          <?php echo $choice->getChoiceValue(); ?> - 
+          <?php echo $choice->getFormattedPercent($totalVotes);?>
+      </li>
+    <?php endforeach; ?>
+  </ul>
+  </div>
   <?php endif;?>
 <?php endif; ?>
-  <div class="date"><?php echo distance_of_time_in_words(strtotime($quote->getCreatedAt())); ?> -
-  </div>
-      <div class="moderation">
+  <div class="date"><?php echo distance_of_time_in_words(strtotime($quote->getCreatedAt())); ?> - </div>
+  <div class="admin_buttons">
+    <?php if(can($sf_user, 'fav_quote', $wall)): ?>
+      <span class="bouton_fav">
+      <?php echo link_to(image_tag((!$quote->getIsFavori()) ? 'star-white32' : 'star-gold32'),
+                  sprintf('@quote_favorite?event=%s&wall=%s&quote=%s',
+                    $eventId,
+                    $wall->getShort(),
+                    $quote->getId())); ?>
+    </span>
+    <?php endif;?>
+  <div class="bouton_alaune">  
   <?php if(can($sf_user, 'validate_moderating_quote', $wall) && !$quote->isValidated()): ?> 
     <?php echo link_to('Validate', 
                 sprintf('@quote_validate?event=%s&wall=%s&quote=%s', 
@@ -64,38 +73,37 @@
                   $wall->getShort(), 
                   $quote->getId()))?> -      
   <?php endif; ?>
-
-  <?php if(can($sf_user, 'remove_quote', $wall)): ?> 
-    <?php echo link_to('Supprimer',
-                sprintf('@quote_remove?event=%s&wall=%s&quote=%s', 
-                  $eventId, 
-                  $wall->getShort(), 
-                  $quote->getId()),
-                'class=delete') ?>
-                
+  </div>
+  <?php if(can($sf_user, 'remove_quote', $wall)): ?>
+  <div class="bouton_supprimer">
+  <?php echo link_to('Supprimer',
+              sprintf('@quote_remove?event=%s&wall=%s&quote=%s', 
+                $eventId, 
+                $wall->getShort(), 
+                $quote->getId()),
+              'class=delete') ?>
+  </div>
   <?php endif;?>
-
-  <?php if(can($sf_user, 'update_moderating_quote', $wall)): ?> 
-    <?php echo link_to('Edit', 
-                sprintf('@quote_edit?event=%s&wall=%s&quote=%s', 
-                  $eventId, 
-                  $wall->getShort(), 
-                  $quote->getId()),
-                 'class=edit_quote') ?>
+  
+  <?php if(can($sf_user, 'update_moderating_quote', $wall)): ?>
+  <div class="bouton_alaune">
+  <?php echo link_to('Edit', 
+              sprintf('@quote_edit?event=%s&wall=%s&quote=%s', 
+                $eventId, 
+                $wall->getShort(), 
+                $quote->getId()),
+               'class=edit_quote') ?>
+  </div>
   <?php endif;?>
+  
   <?php if(can($sf_user, 'une_quote', $wall) ): ?> 
-    <?php echo link_to('A la une', 
-                sprintf('@quote_alaune?event=%s&wall=%s&quote=%s', 
-                  $eventId,
-                  $wall->getShort(), 
-                  $quote->getId()), array('class' => 'alaune')) ?>
-  <?php endif;?>
-  <?php if(can($sf_user, 'fav_quote', $wall) ): ?>
-    <?php echo link_to((!$quote->getIsFavori())? 'Fav': 'Unfav',
-                sprintf('@quote_favorite?event=%s&wall=%s&quote=%s',
-                  $eventId,
-                  $wall->getShort(),
-                  $quote->getId()), array('class' => 'fav')) ?>
+  <div class="bouton_alaune">
+  <?php echo link_to('A la une', 
+              sprintf('@quote_alaune?event=%s&wall=%s&quote=%s', 
+                $eventId,
+                $wall->getShort(), 
+                $quote->getId()), array('class' => 'alaune')) ?>
+  </div>
   <?php endif;?>
   </div>
 </div>
