@@ -52,7 +52,7 @@ $cans = array(
     </div>
 </div>
 <div id="wall">
-  <?php if($wall->isModerated() && can($sf_user, 'show_moderating_quotes', $wall)): ?>
+  <?php if($moderatedQuotes->count() && $wall->isModerated() && can($sf_user, 'show_moderating_quotes', $wall)): ?>
     <h3>Quote Moderated</h3>
     <ul>
       <?php foreach($moderatedQuotes as $quote): ?>
@@ -66,6 +66,7 @@ $cans = array(
       <?php endforeach; ?>
     </ul>
   <?php endif;?>
+  <?php if($publishedQuotes->count()): ?>
   <div class="entete">
     <h3>Quotes</h3>
   </div>
@@ -83,7 +84,9 @@ $cans = array(
     </li>
     <?php endforeach;?>
   </ul>
-
+  <?php else: ?>
+    <div id="newquotes">Pas encore de question posée. Soyez le premier à réagir!</div>
+  <?php endif;?>
 </div>
 <div class="footer">
   <div id="menu_suivant">
