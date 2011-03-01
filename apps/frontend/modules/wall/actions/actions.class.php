@@ -10,15 +10,11 @@
  */
 class wallActions extends sfActions
 {
-  /**
-   * Executes show action
-   *
-   * @param sfWebRequest $request A request object
-   */
-  public function executeShow(sfWebRequest $request)
+  
+  public function preExecute()
   {
-    $this->eventId  = $request->getParameter('event');
-    $this->wallId   = $request->getParameter('wall');
+    $this->eventId  = $this->getRequest()->getParameter('event');
+    $this->wallId   = $this->getRequest()->getParameter('wall');
     
     $this->wall = Doctrine::getTable('Wall')->findByShort($this->wallId);
 
@@ -27,11 +23,6 @@ class wallActions extends sfActions
     if(!$this->wall->isAvailable()){
       $this->redirect(sprintf('@event?short=%s', $this->eventId));
     }
-    
-    $sort = $request->getParameter('sort');
-    
-    $this->moderatedQuotes  = Doctrine::getTable('Quote')->getModeratedQuotesForWall($this->wall->getId(), $sort);
-    $this->publishedQuotes  = Doctrine::getTable('Quote')->getPublishedQuotesForWall($this->wall->getId(), $sort);
     
     $this->menu = new WallTabMenu(array('event' => $this->eventId, 'wall' => $this->wallId));
 
@@ -44,6 +35,20 @@ class wallActions extends sfActions
         $this->form = new SimpleQuoteForm($quote);
     }
   }
+  
+  /**
+   * Executes show action
+   *
+   * @param sfWebRequest $request A request object
+   */
+  public function executeShow(sfWebRequest $request)
+  {
+    $sort = $request->getParameter('sort');
+    
+    $this->moderatedQuotes  = Doctrine::getTable('Quote')->getModeratedQuotesForWall($this->wall->getId(), $sort);
+    $this->publishedQuotes  = Doctrine::getTable('Quote')->getPublishedQuotesForWall($this->wall->getId(), $sort);
+    
+  }
 
   /**
    * Executes edit action
@@ -52,17 +57,6 @@ class wallActions extends sfActions
    */
   public function executeEdit(sfWebRequest $request)
   {
-    $this->eventId  = $request->getParameter('event');
-    $this->wallId   = $request->getParameter('wall');
-
-    $this->wall = Doctrine::getTable('Wall')->findByShort($this->wallId);
-    
-    $this->forward404Unless($this->wall);
-    
-    if(!$this->wall->isAvailable() || !$this->getUser()->can('update', $this->wall)){
-      $this->redirect(sprintf('@event?short=%s', $this->eventId));
-    }
-
     $form = new SimpleWallForm($this->wall);
     if ("POST" === $request->getMethod()) {
       $form->bind($request->getPostParameter($form->getName()), $request->getFiles($form->getName()));
@@ -75,5 +69,15 @@ class wallActions extends sfActions
 
     $this->form = $form;
 
+  }
+  
+  /**
+   * Executes answers action
+   *
+   * @param sfRequest $request A request object
+   */
+  public function executeAnswers(sfWebRequest $request)
+  {
+    $this->quotes = Doctrine::getTable('Quote')->getAnsweredQuotesForWall($this->wall->getId());
   }
 }

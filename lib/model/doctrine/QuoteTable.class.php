@@ -21,7 +21,7 @@ class QuoteTable extends Doctrine_Table
                 ->leftJoin('q.PollChoices pc')
                 ->where('q.wall_id = ?', $wall);
   }
-  
+
   public function getModeratedQuotesForWall($wall, $sort = null)
   {
     return $this->getQuotesQuery($wall, $sort)
@@ -34,6 +34,16 @@ class QuoteTable extends Doctrine_Table
     return $this->getQuotesQuery($wall, $sort)
                 ->leftJoin('pc.Answers a')
                 ->andWhere('q.is_validated = ?', true)
+                ->execute();
+  }
+  
+  public function getAnsweredQuotesForWall($wall)
+  {
+    return $this->getQuotesQuery($wall, null)
+                ->leftJoin('q.Answers a')
+                  ->leftJoin('a.User us')
+                ->andWhere('q.is_validated = ?', true)
+                ->andWhere('q.has_answer = ?', true)
                 ->execute();
   }
 }
