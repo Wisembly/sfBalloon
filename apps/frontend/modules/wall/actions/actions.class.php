@@ -29,7 +29,9 @@ class wallActions extends sfActions
     $quote = new Quote();
     $quote->setWall($this->wall);
     
-    if($this->getUser()->can('add_survey', $this->wall) && $this->wall->supports('poll')){
+    if($this->getUser()->can('add_survey', $this->wall) 
+      && $this->wall->supports('poll') 
+      && $this->wall->getSurveyActived()){
         $this->form = new SimpleSurveyForm($quote);  
     }else{
         $this->form = new SimpleQuoteForm($quote);
