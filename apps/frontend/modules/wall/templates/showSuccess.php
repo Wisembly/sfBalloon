@@ -1,3 +1,12 @@
+<?php
+$cans = array(
+  'can_fav_quote' => can($sf_user, 'fav_quote', $wall),
+  'can_validate_moderating_quote' => can($sf_user, 'validate_moderating_quote', $wall),
+  'can_remove_quote' => can($sf_user, 'remove_quote', $wall),
+  'can_update_moderating_quote' => can($sf_user, 'update_moderating_quote', $wall),
+  'can_une_quote'  => can($sf_user, 'une_quote', $wall)
+);
+?>
 <div class="conteneur_header">
   <div id="poster">
     <div id="compteur">140</div>
@@ -48,7 +57,11 @@
     <ul>
       <?php foreach($moderatedQuotes as $quote): ?>
         <li>
-          <?php include_partial('quote/quote', array('wall' => $wall, 'quote' => $quote, 'eventId' => $eventId)); ?>
+          <?php include_partial('quote/quote', array(
+              'wall' => $wall, 
+              'quote' => $quote, 
+              'eventId' => $eventId
+            ) + $cans); ?>
         </li>
       <?php endforeach; ?>
     </ul>
@@ -60,7 +73,11 @@
     <?php foreach($publishedQuotes as $quote): ?>
     <li>
       <div class="item_wall">
-        <?php include_partial('quote/quote', array('wall' => $wall, 'quote' => $quote, 'eventId' => $eventId)); ?>
+        <?php include_partial('quote/quote', array(
+            'wall' => $wall, 
+            'quote' => $quote, 
+            'eventId' => $eventId
+          ) + $cans); ?>
       </div>
       <div class="separation"></div>
     </li>
