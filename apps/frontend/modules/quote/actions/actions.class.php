@@ -96,6 +96,10 @@ class quoteActions extends sfActions
     
     $quote = new Quote();
     
+    $this->menu = new WallTabMenu();
+    $this->menu->setEvent($this->eventId);
+    $this->menu->setWall($this->wallId);
+    
     if($user->isAuthenticated()){
       $quote->setUser($user->getGuardUser());
     }else{
