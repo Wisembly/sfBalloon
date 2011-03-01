@@ -38,6 +38,20 @@
         <?php endif;?>
       <?php endforeach; ?>
     </ul>
+    <br />
+    
+    <?php if(can($sf_user, 'view_archive', $event)): ?>
+    <h4>Archives</h4>
+    <ul id="past-events">
+      <?php foreach($event->getWalls() as $wall):?>
+        <?php if(!$wall->isAvailable()): ?>
+        <li>
+          <?php echo link_to($wall->getName(), sprintf('@wall?event=%s&wall=%s', $event->getShort(), $wall->getShort()) ); ?>  
+        </li> 
+        <?php endif;?>
+      <?php endforeach; ?>
+    </ul>
+    <?php endif;?>
   </div>  
 </div>
 <?php endif; ?>

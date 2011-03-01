@@ -28,6 +28,11 @@ class BalloonRoles
   {
     return array(
       'event' => array(
+        'view_archive' => array(
+          'admin' => true,
+          'modo'  => true,
+          'anim'  => false
+        ),
         'update' => array(
           'admin' => true,
           'modo'  => false,
