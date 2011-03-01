@@ -11,7 +11,7 @@ class WallTabMenu extends ioMenu
     $wall = $this->getAttribute('wall');
 
     $this->addChild('Dernière', sprintf("@wall?event=%s&wall=%s", $event, $wall));
-    $this->addChild('Populaire', sprintf("@wall?event=%s&wall=%s&sort=trop", $event, $wall));
+    $this->addChild('Populaire', sprintf("@wall?event=%s&wall=%s&sort=top", $event, $wall));
     $this->addChild('Réponses', '');
 
     return parent::render($depth = null, $renderAsChild = false);
