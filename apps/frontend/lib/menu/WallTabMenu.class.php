@@ -7,8 +7,8 @@ class WallTabMenu extends ioMenu
 
   public function render($depth = null, $renderAsChild = false)
   {
-    $event = $this->event;
-    $wall = $this->wall;
+    $event = $this->getAttribute('event');
+    $wall = $this->getAttribute('wall');
 
     $this->addChild('Dernière', sprintf("@wall?event=%s&wall=%s", $event, $wall));
     $this->addChild('Populaire', sprintf("@wall?event=%s&wall=%s&sort=trop", $event, $wall));
@@ -16,15 +16,4 @@ class WallTabMenu extends ioMenu
 
     return parent::render($depth = null, $renderAsChild = false);
   }
-
-  public function setEvent($event)
-  {
-    $this->event = $event;
-  }
-
-  public function setWall($wall)
-  {
-    $this->wall = $wall;
-  }
-
 }

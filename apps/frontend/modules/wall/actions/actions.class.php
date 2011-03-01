@@ -33,9 +33,7 @@ class wallActions extends sfActions
     $this->moderatedQuotes  = Doctrine::getTable('Quote')->getModeratedQuotesForWall($this->wall->getId(), $sort);
     $this->publishedQuotes  = Doctrine::getTable('Quote')->getPublishedQuotesForWall($this->wall->getId(), $sort);
     
-    $this->menu = new WallTabMenu();
-    $this->menu->setEvent($this->eventId);
-    $this->menu->setWall($this->wallId);
+    $this->menu = new WallTabMenu(array('event' => $this->eventId, 'wall' => $this->wallId));
 
     $quote = new Quote();
     $quote->setWall($this->wall);
