@@ -24,7 +24,7 @@ class answerActions extends sfActions
     $quote  = Doctrine::getTable('Quote')->find($this->quoteId);
     $wall   = Doctrine::getTable('Wall')->findByShort($this->wallId);
     
-    $this->forward404Unless($quote && $this->getUser()->can('answer_quote', $wall) && $quote->isActive());
+    $this->forward404Unless($quote && $this->getUser()->can('answer_quote', $wall));
     
     $this->quote  = $quote;
     $this->wall   = $wall;
@@ -39,6 +39,8 @@ class answerActions extends sfActions
 
       if ($form->isValid()){
         $answer = $form->save();
+        $this->quote->setHasAnswer(true);
+        $this->quote->save();
         $this->redirect(sprintf('@quote_answer?event=%s&wall=%s&quote=%s', $this->eventId, $this->wallId, $quote->getId()));
       }
     }
@@ -58,10 +60,15 @@ class answerActions extends sfActions
   
     $wall   = Doctrine::getTable('Wall')->findByShort($this->wallId);
     $answer = Doctrine::getTable('Answer')->find($this->answerId);
+    $quote  = Doctrine::getTable('Quote')->find($this->quoteId);
     
     $this->forward404Unless($answer && $this->getUser()->can('answer_quote', $wall));
     $answer->delete();
     
+    if($quote->getAnswers()->count() === 0){
+      $quote->setHasAnswer(0);
+      $quote->save();
+    }
     $this->redirect(sprintf('@quote_answer?event=%s&wall=%s&quote=%s', $this->eventId, $this->wallId, $this->quoteId));
   }
   
