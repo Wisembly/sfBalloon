@@ -46,4 +46,12 @@ class QuoteTable extends Doctrine_Table
                 ->andWhere('q.has_answer = ?', true)
                 ->execute();
   }
+  
+  public function getFavoriteQuoteForWall($wall)
+  {
+    return $this->getQuotesQuery($wall, null)
+                ->andWhere('q.is_validated = ?', true)
+                ->andWhere('q.is_favori = ?', true)
+                ->execute();
+  }
 }

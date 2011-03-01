@@ -80,4 +80,14 @@ class wallActions extends sfActions
   {
     $this->quotes = Doctrine::getTable('Quote')->getAnsweredQuotesForWall($this->wall->getId());
   }
+  
+  /**
+   * Executes favoris action
+   *
+   * @param sfRequest $request A request object
+   */
+  public function executeFavoris(sfWebRequest $request)
+  {
+    $this->quotes = Doctrine::getTable('Quote')->getFavoriteQuoteForWall($this->wall->getId());
+  }
 }
