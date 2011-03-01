@@ -43,7 +43,7 @@
     </div>
 </div>
 <div id="wall">
-  <?php if($wall->isModerated() && can($sf_user, 'show_moderating_quote', $wall)): ?>
+  <?php if($wall->isModerated() && can($sf_user, 'show_moderating_quotes', $wall)): ?>
     <h3>Quote Moderated</h3>
     <ul>
       <?php foreach($moderatedQuotes as $quote): ?>
