@@ -57,6 +57,11 @@ class BalloonRoles
           'admin' => true,
           'modo'  => false,
           'anim'  => false
+        ),
+        'view'    => array(
+          'admin' => true,
+          'modo'  => false,
+          'anim'  => false
         )
       ),
       'wall'  => array(
