@@ -4,7 +4,7 @@
 class QuoteTable extends Doctrine_Table
 {
   
-  protected function sanitizeSort($sort)
+  protected function sanitizeSort($sort = null)
   {
     if($sort == "top"){
       return "votes_count";
@@ -12,7 +12,7 @@ class QuoteTable extends Doctrine_Table
     return "created_at";
   }
 
-  public function getQuotesQuery($wall, $sort)
+  public function getQuotesQuery($wall, $sort = null)
   {
 
     return $this->createQuery('q')
@@ -22,14 +22,14 @@ class QuoteTable extends Doctrine_Table
                 ->where('q.wall_id = ?', $wall);
   }
   
-  public function getModeratedQuotesForWall($wall, $sort)
+  public function getModeratedQuotesForWall($wall, $sort = null)
   {
     return $this->getQuotesQuery($wall, $sort)
                 ->andWhere('q.is_validated = ?', false)
                 ->execute();
   }
   
-  public function getPublishedQuotesForWall($wall, $sort)
+  public function getPublishedQuotesForWall($wall, $sort = null)
   {
     return $this->getQuotesQuery($wall, $sort)
                 ->leftJoin('pc.Answers a')
