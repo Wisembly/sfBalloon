@@ -47,7 +47,7 @@
       <li>
           <?php echo chr($key + 65); ?> - 
           <?php echo $choice->getChoiceValue(); ?> - 
-          <?php echo $choice->getFormattedPercent($totalVotes);?>
+          <?php echo $choice->getFormattedPercent($totalVotes, $can_view_vote_quote);?>
       </li>
     <?php endforeach; ?>
   </ul>

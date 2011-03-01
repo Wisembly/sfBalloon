@@ -4,7 +4,8 @@ $cans = array(
   'can_validate_moderating_quote' => can($sf_user, 'validate_moderating_quote', $wall),
   'can_remove_quote' => can($sf_user, 'remove_quote', $wall),
   'can_update_moderating_quote' => can($sf_user, 'update_moderating_quote', $wall),
-  'can_une_quote'  => can($sf_user, 'une_quote', $wall)
+  'can_une_quote'  => can($sf_user, 'une_quote', $wall),
+  'can_view_vote_quote' => can($sf_user, 'view_quote_nb_vote', $wall)
 );
 ?>
 <div class="conteneur_header">
