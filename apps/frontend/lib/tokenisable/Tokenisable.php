@@ -41,6 +41,7 @@ class Tokenisable extends sfGuardSecurityUser
   {
     $request      = sfContext::getInstance()->getRequest();
     $response     = sfContext::getInstance()->getResponse(); // WHERE IS THE F*** DIC :(
+    
     $cookieToken  = $this->getCookieToken($request);
     $sessionToken = $this->getSessionToken();
     
@@ -88,7 +89,7 @@ class Tokenisable extends sfGuardSecurityUser
    * @return void
    * @author Clément JOBEILI
    */
-  public function setCookieToken(sfWebResponse $response, $token)
+  public function setCookieToken($token, sfWebResponse $response)
   {
     $response->setCookie('token', $token);
   }
