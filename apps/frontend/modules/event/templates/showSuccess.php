@@ -31,9 +31,11 @@
     <br />
     <ul id="events">
       <?php foreach($event->getWalls() as $wall):?>
-      <li>
-        <?php echo link_to($wall->getName(), sprintf('@wall?event=%s&wall=%s', $event->getShort(), $wall->getShort()) ); ?>  
-      </li> 
+        <?php if($wall->isAvailable()): ?>
+        <li>
+          <?php echo link_to($wall->getName(), sprintf('@wall?event=%s&wall=%s', $event->getShort(), $wall->getShort()) ); ?>  
+        </li> 
+        <?php endif;?>
       <?php endforeach; ?>
     </ul>
   </div>  
