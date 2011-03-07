@@ -105,5 +105,26 @@
                 $quote->getId()), array('class' => 'alaune')) ?>
   </div>
   <?php endif;?>
+  
+  <?php if($can_une_quote): ?> 
+  <div class="bouton_alaune">
+  <?php echo link_to('A la une', 
+              sprintf('@quote_alaune?event=%s&wall=%s&quote=%s', 
+                $eventId,
+                $wall->getShort(), 
+                $quote->getId()), array('class' => 'alaune')) ?>
+  </div>
+  <?php endif;?>
+  
+  <?php if($can_answer_quote): ?> 
+  <div class="bouton_reply">
+  <?php echo link_to('Répondre', 
+              sprintf('@quote_answer?event=%s&wall=%s&quote=%s', 
+                $eventId,
+                $wall->getShort(), 
+                $quote->getId())) ?>
+  </div>
+  <?php endif;?>
+  
   </div>
 </div>
