@@ -25,8 +25,5 @@ class SimpleWallForm extends WallForm
   	}
 
     $this->useFields($fields);
-
-    $this->setWidget('lang', new sfWidgetFormI18nChoiceLanguage());
-    $this->setValidator('lang', new sfValidatorI18nChoiceLanguage());
   }
 }
