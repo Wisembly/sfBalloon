@@ -6,7 +6,7 @@ class SimpleWallForm extends WallForm
   {
   	parent::configure();
   	
-  	$fields = array('name', 'lang', 'short_description');
+  	$fields = array('name', 'short_description');
   	
   	if ($this->getObject()->supports('twitter')) {
   		array_push($fields, 'tw_hashtag');
