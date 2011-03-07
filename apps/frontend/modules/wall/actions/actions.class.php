@@ -22,11 +22,12 @@ class wallActions extends sfActions
     if($this->event->isProtected() && !$this->getUser()->getAttribute('isAllowedOn' .$this->eventId)){
       $this->redirect(sprintf('@event?short=%s', $this->eventId));
     }
+    
     $this->wall = Doctrine::getTable('Wall')->findByShort($this->wallId);
 
     $this->forward404Unless($this->wall);
     
-    if(!$this->wall->isAvailable()){
+    if(!$this->wall->isAvailable() && !$this->getUser()->can('view_archive', $this->event)){
       $this->redirect(sprintf('@event?short=%s', $this->eventId));
     }
     
