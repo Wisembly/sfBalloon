@@ -16,7 +16,10 @@ class wallActions extends sfActions
     $this->eventId  = $this->getRequest()->getParameter('event');
     $this->wallId   = $this->getRequest()->getParameter('wall');
     
-    if(!$this->getUser()->getAttribute('isAllowedOn' .$this->eventId)){
+    $this->event = Doctrine::getTable('Event')->findByShort($this->eventId);
+    $this->forward404Unless($this->event);
+    
+    if($this->event->isProtected() && !$this->getUser()->getAttribute('isAllowedOn' .$this->eventId)){
       $this->redirect(sprintf('@event?short=%s', $this->eventId));
     }
     $this->wall = Doctrine::getTable('Wall')->findByShort($this->wallId);
