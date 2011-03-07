@@ -22,36 +22,53 @@ class QuoteTable extends Doctrine_Table
                 ->where('q.wall_id = ?', $wall);
   }
 
-  public function getModeratedQuotesForWall($wall, $sort = null)
+  public function getModeratedQuotesForWallQuery($wall, $sort = null)
   {
     return $this->getQuotesQuery($wall, $sort)
-                ->andWhere('q.is_validated = ?', false)
-                ->execute();
+                ->andWhere('q.is_validated = ?', false);
+  }
+  
+  public function getModeratedQuotesForWall($wall, $sort = null)
+  {
+    return $this->getModeratedQuotesForWallQuery($wall, $sort)->execute();
+  }
+  
+  public function getPublishedQuotesForWallQuery($wall, $sort = null)
+  {
+    return $this->getQuotesQuery($wall, $sort)
+                ->leftJoin('pc.Answers a')
+                ->andWhere('q.is_validated = ?', true);
   }
   
   public function getPublishedQuotesForWall($wall, $sort = null)
   {
-    return $this->getQuotesQuery($wall, $sort)
-                ->leftJoin('pc.Answers a')
-                ->andWhere('q.is_validated = ?', true)
-                ->execute();
+    return $this->getPublishedQuotesForWallQuery($wall, $sort)->execute();
   }
   
-  public function getAnsweredQuotesForWall($wall)
+  public function getAnsweredQuotesForWallQuery($wall)
   {
     return $this->getQuotesQuery($wall, null)
                 ->leftJoin('q.Answers a')
                   ->leftJoin('a.User us')
                 ->andWhere('q.is_validated = ?', true)
-                ->andWhere('q.has_answer = ?', true)
-                ->execute();
+                ->andWhere('q.has_answer = ?', true);
+  }
+  
+  public function getAnsweredQuotesForWall($wall)
+  {
+    return $this->getAnsweredQuotesForWallQuery($wall)->execute();
+  }
+  
+  public function getFavoriteQuoteForWallQuery($wall)
+  {
+    return $this->getQuotesQuery($wall, null)
+                ->andWhere('q.is_validated = ?', true)
+                ->andWhere('q.is_favori = ?', true);
   }
   
   public function getFavoriteQuoteForWall($wall)
   {
-    return $this->getQuotesQuery($wall, null)
-                ->andWhere('q.is_validated = ?', true)
-                ->andWhere('q.is_favori = ?', true)
-                ->execute();
+    return $this->getFavoriteQuoteForWallQuery($wall)->execute();
   }
+  
 }

@@ -31,12 +31,12 @@ $cans = array(
       <?php endforeach; ?>
     </ul>
   <?php endif;?>
-  <?php if($publishedQuotes->count()): ?>
+  <?php if($pager->getResults()->count()): ?>
   <div class="entete">
     <h3>Quotes</h3>
   </div>
   <ul>
-    <?php foreach($publishedQuotes as $quote): ?>
+    <?php foreach($pager->getResults() as $quote): ?>
     <li>
       <div class="item_wall">
         <?php include_partial('quote/quote', array(
@@ -54,9 +54,18 @@ $cans = array(
   <?php endif;?>
 </div>
 <div class="footer">
-  <div id="menu_suivant">
-    <a class="suivantes" href="#more"><div class="color4" id="suivantes">Load more questions</div></a>
-  </div>
+  <!-- <div id="menu_suivant">
+      <a class="suivantes" href="#more"><div class="color4" id="suivantes">Load more questions</div></a>
+    </div> -->
+    
+    <?php if ($pager->haveToPaginate()): ?>
+    <div class="pagination">
+        <?php include_partial('paginate', array(
+          'pager' => $pager, 
+          'route' => url_for(sprintf('@wall?event=%s&wall=%s', $eventId, $wallId)
+        ))) ?>
+    </div>
+    <?php endif ?>
   <div id="copyright" class="color2">
       &nbsp;<a href="http://balloonup.com">Copyright &copy; 2010 Balloon, tous droits réserv&eacute;s</a>
   </div>

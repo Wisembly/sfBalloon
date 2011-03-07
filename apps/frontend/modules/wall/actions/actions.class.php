@@ -54,9 +54,17 @@ class wallActions extends sfActions
   {
     $sort = $request->getParameter('sort');
     
-    $this->moderatedQuotes  = Doctrine::getTable('Quote')->getModeratedQuotesForWall($this->wall->getId(), $sort);
-    $this->publishedQuotes  = Doctrine::getTable('Quote')->getPublishedQuotesForWall($this->wall->getId(), $sort);
+    $nbQuotes = sfConfig::get('app_quotes_number_per_page', 20);
+    $numPage = $request->getParameter('page', 1);
     
+    $this->pager = new sfDoctrinePager('Quote', $nbQuotes);
+
+    $publishedQuotesQuery  = Doctrine::getTable('Quote')->getPublishedQuotesForWallQuery($this->wall->getId(), $sort);
+    $this->pager->setQuery($publishedQuotesQuery);
+    $this->pager->setPage($numPage);
+    $this->pager->init();
+    
+    $this->moderatedQuotes  = Doctrine::getTable('Quote')->getModeratedQuotesForWall($this->wall->getId(), $sort);
   }
 
   /**
