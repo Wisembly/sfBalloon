@@ -8,6 +8,9 @@ $cans = array(
   'can_view_vote_quote' => can($sf_user, 'view_quote_nb_vote', $wall)
 );
 ?>
+<?php if(can($sf_user, 'update', $wall)): ?>
+  <?php echo link_to('Editer ce wall',sprintf('@wall_edit?event=%s&wall=%s', $event->getShort(), $wall->getShort())); ?>
+<?php endif;?>
 <div class="conteneur_header">
   <?php include_partial('poster', 
     array('wallId' => $wallId, 'eventId' => $eventId, 'form' => $form, 'menu' => $menu)) ?>
