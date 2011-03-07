@@ -12,7 +12,7 @@ $cans = array(
   <?php echo link_to('Editer ce wall',sprintf('@wall_edit?event=%s&wall=%s', $event->getShort(), $wall->getShort())); ?>
 <?php endif;?>
 <div class="conteneur_header">
-  <?php include_partial('poster', 
+  <?php include_partial('wall/poster', 
     array('wallId' => $wallId, 'eventId' => $eventId, 'form' => $form, 'menu' => $menu)) ?>
 </div>
 <div id="wall">

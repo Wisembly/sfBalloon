@@ -89,6 +89,7 @@ class quoteActions extends sfActions
     $user = $this->getUser();
     
     $wall = Doctrine::getTable('Wall')->findByShort($this->wallId);
+    $this->event = Doctrine::getTable('Event')->findByShort($this->eventId);
     
     if(!$wall->isAvailable()){
       $this->redirect(sprintf('@event?short=%s', $this->eventId));
@@ -113,9 +114,15 @@ class quoteActions extends sfActions
       $quote->setIsValidated(true);
     }
     
+    if($this->getUser()->can('add_survey', $wall)){
+      $quote->setIsValidated(true);
+    }
+    
     $quote->setWall($wall);
     
-    if($this->getUser()->can('add_survey', $wall) && $wall->supports('poll')){
+    if($this->getUser()->can('add_survey', $this->wall) 
+      && $wall->supports('poll') 
+      && $wall->getSurveyActived()){
       $quote->setIsPoll(true);
       $form = new SimpleSurveyForm($quote);
     }else{
