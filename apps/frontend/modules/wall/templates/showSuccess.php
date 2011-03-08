@@ -21,17 +21,19 @@
       <?php endforeach; ?>
     </ul>
   <?php endif;?>
-  <?php if($pager->getResults()->count()): ?>
+  <?php $result = $pager->getResults();?>
+  <?php if($result->count()): ?>
   <div class="entete">
     <h3>Quotes</h3>
   </div>
   <ul>
-    <?php foreach($pager->getResults() as $quote): ?>
+    <?php foreach($result as $quote): ?>
     <li>
       <div class="item_wall">
         <?php include_partial('quote/quote', array(
-            'wall' => $wall, 
-            'quote' => $quote, 
+            'votes'   => $currentUserVotes,
+            'wall'    => $wall, 
+            'quote'   => $quote, 
             'eventId' => $eventId
           ) + $cans->getRawValue()); ?>
       </div>

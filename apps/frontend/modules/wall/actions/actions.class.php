@@ -72,9 +72,20 @@ class wallActions extends sfActions
     $this->pager = new sfDoctrinePager('Quote', $nbQuotes);
 
     $publishedQuotesQuery  = Doctrine::getTable('Quote')->getPublishedQuotesForWallQuery($this->wall->getId(), $sort);
+    
     $this->pager->setQuery($publishedQuotesQuery);
     $this->pager->setPage($numPage);
     $this->pager->init();
+    
+    /*
+    Afin de récupérer les votes de l'utilsateur courant, nous devons récupérer les id des quotes sur le wall.
+    Nous cherchons ensuite si il a coté pour ces quotes 
+    Et pour ses surveys.
+    */
+    $quotesId = Doctrine::getTable('Quote')
+        ->getPublishedQuotesForWallQuery($this->wall->getId(), $sort)->execute(array(), 'id');
+    
+    $this->currentUserVotes = $this->getUser()->getVotesOnWall($quotesId);
     
     $this->moderatedQuotes  = Doctrine::getTable('Quote')->getModeratedQuotesForWall($this->wall->getId(), $sort);
   }

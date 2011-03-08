@@ -361,6 +361,9 @@ form inlabel_poster br {display: none;}
 	background:url(../images/fond_vote_hover.png) no-repeat;
 }
 
+#wall .avote{
+  background:url(../images/fond_vote_hover.png) no-repeat;
+}
 
 #wall .vote .num {
 	font-size:20px;

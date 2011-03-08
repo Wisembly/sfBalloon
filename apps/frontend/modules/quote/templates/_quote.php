@@ -1,16 +1,26 @@
 <?php if(!$quote->isSurvey()): ?>
   <?php if($quote->isValidated()): ?>
-  <a href="<?php echo url_for(sprintf('@quote_vote?event=%s&wall=%s&quote=%s', 
-    $eventId, $wall->getShort(), $quote->getId())); ?>">
-    <div class="vote" id="vote">
+    <?php if(!in_array($quote->getId(), $votes->getRawValue())):?>
+    <a href="<?php echo url_for(sprintf('@quote_vote?event=%s&wall=%s&quote=%s', 
+      $eventId, $wall->getShort(), $quote->getId())); ?>">
+      <div class="vote" id="vote">
+      <!--<div class="reponse" id="ie_reponse"></div>-->
+        <div>
+          <span class="num" id="num"><?php echo $quote->getVotesCount()?></span><br>
+          <span class="votes" id="votes">votes</span>
+        </div>
+      </div>
+    </a>
+    <?php else: ?>
+    <div class="vote avote" id="vote">
     <!--<div class="reponse" id="ie_reponse"></div>-->
       <div>
         <span class="num" id="num"><?php echo $quote->getVotesCount()?></span><br>
         <span class="votes" id="votes">votes</span>
       </div>
     </div>
-  </a>
   <?php endif; ?>
+  <?php endif;?>
 <?php else:?>
 <!--cest in sondage on affiche l'image-->
 <div class="sondage"></div>
@@ -22,7 +32,7 @@
     $eventId, $wall->getShort(), $quote->getId())); ?>
   </div>
   <?php if($quote->isSurvey()): ?>
-  <?php if(!$sf_user->hasAlreadyVote($quote->getRawValue(), true) && $quote->isActive()): ?>
+  <?php if(!in_array($votes, $quote->getId()) && $quote->isActive()): ?>
   <form action="<?php echo url_for(sprintf("@choice_vote?event=%s&wall=%s&quote=%s", $eventId, $wall->getShort(), $quote->getId())); ?>" method="post">
     <ul>
       <?php $isActive = $quote->isActive(); ?>
