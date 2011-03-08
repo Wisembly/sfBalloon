@@ -1,14 +1,3 @@
-<?php
-$cans = array(
-  'can_fav_quote' => can($sf_user, 'fav_quote', $wall),
-  'can_validate_moderating_quote' => can($sf_user, 'validate_moderating_quote', $wall),
-  'can_remove_quote' => can($sf_user, 'remove_quote', $wall),
-  'can_update_moderating_quote' => can($sf_user, 'update_moderating_quote', $wall),
-  'can_une_quote'  => can($sf_user, 'une_quote', $wall),
-  'can_view_vote_quote' => can($sf_user, 'view_quote_nb_vote', $wall),
-  'can_answer_quote'    => can($sf_user, 'answer_quote', $wall)
-);
-?>
 <?php if(can($sf_user, 'update', $wall)): ?>
   <?php echo link_to('Editer ce wall',sprintf('@wall_edit?event=%s&wall=%s', $event->getShort(), $wall->getShort())); ?>
 <?php endif;?>
@@ -25,8 +14,9 @@ $cans = array(
           <?php include_partial('quote/quote', array(
               'wall' => $wall, 
               'quote' => $quote, 
-              'eventId' => $eventId
-            ) + $cans); ?>
+              'eventId' => $eventId,
+              'moderated' => true
+            ) + $cans->getRawValue()); ?>
         </li>
       <?php endforeach; ?>
     </ul>
@@ -43,7 +33,7 @@ $cans = array(
             'wall' => $wall, 
             'quote' => $quote, 
             'eventId' => $eventId
-          ) + $cans); ?>
+          ) + $cans->getRawValue()); ?>
       </div>
       <div class="separation"></div>
     </li>

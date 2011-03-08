@@ -43,6 +43,18 @@ class wallActions extends sfActions
     }else{
         $this->form = new SimpleQuoteForm($quote);
     }
+    
+    // roles
+    
+    $this->cans = array(
+      'can_fav_quote' => $this->getUser('fav_quote', $this->wall),
+      'can_validate_moderating_quote' => $this->getUser('validate_moderating_quote', $this->wall),
+      'can_remove_quote' => $this->getUser('remove_quote', $this->wall),
+      'can_update_moderating_quote' => $this->getUser('update_moderating_quote', $this->wall),
+      'can_une_quote'  => $this->getUser('une_quote', $this->wall),
+      'can_view_vote_quote' => $this->getUser('view_quote_nb_vote', $this->wall),
+      'can_answer_quote'    => $this->getUser('answer_quote', $this->wall)
+    );
   }
   
   /**
