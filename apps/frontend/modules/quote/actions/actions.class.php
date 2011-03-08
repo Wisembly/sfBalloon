@@ -97,38 +97,11 @@ class quoteActions extends sfActions
     
     $quote = new Quote();
     
-    $this->menu = new WallTabMenu(array('event' => $this->eventId, 'wall' => $this->wallId));
-    
     if($user->isAuthenticated()){
       $quote->setUser($user->getGuardUser());
     }else{
       $quote->setToken($user->getToken());
     }
-    
-    $this->moderatedQuotes  = Doctrine::getTable('Quote')->getModeratedQuotesForWall($wall->getId());
-    
-    $nbQuotes = sfConfig::get('app_quotes_number_per_page', 20);
-    $numPage = $request->getParameter('page', 1);
-    
-    $this->pager = new sfDoctrinePager('Quote', $nbQuotes);
-    
-    $sort = $request->getParameter('sort');
-
-    $publishedQuotesQuery  = Doctrine::getTable('Quote')->getPublishedQuotesForWallQuery($wall->getId(), $sort);
-    $this->pager->setQuery($publishedQuotesQuery);
-    $this->pager->setPage($numPage);
-    $this->pager->init();
-    
-    /*
-    Afin de récupérer les votes de l'utilsateur courant, nous devons récupérer les id des quotes sur le wall.
-    Nous cherchons ensuite si il a coté pour ces quotes 
-    Et pour ses surveys.
-    */
-    $quotesId = Doctrine::getTable('Quote')
-        ->getPublishedQuotesForWallQuery($wall->getId(), $sort)->execute(array(), 'id');
-    
-    $this->currentUserVotes = $this->getUser()->getVotesOnWall($quotesId);
-    
     //$quote->setSource(Source::find($request));
     
     if(!$wall->isModerated() && $wall->supports('moderation')){
@@ -147,7 +120,7 @@ class quoteActions extends sfActions
       $quote->setIsPoll(true);
       $form = new SimpleSurveyForm($quote);
     }else{
-        $form = new SimpleQuoteForm($quote);
+      $form = new SimpleQuoteForm($quote);
     }
     
     $form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
@@ -160,20 +133,8 @@ class quoteActions extends sfActions
       }
       $this->redirect(sprintf('@wall?event=%s&wall=%s', $this->eventId, $this->wallId));
     }
-    
-    $this->cans = array(
-      'can_fav_quote' => $this->getUser('fav_quote', $this->wall),
-      'can_validate_moderating_quote' => $this->getUser('validate_moderating_quote', $this->wall),
-      'can_remove_quote' => $this->getUser('remove_quote', $this->wall),
-      'can_update_moderating_quote' => $this->getUser('update_moderating_quote', $this->wall),
-      'can_une_quote'  => $this->getUser('une_quote', $this->wall),
-      'can_view_vote_quote' => $this->getUser('view_quote_nb_vote', $this->wall),
-      'can_answer_quote'    => $this->getUser('answer_quote', $this->wall)
-    );
-    
-    $this->form = $form;
-    $this->wall = $wall;
-    $this->setTemplate('show', 'wall');
+    $this->getUser()->setFlash('error', 'Une erreur est survenue lors de l\'envoie de votre question, veuillez vérifier les informations.');
+    $this->redirect(sprintf('@wall?event=%s&wall=%s', $this->eventId, $this->wallId));
   }
   
   /**
