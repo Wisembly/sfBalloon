@@ -92,7 +92,7 @@ sfGuardUser:
     password:       test
     is_super_admin: true
     is_root: true
-  User_admin_2:
+  User_admin_3:
     first_name:     Guillaume
     last_name:      Potier
     email_address:  cobalt2760@gmail.com
