@@ -16,7 +16,10 @@ class SimpleEventForm extends EventForm
       'path' => sfConfig::get('sf_upload_dir').'/events',
       'required' => false, 
       'mime_types' => 'web_images'));
-
+      
+    $this->setWidget('lang', new sfWidgetFormI18nChoiceLanguage());
+    $this->setValidator('lang', new sfValidatorI18nChoiceLanguage());
+    
     $this->widgetSchema->setNameFormat('event[%s]');
     $this->errorSchema = new sfValidatorErrorSchema($this->validatorSchema);
   }

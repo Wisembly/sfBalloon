@@ -47,7 +47,7 @@
       <li>
           <?php echo chr($key + 65); ?> - 
           <?php echo $choice->getChoiceValue(); ?> - 
-          <?php echo $choice->getFormattedPercent($totalVotes);?>
+          <?php echo $choice->getFormattedPercent($totalVotes, $can_view_vote_quote);?>
       </li>
     <?php endforeach; ?>
   </ul>
@@ -56,7 +56,7 @@
 <?php endif; ?>
   <div class="date"><?php echo distance_of_time_in_words(strtotime($quote->getCreatedAt())); ?> - </div>
   <div class="admin_buttons">
-    <?php if(can($sf_user, 'fav_quote', $wall)): ?>
+    <?php if($can_fav_quote): ?>
       <span class="bouton_fav">
       <?php echo link_to(image_tag((!$quote->getIsFavori()) ? 'star-white32' : 'star-gold32'),
                   sprintf('@quote_favorite?event=%s&wall=%s&quote=%s',
@@ -66,7 +66,7 @@
     </span>
     <?php endif;?>
   <div class="bouton_alaune">  
-  <?php if(can($sf_user, 'validate_moderating_quote', $wall) && !$quote->isValidated()): ?> 
+  <?php if($can_validate_moderating_quote && !$quote->isValidated()): ?> 
     <?php echo link_to('Validate', 
                 sprintf('@quote_validate?event=%s&wall=%s&quote=%s', 
                   $eventId, 
@@ -74,7 +74,7 @@
                   $quote->getId()))?> -      
   <?php endif; ?>
   </div>
-  <?php if(can($sf_user, 'remove_quote', $wall)): ?>
+  <?php if($can_remove_quote): ?>
   <div class="bouton_supprimer">
   <?php echo link_to('Supprimer',
               sprintf('@quote_remove?event=%s&wall=%s&quote=%s', 
@@ -85,7 +85,7 @@
   </div>
   <?php endif;?>
   
-  <?php if(can($sf_user, 'update_moderating_quote', $wall)): ?>
+  <?php if($can_update_moderating_quote): ?>
   <div class="bouton_alaune">
   <?php echo link_to('Edit', 
               sprintf('@quote_edit?event=%s&wall=%s&quote=%s', 
@@ -96,7 +96,7 @@
   </div>
   <?php endif;?>
   
-  <?php if(can($sf_user, 'une_quote', $wall) ): ?> 
+  <?php if($can_une_quote): ?> 
   <div class="bouton_alaune">
   <?php echo link_to('A la une', 
               sprintf('@quote_alaune?event=%s&wall=%s&quote=%s', 
@@ -105,5 +105,26 @@
                 $quote->getId()), array('class' => 'alaune')) ?>
   </div>
   <?php endif;?>
+  
+  <?php if($can_une_quote): ?> 
+  <div class="bouton_alaune">
+  <?php echo link_to('A la une', 
+              sprintf('@quote_alaune?event=%s&wall=%s&quote=%s', 
+                $eventId,
+                $wall->getShort(), 
+                $quote->getId()), array('class' => 'alaune')) ?>
+  </div>
+  <?php endif;?>
+  
+  <?php if($can_answer_quote): ?> 
+  <div class="bouton_reply">
+  <?php echo link_to('Répondre', 
+              sprintf('@quote_answer?event=%s&wall=%s&quote=%s', 
+                $eventId,
+                $wall->getShort(), 
+                $quote->getId())) ?>
+  </div>
+  <?php endif;?>
+  
   </div>
 </div>

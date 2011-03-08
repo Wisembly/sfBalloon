@@ -10,6 +10,41 @@
  */
 class wallActions extends sfActions
 {
+  
+  public function preExecute()
+  {
+    $this->eventId  = $this->getRequest()->getParameter('event');
+    $this->wallId   = $this->getRequest()->getParameter('wall');
+    
+    $this->event = Doctrine::getTable('Event')->findByShort($this->eventId);
+    $this->forward404Unless($this->event);
+    
+    if($this->event->isProtected() && !$this->getUser()->getAttribute('isAllowedOn' .$this->eventId)){
+      $this->redirect(sprintf('@event?short=%s', $this->eventId));
+    }
+    
+    $this->wall = Doctrine::getTable('Wall')->findByShort($this->wallId);
+
+    $this->forward404Unless($this->wall);
+    
+    if(!$this->wall->isAvailable() && !$this->getUser()->can('view_archive', $this->event)){
+      $this->redirect(sprintf('@event?short=%s', $this->eventId));
+    }
+    
+    $this->menu = new WallTabMenu(array('event' => $this->eventId, 'wall' => $this->wallId));
+
+    $quote = new Quote();
+    $quote->setWall($this->wall);
+    
+    if($this->getUser()->can('add_survey', $this->wall) 
+      && $this->wall->supports('poll') 
+      && $this->wall->getSurveyActived()){
+        $this->form = new SimpleSurveyForm($quote);  
+    }else{
+        $this->form = new SimpleQuoteForm($quote);
+    }
+  }
+  
   /**
    * Executes show action
    *
@@ -17,32 +52,19 @@ class wallActions extends sfActions
    */
   public function executeShow(sfWebRequest $request)
   {
-    $this->eventId  = $request->getParameter('event');
-    $this->wallId   = $request->getParameter('wall');
-    
-    $this->wall = Doctrine::getTable('Wall')->findByShort($this->wallId);
-
-    $this->forward404Unless($this->wall);
-    
-    if(!$this->wall->isAvailable()){
-      $this->redirect(sprintf('@event?short=%s', $this->eventId));
-    }
-    
     $sort = $request->getParameter('sort');
     
-    $this->moderatedQuotes  = Doctrine::getTable('Quote')->getModeratedQuotesForWall($this->wall->getId(), $sort);
-    $this->publishedQuotes  = Doctrine::getTable('Quote')->getPublishedQuotesForWall($this->wall->getId(), $sort);
+    $nbQuotes = sfConfig::get('app_quotes_number_per_page', 20);
+    $numPage = $request->getParameter('page', 1);
     
-    $this->menu = new WallTabMenu(array('event' => $this->eventId, 'wall' => $this->wallId));
+    $this->pager = new sfDoctrinePager('Quote', $nbQuotes);
 
-    $quote = new Quote();
-    $quote->setWall($this->wall);
+    $publishedQuotesQuery  = Doctrine::getTable('Quote')->getPublishedQuotesForWallQuery($this->wall->getId(), $sort);
+    $this->pager->setQuery($publishedQuotesQuery);
+    $this->pager->setPage($numPage);
+    $this->pager->init();
     
-    if($this->getUser()->can('add_survey', $this->wall) && $this->wall->supports('poll')){
-        $this->form = new SimpleSurveyForm($quote);  
-    }else{
-        $this->form = new SimpleQuoteForm($quote);
-    }
+    $this->moderatedQuotes  = Doctrine::getTable('Quote')->getModeratedQuotesForWall($this->wall->getId(), $sort);
   }
 
   /**
@@ -52,17 +74,6 @@ class wallActions extends sfActions
    */
   public function executeEdit(sfWebRequest $request)
   {
-    $this->eventId  = $request->getParameter('event');
-    $this->wallId   = $request->getParameter('wall');
-
-    $this->wall = Doctrine::getTable('Wall')->findByShort($this->wallId);
-    
-    $this->forward404Unless($this->wall);
-    
-    if(!$this->wall->isAvailable() || !$this->getUser()->can('update', $this->wall)){
-      $this->redirect(sprintf('@event?short=%s', $this->eventId));
-    }
-
     $form = new SimpleWallForm($this->wall);
     if ("POST" === $request->getMethod()) {
       $form->bind($request->getPostParameter($form->getName()), $request->getFiles($form->getName()));
@@ -75,5 +86,25 @@ class wallActions extends sfActions
 
     $this->form = $form;
 
+  }
+  
+  /**
+   * Executes answers action
+   *
+   * @param sfRequest $request A request object
+   */
+  public function executeAnswers(sfWebRequest $request)
+  {
+    $this->quotes = Doctrine::getTable('Quote')->getAnsweredQuotesForWall($this->wall->getId());
+  }
+  
+  /**
+   * Executes favoris action
+   *
+   * @param sfRequest $request A request object
+   */
+  public function executeFavoris(sfWebRequest $request)
+  {
+    $this->quotes = Doctrine::getTable('Quote')->getFavoriteQuoteForWall($this->wall->getId());
   }
 }

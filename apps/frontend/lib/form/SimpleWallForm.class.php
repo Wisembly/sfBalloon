@@ -6,7 +6,7 @@ class SimpleWallForm extends WallForm
   {
   	parent::configure();
   	
-  	$fields = array('name', 'lang', 'short_description');
+  	$fields = array('name', 'short_description');
   	
   	if ($this->getObject()->supports('twitter')) {
   		array_push($fields, 'tw_hashtag');
@@ -25,8 +25,5 @@ class SimpleWallForm extends WallForm
   	}
 
     $this->useFields($fields);
-
-    $this->setWidget('lang', new sfWidgetFormI18nChoiceLanguage());
-    $this->setValidator('lang', new sfValidatorI18nChoiceLanguage());
   }
 }

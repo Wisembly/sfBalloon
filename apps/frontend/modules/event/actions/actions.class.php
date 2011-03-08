@@ -24,7 +24,7 @@ class eventActions extends sfActions
     $this->isAllowed = true;
     $this->form = null;
     
-    if($this->event->isProtected()){
+    if($this->event->isProtected() && !$this->getUser()->can('view', $this->event)){
       $this->isAllowed = $this->getUser()->getAttribute('isAllowedOn' .$this->event->getShort());
       if(!$this->isAllowed){
         $this->form = new EventPasswordCheckerForm(null, array('event_password' => $this->event->getPassword()));

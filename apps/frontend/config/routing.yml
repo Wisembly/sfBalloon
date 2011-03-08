@@ -74,6 +74,14 @@ wall_edit:
   url: /:event/:wall/edit
   param: { module: wall, action: edit }
 
+wall_answers:
+  url: /:event/:wall/anwsers
+  param: { module: wall, action: answers }
+
+wall_favoris:
+  url: /:event/:wall/favoris
+  param: { module: wall, action: favoris }
+
 quote_create:
   url: /:event/:wall/quote/create
   param: { module: quote, action: create }

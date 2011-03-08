@@ -28,6 +28,11 @@ class BalloonRoles
   {
     return array(
       'event' => array(
+        'view_archive' => array(
+          'admin' => true,
+          'modo'  => true,
+          'anim'  => false
+        ),
         'update' => array(
           'admin' => true,
           'modo'  => false,
@@ -49,6 +54,11 @@ class BalloonRoles
           'anim'  => false
         ),
         'add_user' => array(
+          'admin' => true,
+          'modo'  => false,
+          'anim'  => false
+        ),
+        'view'    => array(
           'admin' => true,
           'modo'  => false,
           'anim'  => false
@@ -100,6 +110,11 @@ class BalloonRoles
           'modo'  => true,
           'anim'  => false
         ),
+        'view_quote_nb_vote' => array(
+          'admin' => true,
+          'modo'  => true,
+          'anim'  => true
+        )
       )
     );
   }

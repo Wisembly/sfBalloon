@@ -11,6 +11,7 @@
  * @property string $landing_html
  * @property string $logo
  * @property string $password
+ * @property string $lang
  * @property boolean $redirect
  * @property boolean $has_custom_css
  * @property integer $wall_count
@@ -25,6 +26,7 @@
  * @method string              getLandingHtml()       Returns the current record's "landing_html" value
  * @method string              getLogo()              Returns the current record's "logo" value
  * @method string              getPassword()          Returns the current record's "password" value
+ * @method string              getLang()              Returns the current record's "lang" value
  * @method boolean             getRedirect()          Returns the current record's "redirect" value
  * @method boolean             getHasCustomCss()      Returns the current record's "has_custom_css" value
  * @method integer             getWallCount()         Returns the current record's "wall_count" value
@@ -38,6 +40,7 @@
  * @method Event               setLandingHtml()       Sets the current record's "landing_html" value
  * @method Event               setLogo()              Sets the current record's "logo" value
  * @method Event               setPassword()          Sets the current record's "password" value
+ * @method Event               setLang()              Sets the current record's "lang" value
  * @method Event               setRedirect()          Sets the current record's "redirect" value
  * @method Event               setHasCustomCss()      Sets the current record's "has_custom_css" value
  * @method Event               setWallCount()         Sets the current record's "wall_count" value
@@ -83,6 +86,10 @@ abstract class BaseEvent extends sfDoctrineRecord
         $this->hasColumn('password', 'string', 255, array(
              'type' => 'string',
              'length' => 255,
+             ));
+        $this->hasColumn('lang', 'string', 5, array(
+             'type' => 'string',
+             'length' => 5,
              ));
         $this->hasColumn('redirect', 'boolean', null, array(
              'type' => 'boolean',

@@ -89,6 +89,7 @@ class quoteActions extends sfActions
     $user = $this->getUser();
     
     $wall = Doctrine::getTable('Wall')->findByShort($this->wallId);
+    $this->event = Doctrine::getTable('Event')->findByShort($this->eventId);
     
     if(!$wall->isAvailable()){
       $this->redirect(sprintf('@event?short=%s', $this->eventId));
@@ -105,7 +106,18 @@ class quoteActions extends sfActions
     }
     
     $this->moderatedQuotes  = Doctrine::getTable('Quote')->getModeratedQuotesForWall($wall->getId());
-    $this->publishedQuotes  = Doctrine::getTable('Quote')->getPublishedQuotesForWall($wall->getId());
+    
+    $nbQuotes = sfConfig::get('app_quotes_number_per_page', 20);
+    $numPage = $request->getParameter('page', 1);
+    
+    $this->pager = new sfDoctrinePager('Quote', $nbQuotes);
+    
+    $sort = $request->getParameter('sort');
+
+    $publishedQuotesQuery  = Doctrine::getTable('Quote')->getPublishedQuotesForWallQuery($wall->getId(), $sort);
+    $this->pager->setQuery($publishedQuotesQuery);
+    $this->pager->setPage($numPage);
+    $this->pager->init();
     
     //$quote->setSource(Source::find($request));
     
@@ -113,9 +125,15 @@ class quoteActions extends sfActions
       $quote->setIsValidated(true);
     }
     
+    if($this->getUser()->can('add_survey', $wall)){
+      $quote->setIsValidated(true);
+    }
+    
     $quote->setWall($wall);
     
-    if($this->getUser()->can('add_survey', $wall) && $wall->supports('poll')){
+    if($this->getUser()->can('add_survey', $this->wall) 
+      && $wall->supports('poll') 
+      && $wall->getSurveyActived()){
       $quote->setIsPoll(true);
       $form = new SimpleSurveyForm($quote);
     }else{

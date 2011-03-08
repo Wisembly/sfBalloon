@@ -10,7 +10,6 @@
  * @property string $tw_hashtag
  * @property string $sms_hashtag
  * @property string $last_tweet_id
- * @property string $lang
  * @property text $short_description
  * @property timestamp $start
  * @property timestamp $stop
@@ -30,7 +29,6 @@
  * @method string              getTwHashtag()         Returns the current record's "tw_hashtag" value
  * @method string              getSmsHashtag()        Returns the current record's "sms_hashtag" value
  * @method string              getLastTweetId()       Returns the current record's "last_tweet_id" value
- * @method string              getLang()              Returns the current record's "lang" value
  * @method text                getShortDescription()  Returns the current record's "short_description" value
  * @method timestamp           getStart()             Returns the current record's "start" value
  * @method timestamp           getStop()              Returns the current record's "stop" value
@@ -49,7 +47,6 @@
  * @method Wall                setTwHashtag()         Sets the current record's "tw_hashtag" value
  * @method Wall                setSmsHashtag()        Sets the current record's "sms_hashtag" value
  * @method Wall                setLastTweetId()       Sets the current record's "last_tweet_id" value
- * @method Wall                setLang()              Sets the current record's "lang" value
  * @method Wall                setShortDescription()  Sets the current record's "short_description" value
  * @method Wall                setStart()             Sets the current record's "start" value
  * @method Wall                setStop()              Sets the current record's "stop" value
@@ -93,10 +90,6 @@ abstract class BaseWall extends sfDoctrineRecord
         $this->hasColumn('last_tweet_id', 'string', 50, array(
              'type' => 'string',
              'length' => 50,
-             ));
-        $this->hasColumn('lang', 'string', 5, array(
-             'type' => 'string',
-             'length' => 5,
              ));
         $this->hasColumn('short_description', 'text', null, array(
              'type' => 'text',

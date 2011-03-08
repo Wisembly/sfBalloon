@@ -87,6 +87,7 @@ Event:
     landing_html:       { type: string(255) }
     logo:               { type: string(255), notnull: true } # ça devait pas être un unique id?
     password:           { type: string(255) }
+    lang:               { type: string(5) }
     redirect:           { type: boolean, default: 0 }
     has_custom_css:     { type: boolean, default: 0 }
     wall_count:         { type: integer, default: 0 }
@@ -125,7 +126,6 @@ Wall:
     tw_hashtag:         { type: string(100) }
     sms_hashtag:        { type: string(20) }
     last_tweet_id:      { type: string(50) }
-    lang:               { type: string(5) }
     short_description:  { type: text }
     start:              { type: timestamp, notnull: true }
     stop:               { type: timestamp, notnull: true }
