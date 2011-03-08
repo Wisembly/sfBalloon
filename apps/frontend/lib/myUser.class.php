@@ -43,12 +43,10 @@ class myUser extends Tokenisable
       $userOrToken = $this->getGuardUser()->getId();
     }
     
-    $quoteModels = array('PollAnswer', 'Vote');
     $votes = array();
     
-    foreach($quoteModels as $model){
-      $votes = array_merge($votes, Doctrine::getTable($model)->findVotesByWallAndUser($quotes, $userOrToken));
-    }
+    $votes = $votes = Doctrine::getTable('Vote')->findVotesByWallAndUser($quotes, $userOrToken);
+    
     return $votes;
   }
   
