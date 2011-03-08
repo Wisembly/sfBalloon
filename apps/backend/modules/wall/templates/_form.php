@@ -46,13 +46,6 @@
         </td>
       </tr>
       <tr>
-        <th><?php echo $form['lang']->renderLabel() ?></th>
-        <td>
-          <?php echo $form['lang']->renderError() ?>
-          <?php echo $form['lang'] ?>
-        </td>
-      </tr>
-      <tr>
         <th><?php echo $form['short_description']->renderLabel() ?></th>
         <td>
           <?php echo $form['short_description']->renderError() ?>
