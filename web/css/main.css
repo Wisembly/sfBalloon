@@ -164,6 +164,7 @@ form inlabel_poster br {display: none;}
 	margin-top:10px;
 	margin-bottom:10px;
 	overflow:auto;
+        resize: none;
 }
 
 
@@ -700,10 +701,18 @@ form inlabel_poster br {display: none;}
     margin-bottom: 10px;
 }
 
-.conteneur #balloon .col-100 #field select{
+.conteneur #balloon .col-100 #field input[type="radio"]{
+    width:auto;
+}
+.conteneur #balloon .col-100 .radio_list{
+    list-style: none ;
+    padding: 0;
+    margin: 0;
+}
+.conteneur #balloon .col-100 #field input{
     border:1px solid #484848;
     padding:8px;
-    width:218px;
+    width:200px;
     border-radius: 5px ;
     -moz-border-radius:5px;
     -webkit-border-radius: 5px;
