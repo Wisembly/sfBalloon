@@ -33,7 +33,10 @@
       <?php foreach($event->getWalls() as $wall):?>
         <?php if($wall->isAvailable()): ?>
         <li>
-          <?php echo link_to($wall->getName(), sprintf('@wall?event=%s&wall=%s', $event->getShort(), $wall->getShort()) ); ?>  
+          <?php echo link_to($wall->getName(), sprintf('@wall?event=%s&wall=%s', $event->getShort(), $wall->getShort()) ); ?>
+          <?php if(can($sf_user, 'update', $wall)): ?>
+              <?php echo link_to('(Editer)',sprintf('@wall_edit?event=%s&wall=%s', $event->getShort(), $wall->getShort())); ?>
+            <?php endif;?>
         </li> 
         <?php endif;?>
       <?php endforeach; ?>
