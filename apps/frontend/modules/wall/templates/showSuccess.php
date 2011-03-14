@@ -7,16 +7,21 @@
 </div>
 <div id="wall">
   <?php if($moderatedQuotes->count() && $wall->isModerated() && can($sf_user, 'show_moderating_quotes', $wall)): ?>
+    <div class="entete">
     <h3>Quote Moderated</h3>
+    </div>
     <ul>
       <?php foreach($moderatedQuotes as $quote): ?>
         <li>
+          <div class="item_wall">
           <?php include_partial('quote/quote', array(
               'wall' => $wall, 
               'quote' => $quote, 
               'eventId' => $eventId,
               'moderated' => true
             ) + $cans->getRawValue()); ?>
+          </div>
+          <div class="separation"></div>
         </li>
       <?php endforeach; ?>
     </ul>

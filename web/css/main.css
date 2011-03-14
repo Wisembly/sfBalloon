@@ -404,12 +404,25 @@ form inlabel_poster br {display: none;}
 }
 #wall .content .head
 {
+        background:url("../images/edit_transparent.png") no-repeat scroll left top transparent;
+        padding-left: 20px;
 	display:block;
 	color:#336699;
+        width: 100%-400px;
 	padding-right:50px;
-	padding-top:7px;
+	padding-top:10px;
+        padding-bottom:10px;
 	margin-left:75px;
+        cursor: pointer;
+        border :1px solid white;
 }
+
+
+#wall .content .head:hover{
+    background:url("../images/edit.png") no-repeat scroll left top transparent;
+    border : 1px solid black;
+}
+
 #wall .content .date
 {
 	display:block;

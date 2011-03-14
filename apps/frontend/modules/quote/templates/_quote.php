@@ -28,7 +28,7 @@
 <?php endif; ?>
 <div class="content">
   <div class="head">
-  <?php echo link_to($quote->getQuote(), sprintf('@quote_answer?event=%s&wall=%s&quote=%s', 
+  <?php echo link_to($quote->getQuote(), sprintf('@quote_edit?event=%s&wall=%s&quote=%s',
     $eventId, $wall->getShort(), $quote->getId())); ?>
   </div>
   <?php if($quote->isSurvey()): ?>
@@ -67,7 +67,7 @@
   <div class="date"><?php echo distance_of_time_in_words(strtotime($quote->getCreatedAt())); ?> - </div>
   <div class="admin_buttons">
       
-
+    <!--
     <?php if($can_update_moderating_quote): ?>
     <div class="bouton_edit">
     <?php echo link_to('Edit',
@@ -78,7 +78,7 @@
                  'class=edit_quote') ?>
     </div>
     <?php endif;?>
-
+    -->
     
     
     <?php if(!isset($moderated)): ?>
@@ -134,6 +134,9 @@
                 'class=delete') ?>
     </div>
     <?php endif;?>
+
+      <?php if($can_validate_moderating_quote && !$quote->isValidated()): ?>
+      <?php endif;?>
 
   </div>
 </div>
