@@ -13,7 +13,7 @@
     <ul>
       <?php foreach($moderatedQuotes as $quote): ?>
         <li>
-          <div class="item_wall">
+          <div class="item_wall avalider">
           <?php include_partial('quote/quote', array(
               'wall' => $wall, 
               'quote' => $quote, 

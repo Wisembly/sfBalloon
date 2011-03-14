@@ -397,7 +397,8 @@ form inlabel_poster br {display: none;}
 	background-color:#FFFBCF;
 	border:1px dashed #484848;
 	margin-right:40px;
-	padding-bottom:30px;
+	padding-bottom:40px;
+        background:url("../images/avalider.png") no-repeat scroll right bottom #FFFBCF
 }
 
 #wall .content
@@ -417,7 +418,7 @@ form inlabel_poster br {display: none;}
         padding-bottom:10px;
 	margin-left:75px;
         cursor: pointer;
-        border :1px solid white;
+        border :1px solid transparent;
 }
 
 
@@ -892,7 +893,7 @@ form inlabel_poster br {display: none;}
 	padding: 5px 10px;
 }
 .bouton_valider{
-    padding-right: 32px;
+    padding-right: 72px;
 }
 .bouton_valider a:hover, .bouton_supprimer a, .bouton_alaune a, .bouton_repondre a, .bouton_confirmation a {
 	text-decoration:none;
