@@ -55,6 +55,17 @@ class wallActions extends sfActions
       'can_view_vote_quote' => $this->getUser('view_quote_nb_vote', $this->wall),
       'can_answer_quote'    => $this->getUser('answer_quote', $this->wall)
     );
+    
+    /*
+    Afin de récupérer les votes de l'utilsateur courant, nous devons récupérer les id des quotes sur le wall.
+    Nous cherchons ensuite si il a coté pour ces quotes 
+    Et pour ses surveys.
+    */
+    
+    $quotesId = Doctrine::getTable('Quote')
+        ->getPublishedQuotesForWallQuery($this->wall->getId())->execute(array(), 'id');
+    
+    $this->currentUserVotes = $this->getUser()->getVotesOnWall($quotesId);
   }
   
   /**
@@ -76,16 +87,6 @@ class wallActions extends sfActions
     $this->pager->setQuery($publishedQuotesQuery);
     $this->pager->setPage($numPage);
     $this->pager->init();
-    
-    /*
-    Afin de récupérer les votes de l'utilsateur courant, nous devons récupérer les id des quotes sur le wall.
-    Nous cherchons ensuite si il a coté pour ces quotes 
-    Et pour ses surveys.
-    */
-    $quotesId = Doctrine::getTable('Quote')
-        ->getPublishedQuotesForWallQuery($this->wall->getId(), $sort)->execute(array(), 'id');
-    
-    $this->currentUserVotes = $this->getUser()->getVotesOnWall($quotesId);
     
     $this->moderatedQuotes  = Doctrine::getTable('Quote')->getModeratedQuotesForWall($this->wall->getId(), $sort);
   }

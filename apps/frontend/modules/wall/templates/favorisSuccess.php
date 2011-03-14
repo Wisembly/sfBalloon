@@ -12,6 +12,7 @@
     <li>
       <div class="item_wall">
         <?php include_partial('quote/quote', array(
+            'votes'   => $currentUserVotes,
             'wall' => $wall, 
             'quote' => $quote, 
             'eventId' => $eventId
