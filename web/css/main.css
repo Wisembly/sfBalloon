@@ -1045,3 +1045,28 @@ form inlabel_poster br {display: none;}
 .clear{
     clear: both;
 }
+.admin_buttons_list_wall{
+    float: left;
+    height: 40px;
+    line-height: 40px;
+    vertical-align: middle;
+    padding-left: 10px;
+    margin-left: 25%;
+}
+.admin_buttons_list_wall .label-list-wall{
+    float: left;
+    height: 40px;
+    line-height: 40px;
+    vertical-align: middle;
+    padding-left: 10px;
+}
+.admin_buttons_list_wall .bouton_valider{
+    float: left;
+    padding: 0;
+}
+.admin_buttons_list_wall .bouton_supprimer{
+    float: left;
+}
+.admin_buttons_list_wall .bouton_alaune{
+    float: left;
+}

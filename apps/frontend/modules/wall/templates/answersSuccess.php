@@ -31,7 +31,7 @@
               </div>
           </li>
           <?php endforeach;?>
-        <ul>
+        </ul>
       </div>
       <div class="separation"></div>
     </li>

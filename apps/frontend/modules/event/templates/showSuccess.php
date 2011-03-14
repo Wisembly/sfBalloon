@@ -33,10 +33,24 @@
       <?php foreach($event->getWalls() as $wall):?>
         <?php if($wall->isAvailable()): ?>
         <li>
-          <?php echo link_to($wall->getName(), sprintf('@wall?event=%s&wall=%s', $event->getShort(), $wall->getShort()) ); ?>
-          <?php if(can($sf_user, 'update', $wall)): ?>
-              <?php echo link_to('(Editer)',sprintf('@wall_edit?event=%s&wall=%s', $event->getShort(), $wall->getShort())); ?>
-            <?php endif;?>
+            <div class="admin_buttons_list_wall">
+                <div class="label-list-wall">
+                    <?php echo link_to($wall->getName(), sprintf('@wall?event=%s&wall=%s', $event->getShort(), $wall->getShort()) ); ?>
+                </div>
+                <?php if(can($sf_user, 'update', $wall)): ?>
+                <div class="bouton_supprimer">
+                    <a href="#" >Supprimer</a>
+                </div>
+
+                <div class="bouton_valider">
+                        <?php echo link_to('Editer',sprintf('@wall_edit?event=%s&wall=%s', $event->getShort(), $wall->getShort())); ?>
+                </div>
+                <div class="bouton_alaune">
+                    <a href="#" >Stats (ßeta)</a>
+                </div>
+                <?php endif;?>
+            </div>
+            <div class="clear"></div>
         </li> 
         <?php endif;?>
       <?php endforeach; ?>
