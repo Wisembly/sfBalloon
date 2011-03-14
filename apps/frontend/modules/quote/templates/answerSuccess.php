@@ -30,18 +30,35 @@
 
 <?php endif;?>
 <br/>
-<div class="tab-center"><h4>Liste des réponses</h4>
-<?php if($quote->getAnswers() != ''):?>
-    <em>aucunes réponses</em>
-<?php endif;?>
-<ul>
+<div class="tab-center">
+<ul id="reponses">
+    <li class='head'><h4>Liste des réponses</h4></li>
+<?php $cp = 0;?>
 <?php foreach($quote->getAnswers() as $answer): ?>
-  <li>
-    <?php echo $answer->getAnswer()?> - 
-    <?php echo link_to('Delete', sprintf('@answer_delete?event=%s&wall=%s&quote=%s&answer=%d', $eventId, $wallId, $quoteId, $answer->getId()), array('method' => 'delete', 'confirm' => 'Are you sure')); ?> - 
-    <?php echo link_to('Edit', sprintf('@answer_edit?event=%s&wall=%s&quote=%s&answer=%d', $eventId, $wallId, $quoteId, $answer->getId())); ?>
+    <?php if ($cp%2 == 1):?>
+    <li class='pair'>
+    <?php else: ?>
+    <li class='impair'>
+    <?php endif ?>
+    <div class="admin_buttons_reponse">
+        <div class="reponse_txt">
+        <?php echo $answer->getAnswer()?>
+        </div>
+        <div class="bouton_supprimer">
+            <?php echo link_to('Delete', sprintf('@answer_delete?event=%s&wall=%s&quote=%s&answer=%d', $eventId, $wallId, $quoteId, $answer->getId(),'class=delete'), array('method' => 'delete', 'confirm' => 'Are you sure')); ?>
+        </div>
+        <div class="bouton_valider">
+            <?php echo link_to('Edit', sprintf('@answer_edit?event=%s&wall=%s&quote=%s&answer=%d', $eventId, $wallId, $quoteId, $answer->getId(),array('class' => 'valider'))); ?>
+        </div>
+    </div>
+    <?php $cp++;?>
   </li>
 <?php endforeach; ?>
+<?php if($cp == 0):?>
+    <li>
+        <em>aucunes réponses</em>
+    </li>
+<?php endif;?>
 </ul>
 </div>
 <br/>
