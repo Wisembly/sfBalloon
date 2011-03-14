@@ -218,7 +218,7 @@ form inlabel_poster br {display: none;}
 
 #menu
 {
-	height:45px;
+	height:36px;
 	margin:0;
 	padding:0;
 	width:100%;
@@ -257,9 +257,12 @@ form inlabel_poster br {display: none;}
 
 #menu li.current a
 {
-	-moz-border-radius:3px 3px 3px 3px;
-	background:url(../images/menu_selected_bg.png) repeat scroll 0 0 transparent;
-	border:1px solid #CCCCCC;
+	-moz-border-radius:3px 3px 0px 0px;
+	background:none repeat scroll 0 0 #FFFFFF;
+	border-top:1px solid #CCCCCC;
+        border-right:1px solid #CCCCCC;
+        border-left:1px solid #CCCCCC;
+        color: #484848;
 }
 
 #menu li a:hover
