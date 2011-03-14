@@ -4,7 +4,9 @@
     <a href="<?php echo url_for(sprintf('@quote_vote?event=%s&wall=%s&quote=%s', 
       $eventId, $wall->getShort(), $quote->getId())); ?>">
       <div class="vote" id="vote">
-      <!--<div class="reponse" id="ie_reponse"></div>-->
+        <?php if($quote->hasAnswers()): ?>
+        <div class="reponse" id="ie_reponse"></div>
+        <?php endif;?>
         <div>
           <span class="num" id="num"><?php echo $quote->getVotesCount()?></span><br>
           <span class="votes" id="votes">votes</span>

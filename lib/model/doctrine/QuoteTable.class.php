@@ -18,6 +18,7 @@ class QuoteTable extends Doctrine_Table
     return $this->createQuery('q')
                 ->orderBy('q.' . $this->sanitizeSort($sort) . ' DESC')
                 ->leftJoin('q.User u')
+                ->leftJoin('q.Answers qa')
                 ->leftJoin('q.PollChoices pc')
                 ->where('q.wall_id = ?', $wall);
   }

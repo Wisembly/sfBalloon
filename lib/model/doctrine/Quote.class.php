@@ -97,4 +97,15 @@ class Quote extends BaseQuote
     }
     return $total;
   }
+  
+  /**
+   * Proxy method, return true if this quote has answers.
+   *
+   * @return void
+   * @author Clément JOBEILI
+   */
+  public function hasAnswers()
+  {
+    return ($this->getAnswers()->count()) ? true : false;
+  }
 }
