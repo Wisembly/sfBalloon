@@ -18,14 +18,17 @@
             'eventId' => $eventId
           ) + $cans->getRawValue()); ?>
       </div>
+        <div class="clear"></div>
       <div class="answers">
         <ul>
           <?php foreach($quote->getAnswers() as $answer): ?>
           <li>
-            <p><?php echo $answer->getAnswer() ?></p>
-            <span>
-              Posté par <?php echo $answer->getUser()->getUsername()?> le <?php echo $answer->getCreatedAt() ?>
-            </span>
+              <div class="label-reponse">
+                  <p><?php echo $answer->getAnswer() ?></p>
+              </div>
+              <div class="posted-by">
+              Posté par <b><?php echo $answer->getUser()->getUsername()?></b> le <i><?php echo $answer->getCreatedAt() ?></i>
+              </div>
           </li>
           <?php endforeach;?>
         <ul>

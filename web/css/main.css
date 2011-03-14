@@ -398,7 +398,7 @@ form inlabel_poster br {display: none;}
 	border:1px dashed #484848;
 	margin-right:40px;
 	padding-bottom:40px;
-        background:url("../images/avalider.png") no-repeat scroll right bottom #FFFBCF
+        background:url("../images/avalider.png") no-repeat scroll right bottom #FFFBCF;
 }
 
 #wall .content
@@ -1023,4 +1023,25 @@ form inlabel_poster br {display: none;}
     line-height: 40px;
     vertical-align: middle;
     padding-left: 10px;
+}
+
+.label-reponse{
+    border: 1px solid gray;
+    margin: 5px;
+    padding: 2px;
+    padding-left: 20px;
+    background:url("../images/edit_transparent.png") no-repeat scroll left top transparent;
+    cursor: pointer;
+}
+.label-reponse:hover{
+    background:url("../images/edit.png") no-repeat scroll left top transparent;
+    border: 1px solid black;
+}
+.posted-by{
+    font-size: 12px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+}
+.clear{
+    clear: both;
 }
