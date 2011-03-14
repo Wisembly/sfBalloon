@@ -14,7 +14,7 @@ default:
 
   stylesheets:    [main.css]
 
-  javascripts:    [jquery-1.5.min.js]
+  javascripts:    [jquery-1.5.min.js, login.js]
 
   has_layout:     true
   layout:         layout

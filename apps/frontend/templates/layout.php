@@ -6,12 +6,7 @@
     <?php include_title() ?>
     <link rel="shortcut icon" type="image/png" href="/favicon_balloon.ico" />
     <?php include_stylesheets() ?>
-    <?php include_javascripts() ?>
     <?php echo stylesheet_tag('login') ?>
-
-    <!-- pour signin-->
-    <script type="text/javascript">$(document).ready(function(){$(".signin").click(function(e){e.preventDefault();$("fieldset#signin_menu").toggle();$(".signin").toggleClass("menu-open");});$("fieldset#signin_menu").mouseup(function(){return false});$(document).mouseup(function(e){if($(e.target).parent("a.signin").length==0){$(".signin").removeClass("menu-open");$("fieldset#signin_menu").hide();}});});</script>
-
   </head>
   <body>
   	<div class="header">
@@ -67,5 +62,6 @@
     	<?php echo image_tag('logo_balloon_small.png'); ?>
     	</a>
     </div>
+    <?php include_javascripts() ?>
   </body>
 </html>
