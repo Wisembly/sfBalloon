@@ -1028,13 +1028,13 @@ form inlabel_poster br {display: none;}
 .label-reponse{
     border: 1px solid gray;
     margin: 5px;
-    padding: 2px;
+    padding: 5px;
     padding-left: 20px;
     background:url("../images/edit_transparent.png") no-repeat scroll left top transparent;
     cursor: pointer;
 }
 .label-reponse:hover{
-    background:url("../images/edit.png") no-repeat scroll left top transparent;
+    background:url("../images/edit.png") no-repeat scroll left top #FFFBCF;
     border: 1px solid black;
 }
 .posted-by{
