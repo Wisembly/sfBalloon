@@ -21,7 +21,7 @@
     width:520px;
     min-height:500px;
 }
-#signin_container a:link, a:visited {
+#signin_container a:link,#signin_container a:visited {
     color:#27b;
     text-decoration:none;
 }
