@@ -1,6 +1,6 @@
 <div class="conteneur_header">
   <?php include_partial('wall/poster', 
-    array('wallId' => $wallId, 'eventId' => $eventId, 'form' => $form, 'menu' => $menu)) ?>
+    array('wallId' => $wallId, 'eventId' => $eventId, 'form' => $form, 'menu' => $menu, 'event' => $event)) ?>
 </div>
 <div id="wall">
   <?php if($moderatedQuotes->count() && $wall->isModerated() && can($sf_user, 'show_moderating_quotes', $wall)): ?>

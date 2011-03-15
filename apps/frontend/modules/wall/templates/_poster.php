@@ -33,6 +33,7 @@
               <?php $cp++;?>
           <?php endforeach ?>
       </div>
+      <span><?php echo link_to('Retour à l\'event '.$event->getShort(),sprintf('@event?short=%s', $event->getShort())); ?></span>
       <div id="bt_send"><input type="submit" value="Envoyer" class="envoyer"></div>
     </form>
 </div>
