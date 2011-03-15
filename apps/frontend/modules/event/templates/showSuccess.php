@@ -32,19 +32,16 @@
     </div>
     <br />
     <div class="description">
-        <div id="title"><div class="green-button"></div><span>Description :</span><br/></div>
+        
         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
         Integer tempor, felis non facilisis lacinia, eros leo facilisis mi,
         in interdum ipsum ligula vitae mi. In consectetur, velit a viverra fringilla,
-        eros eros tristique elit, sit amet convallis arcu enim et nunc. Nullam nec lectus eros,
-        id adipiscing neque. Integer imperdiet velit id ipsum placerat laoreet. Quisque in turpis ante,
-        ac posuere enim. Sed pretium interdum dolor, non pulvinar ante auctor vel.
-        Quisque laoreet felis ut augue molestie ultrices gravida dui venenatis.
+        eros eros tristique elit, sit amet convallis arcu enim et nunc.
     </div>
     <ul id="events">
         <li id="title">
             <div class="green-button"></div>
-            <span>Les prochaines sessions :</span>
+            <span>Les prochaines sessions </span>
             <div class="clear"></div>
         </li>
         <?php $total_array = count($event->getWalls()); $flag = 1;?>
@@ -91,7 +88,7 @@
     
     <?php if(can($sf_user, 'view_archive', $event)): ?>
     <div class="archives">
-        <div id="title"><div class="green-button"></div><span>Archives :</span><br/></div>
+        <div id="title"><div class="green-button"></div><span>Archives </span><br/></div>
     </div>
     <ul id="past-events">
       <?php foreach($event->getWalls() as $wall):?>
