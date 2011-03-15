@@ -1,5 +1,6 @@
-<div id="admin_event_edit">
-    <?php echo link_to('Retour à l\'event '.$event->getShort(),sprintf('@event?short=%s', $event->getShort())); ?>
+<div id="admin_event_edit-bt">
+    <div class="img-back"></div>
+    <span><?php echo link_to('Retour à l\'event '.$event->getShort(),sprintf('@event?short=%s', $event->getShort())); ?></span>
 </div>
 <div class="entete">
     <h1>Ajouter un Wall</h1>

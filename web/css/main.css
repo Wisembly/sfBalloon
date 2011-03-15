@@ -1249,3 +1249,29 @@ form inlabel_poster br {display: none;}
     line-height: 13px;
     vertical-align: middle;
 }
+
+.entete{
+    padding-left: 20px;
+    padding-top: 20px;
+}
+#admin_event_edit-bt{
+    float: right;
+    height: 20px;
+    width: 200px;
+    margin-top: 30px;
+    margin-right: 30px;
+}
+#admin_event_edit-bt .img-back{
+    float: left;
+    background: url("../images/back_medium.png") no-repeat;
+    height: 16px;
+    width: 16px;
+    margin-left: 20px;
+}
+#admin_event_edit-bt span{
+    float: left;
+    margin-left: 5px;
+    font-size: 13px;
+    line-height: 13px;
+    vertical-align: middle;
+}

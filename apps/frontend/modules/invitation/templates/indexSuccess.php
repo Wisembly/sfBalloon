@@ -1,6 +1,7 @@
 <?php use_helper('I18N') ?>
-<div id="admin_event_edit">
-    <?php echo link_to('Retour à l\'event '.$eventId,sprintf('@event?short=%s', $eventId)); ?>
+<div id="admin_event_edit-bt">
+    <div class="img-back"></div>
+    <span><?php echo link_to('Retour à l\'event '.$eventId,sprintf('@event?short=%s', $eventId)); ?></span>
 </div>
 <div class="entete">
     <h1>Inviter des personnes à gérer l'événement</h1>
