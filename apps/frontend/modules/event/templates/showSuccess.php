@@ -12,17 +12,20 @@
 <?php else: ?>
 
   <div id="place_content">
-    <div id="admin_edit_event">
-      <?php echo link_to('Ajouter un wall',sprintf('@event_add_wall?short=%s', $event->getShort())); ?>
-    </div>
-    <div id="admin_event_members">
-      <?php echo link_to('Gérer les Utilisateurs',sprintf('@invitation?event=%s', $event->getShort())); ?>
-    </div>
-    <div id="admin_edit_event">
-      <?php echo link_to("Modifier l'événement ".$event->getName(),sprintf('@event_edit?short=%s', $event->getShort())); ?>
-    </div>
-    
-    <br />
+      <div class="menu-place">
+            <div id="admin_edit_event-bt">
+                <div class="img-add"></div>
+              <span><?php echo link_to('Ajouter un wall',sprintf('@event_add_wall?short=%s', $event->getShort())); ?></span>
+            </div>
+            <div id="admin_event_members-bt">
+                <div class="img-user"></div>
+              <span><?php echo link_to('Gérer les Utilisateurs',sprintf('@invitation?event=%s', $event->getShort())); ?></span>
+            </div>
+            <div id="admin_edit_event-bt">
+                <div class="img-edit"></div>
+                <span><?php echo link_to("Modifier l'événement ".$event->getName(),sprintf('@event_edit?short=%s', $event->getShort())); ?></span>
+            </div>
+      </div>
   
     <div id="place_1" class="place_edit">
       <h2><?php echo $event->getName(); ?></h2>
@@ -41,7 +44,7 @@
     <ul id="events">
         <li id="title">
             <div class="green-button"></div>
-            <span>Aujourd'hui :</span>
+            <span>Les prochaines sessions :</span>
             <div class="clear"></div>
         </li>
         <?php $total_array = count($event->getWalls()); $flag = 1;?>

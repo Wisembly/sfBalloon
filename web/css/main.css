@@ -601,6 +601,7 @@ form inlabel_poster br {display: none;}
 }
 .place_edit{
     padding-left: 20px;
+    padding-top: 20px;
     color:#213E7C;
     font-size: 20px;
 }
@@ -1195,4 +1196,56 @@ form inlabel_poster br {display: none;}
 .stats span{
     float: left;
     font-size: 10px;
+}
+
+
+.menu-place{
+    margin-top: 20px;
+    width: 640px;
+    height: 18px;
+    float: right;
+}
+
+#admin_edit_event-bt .img-add{
+    float: left;
+    background: url("../images/add_medium.png") no-repeat;
+    height: 16px;
+    width: 16px;
+}
+#admin_edit_event-bt span{
+    margin-left: 5px;
+    float: left;
+    font-size: 16px;
+    line-height: 16px;
+    vertical-align: middle;
+}
+
+#admin_event_members-bt .img-user{
+    float: left;
+    background: url("../images/users_medium.png") no-repeat;
+    height: 16px;
+    width: 16px;
+    margin-left: 20px;
+}
+#admin_event_members-bt span{
+    margin-left: 5px;
+    float: left;
+    font-size: 16px;
+    line-height: 16px;
+    vertical-align: middle;
+}
+#admin_edit_event-bt .img-edit{
+    float: left;
+    background: url("../images/manage_medium.png") no-repeat;
+    height: 16px;
+    width: 16px;
+    margin-left: 20px;
+}
+
+#admin_edit_event-bt span{
+    margin-left: 5px;
+    float: left;
+    font-size: 16px;
+    line-height: 16px;
+    vertical-align: middle;
 }
