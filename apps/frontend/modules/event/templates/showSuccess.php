@@ -12,22 +12,28 @@
 <?php else: ?>
 
   <div id="place_content">
-      <?php if(can($sf_user, 'update', $event)): ?>
+      
       <div class="menu-place">
+            <?php if(can($sf_user, 'add_wall', $event)): ?>
             <div id="admin_edit_event-bt">
                 <div class="img-add"></div>
               <span><?php echo link_to('Ajouter un wall',sprintf('@event_add_wall?short=%s', $event->getShort())); ?></span>
             </div>
+            <?php endif;?>
+            <?php if(can($sf_user, 'add_user', $event)): ?>
             <div id="admin_event_members-bt">
                 <div class="img-user"></div>
               <span><?php echo link_to('Gérer les Utilisateurs',sprintf('@invitation?event=%s', $event->getShort())); ?></span>
             </div>
+            <?php endif;?>
+            <?php if(can($sf_user, 'update', $event)): ?>
             <div id="admin_edit_event-bt">
                 <div class="img-edit"></div>
                 <span><?php echo link_to("Modifier l'événement ".$event->getName(),sprintf('@event_edit?short=%s', $event->getShort())); ?></span>
             </div>
+            <?php endif;?>
       </div>
-      <?php endif;?>
+      
       
     <div id="place_1" class="place_edit">
       <h2><?php echo $event->getName(); ?></h2>
