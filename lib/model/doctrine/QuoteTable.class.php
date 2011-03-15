@@ -71,5 +71,14 @@ class QuoteTable extends Doctrine_Table
   {
     return $this->getFavoriteQuoteForWallQuery($wall)->execute();
   }
+
+  public function getAvailableSurveys($wall)
+  {
+    return $this->createQuery('q')
+                ->where('q.wall_id = ?', $wall)
+                ->andWhere('q.is_poll = ?', true)
+                ->andWhere('(DATE_SUB(NOW(), INTERVAL q.poll_duration MINUTE) < q.created_at) ')
+                ->execute();
+  }
   
 }
