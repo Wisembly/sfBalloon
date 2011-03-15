@@ -602,6 +602,7 @@ form inlabel_poster br {display: none;}
 .place_edit{
     padding-left: 20px;
     color:#213E7C;
+    font-size: 20px;
 }
 #admin_edit_event
 {
@@ -1069,6 +1070,7 @@ form inlabel_poster br {display: none;}
     vertical-align: middle;
     padding-left: 10px;
     width: 100%;
+    font-size: 18px;
 }
 .admin_buttons_list_wall .label-description{
     float: left;
@@ -1097,7 +1099,7 @@ form inlabel_poster br {display: none;}
 }
 
 .description{
-    font-size: 10px;
+    font-size: 14px;
     padding-left: 20px;
     padding-right: 20px;
 }
@@ -1108,7 +1110,7 @@ form inlabel_poster br {display: none;}
 }
 
 .description #title , #events #title , .archives #title{
-    font-size: 14px;
+    font-size: 18px;
     text-transform: uppercase;
     padding-bottom: 4px;
     color:#808080;

@@ -37,14 +37,6 @@
         id adipiscing neque. Integer imperdiet velit id ipsum placerat laoreet. Quisque in turpis ante,
         ac posuere enim. Sed pretium interdum dolor, non pulvinar ante auctor vel.
         Quisque laoreet felis ut augue molestie ultrices gravida dui venenatis.
-        Fusce mattis, velit vel elementum dignissim, leo nisl facilisis augue,
-        ultrices sagittis mi tortor vel tortor. Vestibulum pellentesque,
-        est vel malesuada porttitor, sem nisi tincidunt mauris, nec dignissim velit augue ac metus.
-        Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
-        Pellentesque eu dolor magna. Aliquam tincidunt tempus nunc, non fermentum sapien porttitor ut.
-        Quisque sodales porttitor congue. Mauris ornare arcu at dolor egestas aliquet.
-        Nam blandit eleifend velit a molestie. Maecenas eleifend rutrum eleifend.
-        Aenean in neque quis neque lobortis cursus eu in tortor.
     </div>
     <ul id="events">
         <li id="title">
