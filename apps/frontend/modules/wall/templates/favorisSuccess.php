@@ -1,6 +1,6 @@
 <div class="conteneur_header">
   <?php include_partial('poster', 
-    array('wallId' => $wallId, 'eventId' => $eventId, 'form' => $form, 'menu' => $menu)) ?>
+    array('wallId' => $wallId, 'eventId' => $eventId, 'form' => $form, 'menu' => $menu, 'event' => $event)) ?>
 </div>
 <div id="wall">
   <?php if($quotes->count()): ?>
