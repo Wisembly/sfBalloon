@@ -10,45 +10,67 @@
       <input type="submit" value="Envoyer">  
   </form>
 <?php else: ?>
-<div id="centerpage">
 
   <div id="place_content">
-
+    <div id="admin_edit_event">
+      <?php echo link_to('Ajouter un wall',sprintf('@event_add_wall?short=%s', $event->getShort())); ?>
+    </div>
     <div id="admin_event_members">
       <?php echo link_to('Gérer les Utilisateurs',sprintf('@invitation?event=%s', $event->getShort())); ?>
     </div>
     <div id="admin_edit_event">
-      <?php echo link_to("Modifier l'événement",sprintf('@event_edit?short=%s', $event->getShort())); ?>
+      <?php echo link_to("Modifier l'événement ".$event->getName(),sprintf('@event_edit?short=%s', $event->getShort())); ?>
     </div>
-    <div id="admin_edit_event">
-      <?php echo link_to('Ajouter un wall',sprintf('@event_add_wall?short=%s', $event->getShort())); ?>
-    </div>
+    
     <br />
   
     <div id="place_1" class="place_edit">
       <h2><?php echo $event->getName(); ?></h2>
     </div>
     <br />
+    <div class="description">
+        <div id="title"><div class="green-button"></div><span>Description :</span><br/></div>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        Integer tempor, felis non facilisis lacinia, eros leo facilisis mi,
+        in interdum ipsum ligula vitae mi. In consectetur, velit a viverra fringilla,
+        eros eros tristique elit, sit amet convallis arcu enim et nunc. Nullam nec lectus eros,
+        id adipiscing neque. Integer imperdiet velit id ipsum placerat laoreet. Quisque in turpis ante,
+        ac posuere enim. Sed pretium interdum dolor, non pulvinar ante auctor vel.
+        Quisque laoreet felis ut augue molestie ultrices gravida dui venenatis.
+        Fusce mattis, velit vel elementum dignissim, leo nisl facilisis augue,
+        ultrices sagittis mi tortor vel tortor. Vestibulum pellentesque,
+        est vel malesuada porttitor, sem nisi tincidunt mauris, nec dignissim velit augue ac metus.
+        Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+        Pellentesque eu dolor magna. Aliquam tincidunt tempus nunc, non fermentum sapien porttitor ut.
+        Quisque sodales porttitor congue. Mauris ornare arcu at dolor egestas aliquet.
+        Nam blandit eleifend velit a molestie. Maecenas eleifend rutrum eleifend.
+        Aenean in neque quis neque lobortis cursus eu in tortor.
+    </div>
     <ul id="events">
+        <li id="title">
+            <div class="green-button"></div>
+            <span>Aujourd'hui :</span>
+            <div class="clear"></div>
+        </li>
       <?php foreach($event->getWalls() as $wall):?>
         <?php if($wall->isAvailable()): ?>
-        <li>
+        <li id="wall">
             <div class="admin_buttons_list_wall">
                 <div class="label-list-wall">
                     <?php echo link_to($wall->getName(), sprintf('@wall?event=%s&wall=%s', $event->getShort(), $wall->getShort()) ); ?>
                 </div>
+                <div class="label-description">
+                    Lundi 25 avril 2011 au Mercredi 27 avril 2011 à Paris
+                </div>
+                
                 <?php if(can($sf_user, 'update', $wall)): ?>
-                <div class="bouton_supprimer">
-                    <a href="#" >Supprimer</a>
-                </div>
-
-                <div class="bouton_valider">
-                        <?php echo link_to('Editer',sprintf('@wall_edit?event=%s&wall=%s', $event->getShort(), $wall->getShort())); ?>
-                </div>
-                <div class="bouton_alaune">
+                <div class="button-action">
+                    <a href="#" >Supprimer</a> -
+                    <?php echo link_to('Editer',sprintf('@wall_edit?event=%s&wall=%s', $event->getShort(), $wall->getShort())); ?> - 
                     <a href="#" >Stats (ßeta)</a>
                 </div>
                 <?php endif;?>
+                
             </div>
             <div class="clear"></div>
         </li> 
@@ -58,7 +80,9 @@
     <br />
     
     <?php if(can($sf_user, 'view_archive', $event)): ?>
-    <h4>Archives</h4>
+    <div class="archives">
+        <div id="title"><div class="green-button"></div><span>Archives :</span><br/></div>
+    </div>
     <ul id="past-events">
       <?php foreach($event->getWalls() as $wall):?>
         <?php if(!$wall->isAvailable()): ?>
@@ -70,5 +94,4 @@
     </ul>
     <?php endif;?>
   </div>  
-</div>
 <?php endif; ?>

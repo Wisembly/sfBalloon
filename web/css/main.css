@@ -591,24 +591,26 @@ form inlabel_poster br {display: none;}
 
 #place_content
 {
-	height:450px;
+	min-height:450px;
 }
 #admin_event_members
 {
 	padding-top:20px;
-	padding-left:20px;
-	float:left;
+	float:right;
+        padding-right: 20px;
 }
-
+.place_edit{
+    padding-left: 20px;
+    color:#213E7C;
+}
 #admin_edit_event
 {
 	padding-top:20px;
-	padding-right:20px;
 	float:right;
+        padding-right: 20px;
 }
 #admin_event_edit{
     padding-top:20px;
-    padding-right:20px;
     float:right;
 }
 
@@ -1059,8 +1061,6 @@ form inlabel_poster br {display: none;}
     height: 40px;
     line-height: 40px;
     vertical-align: middle;
-    padding-left: 10px;
-    margin-left: 25%;
 }
 .admin_buttons_list_wall .label-list-wall{
     float: left;
@@ -1068,14 +1068,72 @@ form inlabel_poster br {display: none;}
     line-height: 40px;
     vertical-align: middle;
     padding-left: 10px;
+    width: 100%;
 }
-.admin_buttons_list_wall .bouton_valider{
+.admin_buttons_list_wall .label-description{
     float: left;
+    font-size: 10px;
+    width: 100%;
+    height: 10px;
+    line-height: 10px;
+    padding-left: 10px;
+}
+.admin_buttons_list_wall .button-action{
+    float: left;
+    height: 20px;
+    line-height: 20px;
+    width: 100%;
+    padding-left: 10px;
+    font-size: 10px;
+    margin-top: 5px;
+}
+#events {
+    list-style: none;
+    margin: 0;
     padding: 0;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-top: 20px;
 }
-.admin_buttons_list_wall .bouton_supprimer{
+
+.description{
+    font-size: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.archives{
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.description #title , #events #title , .archives #title{
+    font-size: 14px;
+    text-transform: uppercase;
+    padding-bottom: 4px;
+    color:#808080;
+    letter-spacing:3px;
+    font-family: "Helvetica Neue,Helvetica,Arial,sans-serif";
+}
+#events #title .green-button ,.description #title .green-button, .archives #title .green-button{
+    background: url("../images/green_button.png") no-repeat scroll left top #FAFAFA;
+    height: 16px;
+    width: 16px;
     float: left;
 }
-.admin_buttons_list_wall .bouton_alaune{
+#events #title span ,.description #title span, .archives #title span{
     float: left;
+    padding-left: 10px;
+    height: 16px;
+    line-height: 16px;
+    vertical-align: middle;
+    background: #FAFAFA;
+}
+.description #title , #events #title, .archives #title{
+    background: url("../images/tiret.png") repeat-x scroll 0 2px #FAFAFA;
+}
+
+#events #wall{
+    height: 80px;
+    border-bottom: 1px dotted #808080;
 }
