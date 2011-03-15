@@ -44,27 +44,42 @@
             <span>Aujourd'hui :</span>
             <div class="clear"></div>
         </li>
+        <?php $total_array = count($event->getWalls()); $flag = 1;?>
       <?php foreach($event->getWalls() as $wall):?>
         <?php if($wall->isAvailable()): ?>
-        <li id="wall">
+        
+        <?php if ($total_array == $flag):?>
+            <li id="wall" style="border:0px;">
+        <?php else:?>
+            <li id="wall">
+        <?php endif;?>
+        
             <div class="admin_buttons_list_wall">
+            <?php if(can($sf_user, 'update', $wall)): ?>
+                    <div class="stats">
+                        <div class="img-stats"></div><a href="#" ><span>Stats (ßeta)</span></a>
+                    </div>
+                    <div class="edition">
+                        <div class="img-edition"></div>
+                        <span><?php echo link_to('Editer',sprintf('@wall_edit?event=%s&wall=%s', $event->getShort(), $wall->getShort())); ?></span>
+                    </div>
+                    <div class="supr">
+                        <div class="img-supr"></div><a href="#" ><span>Supprimer</span></a>
+                    </div>
+                <?php endif;?>
+            </div>
+            <div class="content_list_wall">
                 <div class="label-list-wall">
                     <?php echo link_to($wall->getName(), sprintf('@wall?event=%s&wall=%s', $event->getShort(), $wall->getShort()) ); ?>
                 </div>
                 <div class="label-description">
                     Lundi 25 avril 2011 au Mercredi 27 avril 2011 à Paris
                 </div>
-                
-                <?php if(can($sf_user, 'update', $wall)): ?>
-                <div class="button-action">
-                    <a href="#" >Supprimer</a> -
-                    <?php echo link_to('Editer',sprintf('@wall_edit?event=%s&wall=%s', $event->getShort(), $wall->getShort())); ?> - 
-                    <a href="#" >Stats (ßeta)</a>
-                </div>
-                <?php endif;?>
-                
             </div>
+                
+            
             <div class="clear"></div>
+            <?php $flag++;?>
         </li> 
         <?php endif;?>
       <?php endforeach; ?>

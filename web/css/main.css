@@ -1058,21 +1058,23 @@ form inlabel_poster br {display: none;}
     clear: both;
 }
 .admin_buttons_list_wall{
-    float: left;
-    height: 40px;
-    line-height: 40px;
+    float: right;
+    height: 10px;
+    line-height: 10px;
     vertical-align: middle;
+    width: 300px;
+    margin-top: 5px;
 }
-.admin_buttons_list_wall .label-list-wall{
+.label-list-wall{
     float: left;
     height: 40px;
     line-height: 40px;
     vertical-align: middle;
     padding-left: 10px;
-    width: 100%;
+    width: 600px;
     font-size: 18px;
 }
-.admin_buttons_list_wall .label-description{
+.label-description{
     float: left;
     font-size: 10px;
     width: 100%;
@@ -1080,14 +1082,15 @@ form inlabel_poster br {display: none;}
     line-height: 10px;
     padding-left: 10px;
 }
-.admin_buttons_list_wall .button-action{
+.button-action{
     float: left;
-    height: 20px;
-    line-height: 20px;
-    width: 100%;
+    height: 10px;
+    line-height: 10px;
+    width: 25%;
     padding-left: 10px;
     font-size: 10px;
     margin-top: 5px;
+    text-align: right;
 }
 #events {
     list-style: none;
@@ -1115,7 +1118,6 @@ form inlabel_poster br {display: none;}
     padding-bottom: 4px;
     color:#808080;
     letter-spacing:3px;
-    font-family: "Helvetica Neue,Helvetica,Arial,sans-serif";
 }
 #events #title .green-button ,.description #title .green-button, .archives #title .green-button{
     background: url("../images/green_button.png") no-repeat scroll left top #FAFAFA;
@@ -1136,6 +1138,61 @@ form inlabel_poster br {display: none;}
 }
 
 #events #wall{
-    height: 80px;
+    height: 60px;
     border-bottom: 1px dotted #808080;
+}
+#events #end-wall{
+    border-bottom: 0px;
+}
+.img-supr{
+    float: left;
+    margin-top: 1px;
+    margin-left: 5px;
+    margin-right: 5px;
+    background: url("../images/delete_small.png") no-repeat;
+    height: 8px;
+    width: 8px;
+}
+.supr{
+    float: right;
+    padding-right: 5px;
+}
+.supr span{
+    float: left;
+    font-size: 10px;
+}
+.img-edition{
+    float: left;
+    margin-top: 1px;
+    margin-left: 5px;
+    margin-right: 5px;
+    background: url("../images/edit_small.png") no-repeat;
+    height: 8px;
+    width: 8px;
+}
+.edition{
+    float: right;
+    padding-right: 5px;
+}
+.edition span{
+    float: left;
+    font-size: 10px;
+}
+
+.img-stats{
+    float: left;
+    margin-top: 1px;
+    margin-left: 5px;
+    margin-right: 5px;
+    background: url("../images/stats_small.png") no-repeat;
+    height: 8px;
+    width: 8px;
+}
+.stats{
+    float: right;
+    padding-right: 5px;
+}
+.stats span{
+    float: left;
+    font-size: 10px;
 }
