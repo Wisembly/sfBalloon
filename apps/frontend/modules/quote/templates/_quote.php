@@ -34,7 +34,7 @@
     $eventId, $wall->getShort(), $quote->getId())); ?>
   </div>
   <?php if($quote->isSurvey()): ?>
-  <?php if(!in_array($votes, $quote->getId()) && $quote->isActive()): ?>
+  <?php if(!in_array($quote->getId(), $votes->getRawValue()) && $quote->isActive()): ?>
   <form action="<?php echo url_for(sprintf("@choice_vote?event=%s&wall=%s&quote=%s", $eventId, $wall->getShort(), $quote->getId())); ?>" method="post">
     <ul>
       <?php $isActive = $quote->isActive(); ?>
