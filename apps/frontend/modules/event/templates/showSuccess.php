@@ -12,6 +12,7 @@
 <?php else: ?>
 
   <div id="place_content">
+      <?php if(can($sf_user, 'update', $event)): ?>
       <div class="menu-place">
             <div id="admin_edit_event-bt">
                 <div class="img-add"></div>
@@ -26,7 +27,8 @@
                 <span><?php echo link_to("Modifier l'événement ".$event->getName(),sprintf('@event_edit?short=%s', $event->getShort())); ?></span>
             </div>
       </div>
-  
+      <?php endif;?>
+      
     <div id="place_1" class="place_edit">
       <h2><?php echo $event->getName(); ?></h2>
     </div>
