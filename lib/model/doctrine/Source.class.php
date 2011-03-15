@@ -13,6 +13,13 @@
 class Source extends BaseSource
 {
   
+  
+  public static $WEB        = 1;
+  public static $SMARTPHONE = 2;
+  public static $SMS        = 3;
+  public static $TWITTER    = 4;
+  public static $WIDGET     = 5;
+  
   public static function find($request, $force = "")
   {
     return 1; // To Change (with test on the user agent ());
