@@ -5,6 +5,7 @@ class SMSGateway
   protected $sms;
   protected $smsParser;
   protected static $dbManager;
+  protected $dispatcher;
   
   public function __construct($smsParser, $dbManager)
   {
@@ -12,6 +13,11 @@ class SMSGateway
     self::$dbManager = $dbManager;
   }
   
+  public function setDispatcher($dispatcher)
+  {
+    $this->dispatcher = $dispatcher;
+  }
+
   public static function getDbManager()
   {
     return self::$dbManager;
@@ -21,8 +27,18 @@ class SMSGateway
   {
     $status = "ok";
     try{
+
       $this->perform($smsInfo);
+      $this->dispatcher->notify(new sfEvent($this, 'sms.log', array("sms" => $this->sms)));
+
     }catch(Exception $e){
+
+      $this->dispatcher->notify(
+        new sfEvent($this, 'sms.log_error', array(
+          "sms"         => $this->sms,
+          "message"     => $e->getMessage()
+        )));
+        
       $status = "notok";
     }
     
@@ -38,11 +54,11 @@ class SMSGateway
     if ($event) {
       $walls = SMSGateway::getDbManager()->findAvailableWallForEventId($event->getId());
       if(!$walls) {
-        throw new WallNotFoundException();
+        throw new WallNotFoundException("Aucun wall trouvé pour l'event ". $event->getName());
       }
       
       if ($walls->count() > 1) {
-        throw new TooManyWallFoundException();
+        throw new TooManyWallFoundException("Il y a plus d'un wall pour l'event ". $event->getName());
       }
       
       $wall = $walls[0];
@@ -51,22 +67,27 @@ class SMSGateway
         $surveys = SMSGateway::getDbManager()->findAvailableSurvey($wall->getId());
 
         if ($surveys->count() > 1) {
-          throw new TooManySurveyFoundException();
+          throw new TooManySurveyFoundException("Il y a plus d'un sondage pour le wall ". $wall->getName());
         }
 
         if ($surveys->count() == 0) {
-          throw new NoSurveyAvailableException();
+          throw new NoSurveyAvailableException("Aucun sondage trouvé pour le wall ". $wall->getName());
         }
 
         $survey = $surveys[0];
         $alreadyVote = SMSGateway::getDbManager()->userHasAlreadyVote($this->sms->getFrom(), $survey->getId());
         
         if ($alreadyVote) {
-          throw new UserHasAlreadyVoteOnThisSurveyException();
+          throw new UserHasAlreadyVoteOnThisSurveyException(
+            sprintf("L'utilisateur %s à déjà voté sur la quote %s", 
+              $this->sms->getFrom(),
+              $survey->getQuote()
+            )
+          );
         }
 
         if (null === $this->sms->getVote()) {
-          throw new RuntimeException();
+          throw new SMSIsNotAVoteException("Le message est trop cours pour être un vote");
         }
 
         SMSGateway::getDbManager()->voteOnQuote(
@@ -86,7 +107,7 @@ class SMSGateway
       si quote, on ajoute la quote.
       */
     }else{
-      throw new EventNotFoundException();
+      throw new EventNotFoundException("Aucun event n'a été trouvé");
     }
   }
   

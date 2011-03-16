@@ -28,7 +28,10 @@ class aggregatorActions extends sfActions
     );
    
     $sg = new SMSGateway(new SMSParser(), new SMSDbManager());
+    $sg->setDispatcher($this->dispatcher);
+
     echo $sg->handle($sms);
-    die();
+
+    exit;
  }
 }
