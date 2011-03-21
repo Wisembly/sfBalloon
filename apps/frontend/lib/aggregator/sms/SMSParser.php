@@ -7,12 +7,12 @@
  * @package default
  * @author Clément JOBEILI
  */
-class SMSParser
+class SMSParser implements ObjectParser
 {
   
-  public function parse($sms)
+  public function parse($object)
   {
-    $content = $this->normalizeText($sms['content']);
+    $content = $this->normalizeText($object['content']);
     $eventCode = $this->findEventCode($content);
     
     $realContent = $this->findContent($content);
@@ -24,7 +24,7 @@ class SMSParser
     }
     $vote = $this->findVote($realContent);
 
-    return new SMS($eventCode, $realContent, $sms['from'], $sms['to'], $type, $vote);
+    return new SMS($eventCode, $realContent, $object['from'], $object['to'], $type, $vote);
   }
   
   private function findEventCode($text)
