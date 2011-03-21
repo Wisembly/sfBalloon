@@ -38,8 +38,7 @@ class SMSGateway
           "sms"         => $this->sms,
           "message"     => $e->getMessage()
         )));
-        
-      $status = "notok";
+      $status = $e->getMessage();
     }
     
     return new SMSResponse($status);
@@ -100,12 +99,6 @@ class SMSGateway
         // Add the quote.
         SMSGateway::getDbManager()->addQuote($this->sms->getFrom(), $this->sms->getContent(), $wall->getId());
       }
-
-      /*
-      @todo : Vérifier si on est dans quote ou sondage, voir si le vote sondage est dispo (durée etc)
-      Si on a un seul sondage : test si l'user a déjà voté, si pas voté, on récupére le sondage, on vote suivant ce que l'utilisateur a mis
-      si quote, on ajoute la quote.
-      */
     }else{
       throw new EventNotFoundException("Aucun event n'a été trouvé");
     }
