@@ -51,31 +51,33 @@ class SMSGateway
     $event = self::getDbManager()->findOneEvent($this->sms->getEventCode());
     
     if (!$event) {
-      $walls = self::getDbManager()->findAvailableWallForEventId($event->getId());
-      if(!$walls) {
-        throw new WallNotFoundException("Aucun wall trouvé pour l'event ". $event->getName());
-      }
+      throw new EventNotFoundException("Aucun event n'a été trouvé");
+    }
+    
+    $walls = self::getDbManager()->findAvailableWallForEventId($event->getId());
+    
+    if(!$walls) {
+      throw new WallNotFoundException("Aucun wall trouvé pour l'event ". $event->getName());
+    }
+    
+    if ($walls->count() > 1) {
+      throw new TooManyWallFoundException("Il y a plus d'un wall pour l'event ". $event->getName());
+    }
+    
+    $wall = $walls[0];
+    
+    if ($this->sms->isVoteToSurvey()) {
       
-      if ($walls->count() > 1) {
-        throw new TooManyWallFoundException("Il y a plus d'un wall pour l'event ". $event->getName());
-      }
-      
-      $wall = $walls[0];
-      
-      if ($this->sms->isVoteToSurvey()) {
-        throw new EventNotFoundException("Aucun event n'a été trouvé");
-      }
-
       $surveys = self::getDbManager()->findAvailableSurvey($wall->getId());
-
+      
       if ($surveys->count() > 1) {
          throw new TooManySurveyFoundException("Il y a plus d'un sondage pour le wall ". $wall->getName());
       }
-
+      
       if ($surveys->count() == 0) {
          throw new NoSurveyAvailableException("Aucun sondage trouvé pour le wall ". $wall->getName());
       }
-
+      
       $survey = $surveys[0];
       $alreadyVote = self::getDbManager()->userHasAlreadyVote($this->sms->getFrom(), $survey->getId());
         
@@ -87,11 +89,11 @@ class SMSGateway
           )
         );
       }
-
+      
       if (null === $this->sms->getVote()) {
         throw new SMSIsNotAVoteException("Le message est trop cours pour être un vote");
       }
-
+      
       self::getDbManager()->voteOnQuote(
         $this->sms->getFrom(), 
         $this->sms->getVote(), 
