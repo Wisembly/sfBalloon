@@ -62,7 +62,12 @@ class EmailGateway
 
     $wall = $walls[0];
 
-    self::getDbManager()->addQuote($this->email->getFrom(), $this->email->getContent(), $wall->getId());
+    self::getDbManager()->addQuote(
+      $this->email->getFrom(), 
+      $this->email->getContent(), 
+      $wall->getId(),
+      Source::$EMAIL
+    );
   }
   
   /**

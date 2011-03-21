@@ -95,12 +95,18 @@ class SMSGateway
       self::getDbManager()->voteOnQuote(
         $this->sms->getFrom(), 
         $this->sms->getVote(), 
-        $survey
+        $survey,
+        Source::$SMS
       );
 
     }else{
       // Add the quote.
-      self::getDbManager()->addQuote($this->sms->getFrom(), $this->sms->getContent(), $wall->getId());
+      self::getDbManager()->addQuote(
+        $this->sms->getFrom(), 
+        $this->sms->getContent(), 
+        $wall->getId(),
+        Source::$SMS
+      );
     }
   }
   

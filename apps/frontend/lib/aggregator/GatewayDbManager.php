@@ -18,11 +18,11 @@ class GatewayDbManager
             ->execute();
   }
 
-  public function addQuote($from, $content, $wall)
+  public function addQuote($from, $content, $wall, $source)
   {
     $quote = new Quote();
     $quote->setQuote($content);
-    $quote->setSourceId(Source::$SMS);
+    $quote->setSourceId($source);
     $quote->setToken($from);
     $quote->setWallId($wall);
     $quote->save();
@@ -38,7 +38,7 @@ class GatewayDbManager
     return Doctrine::getTable('PollAnswer')->existsByQuoteAndUserOrToken($quote, $user);
   }
 
-  public function voteOnQuote($user, $choice, $quote)
+  public function voteOnQuote($user, $choice, $quote, $source)
   {
     $choices = $quote->getPollChoices();
     $trueChoice = $choices->get($choice);
@@ -47,7 +47,7 @@ class GatewayDbManager
     $pollAnswer->setQuote($quote);
     $pollAnswer->setChoice($trueChoice);
     $pollAnswer->setToken($user);
-    $pollAnswer->setSourceId(Source::$SMS);
+    $pollAnswer->setSourceId($source);
     $pollAnswer->save();
   }
 }
