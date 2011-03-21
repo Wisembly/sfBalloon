@@ -6,11 +6,15 @@ homepage:
   url:   /
   param: { module: home, action: index }
 
-#SMS GATEWAY
+#GATEWAY
 
 sms_gateway:
   url:   /aggregator/sms
   param: { module: aggregator, action: sms }
+
+email_gateway:
+  url:   /aggregator/email
+  param: { module: aggregator, action: email }
 
 # sfDoctrineGuard
 sf_guard_signin:

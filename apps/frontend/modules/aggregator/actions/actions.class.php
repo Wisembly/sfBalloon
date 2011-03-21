@@ -34,4 +34,27 @@ class aggregatorActions extends sfActions
 
     exit;
  }
+
+ public function executeEmail(sfWebRequest $request)
+ {
+   $from    = $request->getParameter('from');
+   $to      = $request->getParameter('to');
+   $content = $request->getParameter('text');
+   $envelop = $request->getParameter('envelope');
+   $subject = $request->getParameter('subject');
+
+   $email = array(
+     'from'     => $from,
+     'to'       => $to,
+     'content'  => $content,
+     'envelop'  => $envelop,
+     'subject'  => $subject
+   );
+
+   $eg = new EmailGateway(new EmailParser(), new EmailDbManager());
+   $eg->setDispatcher($this->dispatcher);
+
+   $eg->handle($email);
+   exit;
+ }
 }
