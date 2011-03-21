@@ -105,7 +105,7 @@ class Tokenisable extends sfGuardSecurityUser
   public function setBothToken($token, sfWebResponse $response)
   {
     $this->setSessionToken($token);
-    $this->setCookieToken($response, $token);
+    $this->setCookieToken($token, $response);
   }
   
   /**
