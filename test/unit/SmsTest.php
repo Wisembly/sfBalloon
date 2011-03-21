@@ -39,7 +39,7 @@ $smsQuotes = array(
 
 
 foreach($smsVotes as $sms){
-  $sg = new SMSGateway(new SMSParser(), new SMSDbManager());
+  $sg = new SMSGateway(new SMSParser(), new GatewayDbManager());
   $sg->setDispatcher(new sfEventDispatcher());
   $resp = $sg->handle($sms);
 
@@ -53,7 +53,7 @@ foreach($smsVotes as $sms){
 
 
 foreach($smsQuotes as $sms){
-  $sg = new SMSGateway(new SMSParser(), new SMSDbManager());
+  $sg = new SMSGateway(new SMSParser(), new GatewayDbManager());
   $sg->setDispatcher(new sfEventDispatcher());
   $resp = $sg->handle($sms); 
 

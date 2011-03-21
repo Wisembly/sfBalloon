@@ -1,6 +1,6 @@
 <?php
 
-class SMSDbManager
+class GatewayDbManager
 {
   public function findOneEvent($eventCode)
   {

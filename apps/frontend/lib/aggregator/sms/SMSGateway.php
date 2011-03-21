@@ -48,10 +48,10 @@ class SMSGateway
   {
     $smsParser = $this->getSmsParser();
     $this->sms = $smsParser->parse($sms);
-    $event = SMSGateway::getDbManager()->findOneEvent($this->sms->getEventCode());
+    $event = self::getDbManager()->findOneEvent($this->sms->getEventCode());
     
-    if ($event) {
-      $walls = SMSGateway::getDbManager()->findAvailableWallForEventId($event->getId());
+    if (!$event) {
+      $walls = self::getDbManager()->findAvailableWallForEventId($event->getId());
       if(!$walls) {
         throw new WallNotFoundException("Aucun wall trouvé pour l'event ". $event->getName());
       }
@@ -63,44 +63,44 @@ class SMSGateway
       $wall = $walls[0];
       
       if ($this->sms->isVoteToSurvey()) {
-        $surveys = SMSGateway::getDbManager()->findAvailableSurvey($wall->getId());
-
-        if ($surveys->count() > 1) {
-          throw new TooManySurveyFoundException("Il y a plus d'un sondage pour le wall ". $wall->getName());
-        }
-
-        if ($surveys->count() == 0) {
-          throw new NoSurveyAvailableException("Aucun sondage trouvé pour le wall ". $wall->getName());
-        }
-
-        $survey = $surveys[0];
-        $alreadyVote = SMSGateway::getDbManager()->userHasAlreadyVote($this->sms->getFrom(), $survey->getId());
-        
-        if ($alreadyVote) {
-          throw new UserHasAlreadyVoteOnThisSurveyException(
-            sprintf("L'utilisateur %s à déjà voté sur la quote %s", 
-              $this->sms->getFrom(),
-              $survey->getQuote()
-            )
-          );
-        }
-
-        if (null === $this->sms->getVote()) {
-          throw new SMSIsNotAVoteException("Le message est trop cours pour être un vote");
-        }
-
-        SMSGateway::getDbManager()->voteOnQuote(
-          $this->sms->getFrom(), 
-          $this->sms->getVote(), 
-          $survey
-        );
-
-      }else{
-        // Add the quote.
-        SMSGateway::getDbManager()->addQuote($this->sms->getFrom(), $this->sms->getContent(), $wall->getId());
+        throw new EventNotFoundException("Aucun event n'a été trouvé");
       }
+
+      $surveys = self::getDbManager()->findAvailableSurvey($wall->getId());
+
+      if ($surveys->count() > 1) {
+         throw new TooManySurveyFoundException("Il y a plus d'un sondage pour le wall ". $wall->getName());
+      }
+
+      if ($surveys->count() == 0) {
+         throw new NoSurveyAvailableException("Aucun sondage trouvé pour le wall ". $wall->getName());
+      }
+
+      $survey = $surveys[0];
+      $alreadyVote = self::getDbManager()->userHasAlreadyVote($this->sms->getFrom(), $survey->getId());
+        
+      if ($alreadyVote) {
+        throw new UserHasAlreadyVoteOnThisSurveyException(
+          sprintf("L'utilisateur %s à déjà voté sur la quote %s", 
+            $this->sms->getFrom(),
+            $survey->getQuote()
+          )
+        );
+      }
+
+      if (null === $this->sms->getVote()) {
+        throw new SMSIsNotAVoteException("Le message est trop cours pour être un vote");
+      }
+
+      self::getDbManager()->voteOnQuote(
+        $this->sms->getFrom(), 
+        $this->sms->getVote(), 
+        $survey
+      );
+
     }else{
-      throw new EventNotFoundException("Aucun event n'a été trouvé");
+      // Add the quote.
+      self::getDbManager()->addQuote($this->sms->getFrom(), $this->sms->getContent(), $wall->getId());
     }
   }
   

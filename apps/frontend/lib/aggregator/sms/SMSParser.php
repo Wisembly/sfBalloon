@@ -7,7 +7,7 @@
  * @package default
  * @author Clément JOBEILI
  */
-class SMSParser implements ObjectParser
+class SMSParser extends BaseParser implements ObjectParser
 {
   
   public function parse($object)
@@ -30,11 +30,6 @@ class SMSParser implements ObjectParser
   private function findEventCode($text)
   {
     return strstr($text, ' ', true);
-  }
-  
-  private function findContent($text)
-  {
-    return trim(strstr($text, ' '));
   }
   
   private function findType($text)
@@ -62,9 +57,5 @@ class SMSParser implements ObjectParser
       case 'e': return 4 ; break;
       default: return null; break;
     }
-  }
-  
-  private function normalizeText($text){
-    return str_replace(array("\n", "\t"), '', $text);
   }
 }
