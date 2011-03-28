@@ -28,4 +28,15 @@ class WallTable extends Doctrine_Table
     return $this->findByShortQuery($short)
                 ->fetchOne();
   }
+  
+  public function findAvailableWalls()
+  {
+      $today = new DateTime();
+      $today = $today->format('Y-m-d h:i:s');
+
+      return $this->createQuery('w')
+              ->where('w.start <= ?', $today)
+              ->andWhere('w.stop > ?', $today)
+              ->execute();
+  }
 }
