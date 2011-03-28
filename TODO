@@ -5,4 +5,22 @@ Bug sur vote on poll (quote);
 
 Prévoir de lister les questions avec 1, 2,3 et A,b,c
 Résultat sondage:
-	33% => 33,33% et 50% => 50% , dans le cas présent on a 33,33% et 50,00%
+    33% => 33,33% et 50% => 50% , dans le cas présent on a 33,33% et 50,00%
+
+RéFlection sur ajax
+
+    -> Ajax sur wall/1/results.json
+    [
+        {
+            id: 67890
+            quote: ...
+            votes: 0
+            is_new: true // Ajoute la quote
+        },
+        {
+            id: 6
+            quote: ...
+            votes: 89
+            is_new: false // update le vote
+        }
+    ]
