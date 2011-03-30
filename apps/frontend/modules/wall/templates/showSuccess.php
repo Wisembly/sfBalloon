@@ -64,3 +64,9 @@
       &nbsp;<a href="http://balloonup.com">Copyright &copy; 2010 Balloon, tous droits réserv&eacute;s</a>
   </div>
 </div>
+
+<script>
+config.sync.url = "<?php echo url_for(sprintf('@sync?wall=%s', $wallId)); ?>";
+config.sync.timestamp = <?php echo time(); ?>;
+</script>
+<script src="/js/comet.js" type="text/javascript" charset="utf-8"></script>
