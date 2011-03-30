@@ -16,6 +16,12 @@ email_gateway:
   url:   /aggregator/email
   param: { module: aggregator, action: email }
 
+#Sync
+
+sync:
+  url: sync/wall/:wall
+  param: { module: sync, action: sync }
+    
 # sfDoctrineGuard
 sf_guard_signin:
   url:   /login

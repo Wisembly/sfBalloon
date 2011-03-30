@@ -81,4 +81,22 @@ class QuoteTable extends Doctrine_Table
                 ->execute();
   }
   
+  public function findNewSinceByWall($date, $wall)
+  {
+    return $this->createQuery('q')
+                ->where('q.created_at >= ?', $date)
+                ->andWhere('q.wall_id = ?', $wall->getId())
+                ->andWhere('q.is_validated = 1')
+                ->execute();
+  }
+  
+  public function findUpdatedSinceByWall($date, $wall)
+  {
+    return $this->createQuery('q')
+                ->orWhere('q.updated_at >= ?', $date)
+                ->andWhere('q.wall_id = ?', $wall->getId())
+                ->andWhere('q.is_validated = 1')
+                ->execute();
+  }
+  
 }
