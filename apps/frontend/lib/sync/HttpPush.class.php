@@ -13,10 +13,15 @@ class HttpPush
   
   public function poll($clientUpdater, $wall, $date)
   {
-    $modifs = $clientUpdater->hasNewContent($wall, $date);
-    while($modifs){
-      usleep(10000);
-      $modifs = $clientUpdater->hasNewContent($wall, $date);
+    $nbLoops = round($this->latency / $this->delay);
+    
+    $newContent = false;
+    
+    for ($i = 0; $i < $nbLoops; $i++) {
+      $newContent = $clientUpdater->hasNewContent($wall, $date);
+      if($newContent) break;
+      
+      usleep($this->delay * 1000 * 1000);
     }
   }
 }

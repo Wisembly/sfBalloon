@@ -1,4 +1,5 @@
-<?php if(!$quote->isSurvey()): ?>
+<div class="item_wall_<?php echo $quote->getId()?>">
+  <?php if(!$quote->isSurvey()): ?>
   <?php if($quote->isValidated()): ?>
     <?php if(!in_array($quote->getId(), $votes->getRawValue())):?>
     <a href="<?php echo url_for(sprintf('@quote_vote?event=%s&wall=%s&quote=%s', 
@@ -142,3 +143,5 @@
 
   </div>
 </div>
+</div>
+<div class="separation"></div>

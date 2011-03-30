@@ -24,6 +24,31 @@ class syncActions extends sfActions
       $data = $this->getSynchronizer()->synchronize($wall, $date);
     }
     
+    $this->getContext()->getConfiguration()->loadHelpers('Partial');
+    
+    $news  = array();
+    
+    $cans = array(
+      'can_fav_quote' => $this->getUser('fav_quote', $this->wall),
+      'can_validate_moderating_quote' => $this->getUser('validate_moderating_quote', $this->wall),
+      'can_remove_quote' => $this->getUser('remove_quote', $this->wall),
+      'can_update_moderating_quote' => $this->getUser('update_moderating_quote', $this->wall),
+      'can_une_quote'  => $this->getUser('une_quote', $this->wall),
+      'can_view_vote_quote' => $this->getUser('view_quote_nb_vote', $this->wall),
+      'can_answer_quote'    => $this->getUser('answer_quote', $this->wall)
+    );
+    
+    foreach($data['news'] as $quote){
+      $currentUserVotes = $this->getUser()->getVotesOnWall($quote->getId());
+      $news[] = get_partial('quote/quote', array(
+        'votes'   => $currentUserVotes,
+        'wall'    => $quote->getWall(), 
+        'quote'   => $quote, 
+        'eventId' => $quote->getWall()->getEvent()->getShort()
+        ) + $cans);
+    }
+    
+    $data['news'] = $news;
     echo json_encode($data);
     exit();
   }

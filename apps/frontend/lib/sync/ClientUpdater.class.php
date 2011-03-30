@@ -14,10 +14,12 @@ class ClientUpdater
 
     $newQuotes      = Doctrine::getTable('Quote')->findNewSinceByWall($d, $wall);
     $updatedQuotes  = Doctrine::getTable('Quote')->findUpdatedSinceByWall($d, $wall);
-
+    
+    
+    
     $result = array(
-      'new'       => $newQuotes->toArray(),
-      'update'    => $updatedQuotes->toArray(),
+      'news'       => $newQuotes,
+      'updates'    => $updatedQuotes->toArray(),
       'timestamp' => time()
     );
 
@@ -30,9 +32,8 @@ class ClientUpdater
     $today->setTimestamp((int)$date);
     $d = $today->format('Y-m-d H:i:s');
 
-    $newQuotes      = Doctrine::getTable('Quote')->findNewSinceByWall($d, $wall);
-    $updatedQuotes  = Doctrine::getTable('Quote')->findUpdatedSinceByWall($d, $wall);
+    $count = Doctrine::getTable('Quote')->countNewContentSinceByWall($d, $wall);
     
-    return ($newQuotes || $updatedQuotes) ? true: false;
+    return ($count) ? true: false;
   }
 }

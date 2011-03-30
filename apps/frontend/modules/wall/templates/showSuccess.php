@@ -31,15 +31,13 @@
   <ul>
     <?php foreach($result as $quote): ?>
     <li>
-      <div class="item_wall">
         <?php include_partial('quote/quote', array(
             'votes'   => $currentUserVotes,
             'wall'    => $wall, 
             'quote'   => $quote, 
             'eventId' => $eventId
           ) + $cans->getRawValue()); ?>
-      </div>
-      <div class="separation"></div>
+      
     </li>
     <?php endforeach;?>
   </ul>
