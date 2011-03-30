@@ -7,6 +7,7 @@
     <link rel="shortcut icon" type="image/png" href="/favicon_balloon.ico" />
     <?php include_stylesheets() ?>
     <?php echo stylesheet_tag('login') ?>
+    <?php include_javascripts() ?>
   </head>
   <body>
   	<div class="header">
@@ -62,6 +63,5 @@
     	<?php echo image_tag('logo_balloon_small.png'); ?>
     	</a>
     </div>
-    <?php include_javascripts() ?>
   </body>
 </html>
