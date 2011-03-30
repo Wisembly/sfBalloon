@@ -1,0 +1,5 @@
+config = {
+    sync: {
+        url: ""
+    }
+}
